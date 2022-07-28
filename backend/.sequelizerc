@@ -1,0 +1,17 @@
+// backend/.sequelizerc
+const path = require ('path');
+
+module.exports = {
+  config: path.resolve('config', 'database.js'),  //create a database.js file in the config
+  'models-path': path.resolve('db', 'models'),
+  'seeders-path': path.resolve('db', 'seeders'),
+  'migrations-path': path.resolve('db', 'migrations')
+};
+
+
+/*
+Created "config/database.js"
+Successfully created models folder at "/Users/Raphael/Desktop/AirBnb/backend/db/models".
+Successfully created migrations folder at "/Users/Raphael/Desktop/AirBnb/backend/db/migrations".
+Successfully created seeders folder at "/Users/Raphael/Desktop/AirBnb/backend/db/seeders".
+ */
