@@ -5,8 +5,8 @@ const router = express.Router();
 // backend/routes/index.js
 // ...
 
-const apiRouter = require('./api')
-router.use('/api', apiRouter)
+const apiRouter = require('./api')  // aka ./api/index.js  
+router.use('/api', apiRouter)  //express automtically selects an 'index.js' file in the api folder
 
 
 // Add a XSRF-TOKEN cookie
