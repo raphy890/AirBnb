@@ -1,5 +1,5 @@
 // backend/routes/api/index.js
-const router = require('express').Router();
+const router = require('express').Router();  //Phase 1: 
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const { restoreUser } = require("../../utils/auth.js");
