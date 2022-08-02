@@ -9,11 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       firstName: {
-        type: Sequelize.VARCHAR(64),
+        type: Sequelize.STRING(64),
         allowNull: false,
       },
       lastName:{
-        type: Sequelize.VARCHAR(64),
+        type: Sequelize.STRING(64),
         allowNull: false,
 
       },
