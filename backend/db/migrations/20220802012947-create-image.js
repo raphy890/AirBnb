@@ -20,19 +20,19 @@ module.exports = {
         allowNull: false
       },
 
-      spotid: {
+      spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true
 
       },
-      reviewid: {
+      reviewId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true
 
       },
-      userid: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true
