@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
-    // SIGN 
+    // SIGN
     static async signup({ username, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
@@ -46,11 +46,30 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      User.hasMany(models.Spot, {foreignKey: 'ownerId', onDelete: "CASCADE", hooks:true});
+      User.hasMany(models.Booking, {foreignKey: 'userId', onDelete: "CASCADE", hooks:true});
+      User.hasMany(models.Image, {foreignKey: 'userId',  onDelete: "CASCADE", hooks:true});
+      User.hasMany(models.Review, {foreignKey: 'userId',  onDelete: "CASCADE", hooks:true});
+
     }
   };
 
   User.init(
     {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1,64]
+        }
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1,64]
+        }
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,

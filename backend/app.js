@@ -12,10 +12,10 @@ const isProduction = environment === 'production';
 
 const app = express();
 
-app.use(morgan('dev'));
+app.use(morgan('dev')); //logging platform  all behind the scenees
 
-app.use(cookieParser());
-app.use(express.json());
+app.use(cookieParser()); //allow you to parse cookies
+app.use(express.json()); //converts response to json; allows express to understand json
 
 // Security Middleware
 if (!isProduction) {
@@ -32,7 +32,7 @@ if (!isProduction) {
 
   // Set the _csrf token and create req.csrfToken method
   app.use(
-    csurf({
+    csurf({  //
       cookie: {
         secure: isProduction,
         sameSite: isProduction && "Lax",
@@ -88,4 +88,3 @@ app.use((err, _req, res, _next) => {
 });
 
 module.exports = app;
-  
