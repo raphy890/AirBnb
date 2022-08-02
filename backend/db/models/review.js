@@ -40,22 +40,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: null,
-      unique: true
+      allowNull: false,
+      unique: true,
+      references: {model: 'Users'}
     },
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: null,
-      unique: true
+      unique: true,
+      references: {model: 'Spots'}
     },
-    createdAt:  {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    }
   }, {
     sequelize,
     modelName: 'Review',

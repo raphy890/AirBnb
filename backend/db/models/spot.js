@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     ownerId:{
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true
+      unique: true,
+      references: {model: "Users"}
     },
 
     address:{
@@ -70,16 +71,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-
-    createdAt:  {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    }
 
   }, {
     sequelize,
