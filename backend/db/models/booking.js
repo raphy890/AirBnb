@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Booking.belongsTo(
         models.User,
-        {foreignKey: 'userid', onDelete: "CACADE", hooks:true}
+        {foreignKey: 'userid', onDelete: "CASCADE", hooks:true}
       )
       Booking.belongsTo(
         models.Spot,
