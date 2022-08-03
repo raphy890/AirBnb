@@ -11,6 +11,18 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+    //  await queryInterface.bulkInsert('Images', [
+
+    //   // {
+    //   //    imageableId: ,
+    //   //    url: ''
+    //   //  },
+    //   //  {
+    //   //   imageableId: '2',
+    //   //   url: ''
+    //   // },
+
+    // ], {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -20,5 +32,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+  //    await queryInterface.bulkDelete('Images', null, {});
   }
 };
