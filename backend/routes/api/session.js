@@ -1,6 +1,6 @@
 // backend/routes/api/session.js
 const express = require('express')
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');// Validating Login Request Body
@@ -12,7 +12,6 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 //Test
 
-
 const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })
@@ -23,9 +22,6 @@ const validateLogin = [
     .withMessage('Please provide a password.'),
   handleValidationErrors
 ];
-
-
-
 
 
 
@@ -62,37 +58,24 @@ router.post(
 
 
 
-// Log out
+// User Logout API Route:
 router.delete(
   '/',
   (_req, res) => {
-    res.clearCookie('token');
+    res.clearCookie('token');//removes the token cookie from the response & return json message
     return res.json({ message: 'success' });
   }
 );
 
 
 
+//Get/Session: requires authroization while logged in
+//References auth.js file  to return the user else returns an error
+router.get("/", requireAuth, async (req, res) => { res.json(req.user)});
 
 
 
 
-
-
-
-// Restore session user
-router.get(
-  '/',
-  restoreUser,
-  (req, res) => {
-    const { user } = req;
-    if (user) {
-      return res.json({
-        user: user.toSafeObject()
-      });
-    } else return res.json({});
-  }
-);
 
 
 

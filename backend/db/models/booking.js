@@ -43,7 +43,6 @@ module.exports = (sequelize, DataTypes) => {
       type:  DataTypes.STRING,
       allowNull: false,
     },
-
   }, {
     sequelize,
     modelName: 'Booking',
