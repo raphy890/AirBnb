@@ -3,7 +3,7 @@ const router = require('express').Router();  //Phase 1:
 const sessionRouter = require('./session.js');
 const spotsRouter = require('./spots'); //spots router is imported
 const usersRouter = require('./users'); //user router is imported
-const reviewsRouter = require ('./reviews') //review router is imported
+const reviewsRouter = require ('./reviews.js') //review router is imported
 const bookingsRouter = require('./bookings') //book router is imported
 const { restoreUser } = require("../../utils/auth.js");
 
