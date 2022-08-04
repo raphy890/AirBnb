@@ -6,12 +6,29 @@ const router = express.Router();
 
 
 
-//Get all Spots - COMPLETE
-router.get('/', async (req, res) => {
-  const getSpots = await Spot.findAll({})
-  res.status(200)
-  return res.json(getSpots)
-})
+//GET ALL SPOTS - ASK TA QUESTION
+// router.get('/', async (req, res) => {
+
+//   const getSpots = await Spot.findAll({
+//     attributes{
+
+//     include: [
+//                   [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"], //call sequelize to run AVG function; key into Reviews using stars ; and call the row 'avgRating'
+//                ]
+
+//       ,
+//       {
+//         model: Image,
+//         attributes: ['url']
+//       }
+//     ]
+//   }
+//   })
+//   res.status(200)
+//   return res.json(getSpots)
+// })
+
+
 
 
 

@@ -2,36 +2,39 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-    //  await queryInterface.bulkInsert('Images', [
 
-    //   // {
-    //   //    imageableId: ,
-    //   //    url: ''
-    //   //  },
-    //   //  {
-    //   //   imageableId: '2',
-    //   //   url: ''
-    //   // },
+    await queryInterface.bulkInsert('Images', [
 
-    // ], {});
+      {
+        url: 'www.allstar1.com',
+        previewImage: true,
+        spotId: 1,
+        reviewId: null,
+        userId: 1
+       },
+
+       {
+        url: 'www.allstar2.com',
+        previewImage: true,
+        spotId: null,
+        reviewId: 2,
+        userId: 2
+       },
+
+       {
+        url: 'www.allstar3.com',
+        previewImage: true,
+        spotId: 3,
+        reviewId: null,
+        userId: 3
+       }
+
+    ], {});
+
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  //    await queryInterface.bulkDelete('Images', null, {});
+
+    await queryInterface.bulkDelete('Images', null, {});
   }
 };
