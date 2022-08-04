@@ -10,22 +10,22 @@ const router = express.Router();
 
 
 // // //### Get all Reviews of the Current User
-// router.get('/current', async (req,res) => {
-//   // console.log(req.user)
-//   const currentUserId = req.user.dataValues.id // access current User id
-//   const getReviews = await Review.findall({
-//     include: [
-//       {
-//         model: User,
-//         where: {
-//           id: currentUserId
-//         }
-//       }
-//     ]
-//   })
-//   res.status(200)
-//   return res.json({getReviews})
-// })
+router.get('/current', async (req,res) => {
+  // console.log(req.user)
+  const currentUserId = req.user.dataValues.id // access current User id
+  const getReviews = await Review.findall({
+    include: [
+      {
+        model: User,
+        where: {
+          id: currentUserId
+        }
+      }
+    ]
+  })
+  res.status(200)
+  return res.json({getReviews})
+})
 
 
 

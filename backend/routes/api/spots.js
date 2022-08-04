@@ -253,4 +253,40 @@ router.post('/:spotId/reviews', async (req, res) => {
 })
 
 
+
+//### Get all Reviews by a Spot's Id - COMPLETE
+router.get('/:spotId/reviews', async (req,res) => {
+  const {spotId} = req.params  //id = 4
+  // console.log(spotId)
+  const {Image} = req.body
+  console.log()
+  const spotCurrent = await Spot.findByPk(spotId);
+    const reviewSpot = await Review.findAll({
+      where: {
+        spotId
+      },
+      include: [
+      {model: User, attributes:['id', 'firstName', 'lastName']},
+      // {model: Image, attributes: ['id', 'imageableId', 'url']}
+
+    ],
+
+    })
+    //If review spots exists, display all reviews by Spot's ID
+    if(spotCurrent){   //IF CURRENT SPOT EXISTS
+      res.status(200)
+      res.json(reviewSpot)
+    }
+    //If review spots doesn't exist, throw an error
+    else {  //IF CURRENT SPOT DOESN'T EXIST
+      res.status(404)
+      res.json({
+        "message": "Spot couldn't be found",
+        "statusCode": 404
+      })
+    }
+})
+
+
+
 module.exports = router
