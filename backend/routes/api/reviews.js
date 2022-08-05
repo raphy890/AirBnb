@@ -9,20 +9,20 @@ const router = express.Router();
 
 
 
-//### Get all Reviews of the Current User - COMPLETED
+//### Get all Reviews of the Current User - complete
 router.get('/current', async (req,res) => {
   // console.log(req.user)
   const currentUserId = req.user.dataValues.id // access current User id
   const getReviews = await Review.findAll({
 
-        where: {
-          id: currentUserId
-        },
         include: [
-          { model: User, attributes: ['id', 'firstName', 'lastName']}
+          { model: User, where: {id: currentUserId}},
+          { model: Spot},
+          { model: Image}
         ]
 
   })
+  if(getReviews)
   res.status(200)
   return res.json({getReviews})
 })

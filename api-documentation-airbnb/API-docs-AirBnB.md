@@ -138,7 +138,7 @@ information.
     }
     ```
 
-### Sign Up a User
+### Sign Up a User -
 
 Creates a new user, logs them in as the current user, and returns the current
 user's information.
@@ -311,7 +311,7 @@ Returns all the spots owned (created) by the current user.
     }
     ```
 
-### Get details of a Spot from an id - DONE
+### Get details of a Spot from an id
 
 Returns the details of a spot specified by its id.
 
@@ -619,7 +619,7 @@ Deletes an existing spot.
 
 ## REVIEWS
 
-### Get all Reviews of the Current User
+### Get all Reviews of the Current User - complete
 
 Returns all the reviews written by the current user.
 
@@ -979,7 +979,7 @@ Delete an existing review.
 
 ## BOOKINGS
 
-### Get all of the Current User's Bookings
+### Get all of the Current User's Bookings - COMPLETE
 
 Return all the bookings that the current user has made.
 
@@ -1092,7 +1092,7 @@ Return all the bookings for a spot specified by id.
     }
     ```
 
-### Create a Booking from a Spot based on the Spot's id - complete
+### Create a Booking from a Spot based on the Spot's id - COMPLETE
 
 Create and return a new booking from a spot specified by id.
 
@@ -1174,7 +1174,7 @@ Create and return a new booking from a spot specified by id.
     }
     ```
 
-### Edit a Booking
+### Edit a Booking - COMPLETE
 
 Update and return an existing booking.
 

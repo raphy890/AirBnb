@@ -231,6 +231,15 @@ router.put("/:spotId", async (req, res) => {
     res.json(spotEdit)
   }
 
+  //IF SPOT DOESN'T EXIST
+  else if(!spotEdit){
+    res.status(404)
+    res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+
 
   //Error Response: Body validation error - DONE
   else {
@@ -292,18 +301,18 @@ router.delete("/:spotId", async (req, res) => {
 
 // ****************************** Bookings *************************************************
 
-// GET ALL BOOKINGS FOR A SPOT BASED ON SPOT'S ID - UPDATE CODE**
+// GET ALL BOOKINGS FOR A SPOT BASED ON SPOT'S ID - COMPLETE
 router.get('/:spotId/bookings', async (req, res) => {
-  const { startDate, endDate } = req.params
+  // const { startDate, endDate } = req.params
 
   let { spotId } = req.params // DECONSTRUCT SPOTID FROM PARAMS/URL
   const searchSpot = await Spot.findByPk(spotId)
-
   const { userId } = req.user.dataValues.id
 
   const getBookings = await Booking.findAll({ //SET GETSPOT TO VARIABLE BASED ON SPOTID WITHIN PARAMS
+    where: {spotId},
     include: [
-      { model: Spot, where: { id: spotId } }
+      { model: User, attributes: ['id', 'firstName', 'lastName'] },
     ]
   })
 
@@ -315,8 +324,6 @@ router.get('/:spotId/bookings', async (req, res) => {
     res.json({ getBookings })
   }
 
-
-  
   //THROW ERROR IF SPOT CANNOT BE FOUND
   else {
     res.status(404)
@@ -326,6 +333,10 @@ router.get('/:spotId/bookings', async (req, res) => {
     })
   }
 })
+
+
+
+
 
 
 // Create a Booking from a Spot based on the Spot's id - COMPLETE
@@ -461,6 +472,9 @@ router.post('/:spotId/reviews', async (req, res) => {
     }
 
 
+
+
+
     //Create Review - COMPLETE
     else {
       const spotReview = await Review.create({
@@ -487,12 +501,12 @@ router.post('/:spotId/reviews', async (req, res) => {
 
 
 
-//### Get all Reviews by a Spot's Id - COMPLETE
+//### Get all Reviews by a Spot's Id
 router.get('/:spotId/reviews', async (req, res) => {
   const { spotId } = req.params  //id = 4
   // console.log(spotId)
   const { Image } = req.body
-  console.log()
+  // console.log()
   const spotCurrent = await Spot.findByPk(spotId);
   const reviewSpot = await Review.findAll({
     where: {
@@ -510,7 +524,8 @@ router.get('/:spotId/reviews', async (req, res) => {
     res.status(200)
     res.json(reviewSpot)
   }
-  //If review spots doesn't exist, throw an error
+
+  //Error response: Couldn't find a Spot with the specified id
   else {  //IF CURRENT SPOT DOESN'T EXIST
     res.status(404)
     res.json({
