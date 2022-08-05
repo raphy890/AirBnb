@@ -80,5 +80,33 @@ router.put("/:bookingId", async (req, res) => {
 
 
 
+//DELETE A BOOKING - COMPLETE
+router.delete("/:bookingId", async (req, res) => {
+
+
+  //DECONSTRUCT BOOKINGID FROM THE REQUEST
+  const { bookingId } = req.params;
+  // console.log(bookingId)
+  const currentBooking = await Booking.findByPk(bookingId);
+
+
+  //THROW ERROR IF BOOKING DOESN'T EXIST
+  if (!currentBooking) {
+    res.status(404);
+    return res.json({
+      message: "Booking couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  //
+  await currentBooking.destroy();
+  res.json({
+    message: "Successfully deleted",
+    statusCode: 200,
+  });
+
+});
+
 
 module.exports = router

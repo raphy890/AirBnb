@@ -29,7 +29,7 @@ router.get('/current', async (req,res) => {
 
 
 
-//### Edit a Review  ******
+//### Edit a Review  - COMPLETE
 router.put('/:reviewId', async (req,res) => {
   // console.log(req.params)
   const {reviewId} = req.params
@@ -49,6 +49,7 @@ router.put('/:reviewId', async (req,res) => {
     res.status(200)
     res.json(edit)
   }
+
 
   // THROW ERROR IF STARS DON'T ALIGN WITH VALIDATION
   else if (stars < 1 || stars > 5) {
@@ -108,6 +109,8 @@ router.delete("/:reviewId",  async (req, res) => {
   });
 
 });
+
+
 
 
 

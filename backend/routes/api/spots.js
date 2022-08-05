@@ -12,11 +12,11 @@ router.get('/', async (req, res, next) => {
   const allSpots = await Spot.findAll({
     attributes: {
       include: [
-           [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]  //AvgRating Column Added using sequelize functions in the stars column
+        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]  //AvgRating Column Added using sequelize functions in the stars column
       ]
     },
-    include:  [     //Provide access to Review model from associations
-      {model: Review, attributes: []}
+    include: [     //Provide access to Review model from associations
+      { model: Review, attributes: [] }
     ],
     group: ['Spot.id'], //
     raw: true //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
@@ -24,18 +24,18 @@ router.get('/', async (req, res, next) => {
 
   //Part 2 - Associate previewImage with Spots
   //Iterate through each spot in allSpots variable
-  for (let spot of allSpots){
+  for (let spot of allSpots) {
     const image = await Image.findOne({
       attributes: ['url'],
       where: {
         previewImage: true,
         spotId: spot.id
       },
-      raw:true
+      raw: true
     })
 
     //Determine if image contains a url link
-   if(image){ //if image exists, set the url of the image equal to the value of previewImage
+    if (image) { //if image exists, set the url of the image equal to the value of previewImage
       spot.previewImage = image.url  //www.allstar1.com'
     } else {
       spot.previewImage = null
@@ -53,37 +53,37 @@ router.get('/', async (req, res, next) => {
 
 // Get all Spots owned by the Current User - COMPLETE
 router.get('/current', requireAuth, async (req, res, next) => {
-   //Step 1: Idenitfy the current userId  from the request
+  //Step 1: Idenitfy the current userId  from the request
   const id = req.user.dataValues.id //4
   // console.log('req.user', req.user.dataValues.id) //4
 
   //Step 2: Find current user
   const currUser = await Spot.findAll({
-      attributes: {include: [[sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]] },
-      include: [{model: Review, attributes: []}],
-      where: {id},
-      raw: true
+    attributes: { include: [[sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]] },
+    include: [{ model: Review, attributes: [] }],
+    where: { id },
+    raw: true
   })
 
   //Step 3: ITERATE THROUGH EACH SPOT
   for (let spot of currUser) {
-    console.log('spot',spot)
-      const image = await Image.findOne({
-          attributes: ['url'],
-          where: {
-              previewImage: true,
-              spotId: spot.id
-          },
-          raw: true
-      })
+    console.log('spot', spot)
+    const image = await Image.findOne({
+      attributes: ['url'],
+      where: {
+        previewImage: true,
+        spotId: spot.id
+      },
+      raw: true
+    })
 
 
-      //Step 4: IF IMAGE EXISTS, SET PREVIEW IMAGE EQUAL TO THE VALUE OF THE KEY OF URL
-      if (image) {
-          spot.previewImage = image.url
-      } else {
-          spot.previewImage = null
-      }
+    //Step 4: IF IMAGE EXISTS, SET PREVIEW IMAGE EQUAL TO THE VALUE OF THE KEY OF URL
+    if (image) {
+      spot.previewImage = image.url
+    } else {
+      spot.previewImage = null
+    }
 
   }
   res.status(200)
@@ -106,30 +106,30 @@ router.get('/:spotId', async (req, res, next) => {
 
   const spotDetails = await Spot.findOne({
 
-      //Determine the key:value pair for numReviews
-      attributes:{
-        include: [
-          [sequelize.fn("COUNT", reviews), "numReviews"],
-          [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]
-        ]
-      },
-
-
+    //Determine the key:value pair for numReviews
+    attributes: {
       include: [
-        {model: Review, attributes: []},
-        {model: Image, attributes: []},
-      ],
+        [sequelize.fn("COUNT", reviews), "numReviews"],
+        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]
+      ]
+    },
 
 
-      raw:true, //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
-      where: {id: spotId}
+    include: [
+      { model: Review, attributes: [] },
+      { model: Image, attributes: [] },
+    ],
+
+
+    raw: true, //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
+    where: { id: spotId }
   })
 
 
   //Part 2
   const imagesDetails = await Image.findAll({ //Set up a query for Images
-    attributes: ['id', ['spotId','imageableId'], 'url'], //Extract attributes from Images and attach spotID ==> imageableID
-    where: {spotId},
+    attributes: ['id', ['spotId', 'imageableId'], 'url'], //Extract attributes from Images and attach spotID ==> imageableID
+    where: { spotId },
     raw: true //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
   })
 
@@ -154,7 +154,7 @@ router.get('/:spotId', async (req, res, next) => {
   console.log('getSpots', getSpots)
 
   //ERROR HANDLER IF SPOT COULD NOT BE FOUND WITH THE SPECIFICED ID
-  if(!getSpots) {
+  if (!getSpots) {
     res.json({
       "message": "Spot couldn't be found",
       "statusCode": 404
@@ -294,111 +294,41 @@ router.delete("/:spotId", async (req, res) => {
 
 // GET ALL BOOKINGS FOR A SPOT BASED ON SPOT'S ID - UPDATE CODE**
 router.get('/:spotId/bookings', async (req, res) => {
-const {startDate, endDate} = req.params
+  const { startDate, endDate } = req.params
 
   let { spotId } = req.params // DECONSTRUCT SPOTID FROM PARAMS/URL
   const searchSpot = await Spot.findByPk(spotId)
 
-  const {userId} = req.user.dataValues.id
+  const { userId } = req.user.dataValues.id
 
   const getBookings = await Booking.findAll({ //SET GETSPOT TO VARIABLE BASED ON SPOTID WITHIN PARAMS
-      include: [
-        { model: Spot, where: { id: spotId }}
-      ]
+    include: [
+      { model: Spot, where: { id: spotId } }
+    ]
   })
+
+
 
   //IF THE SPOTID EXISTS, GET ALL BOOKINGS BASED ON SPOT ID
   if (searchSpot) {
-      res.status(200)
-      res.json({ getBookings })
+    res.status(200)
+    res.json({ getBookings })
   }
 
+
+  
   //THROW ERROR IF SPOT CANNOT BE FOUND
   else {
-      res.status(404)
-      res.json({
-          message: "Spot couldn't be found",
-          statusCode: 404,
-      })
+    res.status(404)
+    res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    })
   }
 })
 
 
-
-
-
-// //### Create a Booking from a Spot based on the Spot's id
-// router.post('/:spotId/bookings', async (req, res) => {
-// const {startDate, endDate} = req.body //"startDate": "2024-12-24"
-
-// //DECONSTRUCT USERID FROM REQUEST
-// const {user} = req
-// const userId = user.dataValues.id
-
-// //DECONSTRUCT SPOTID FROM PARAMS
-// const {spotId} = req.params // 4
-// const searchSpot = await Spot.findByPk(spotId)
-
-// //GET ALL BOOKING  DATA FOR THE SPECIFIED SPOTID
-// const Bookings = await Booking.findAll({
-//   include:[{ model: Spot, where:{id: spotId }}]
-//   })
-
-
-
-// if (searchSpot){
-//   let booked; //
-//   for (let bookings of Bookings){
-//     if(bookings.userId === userId){
-//       booked = true
-//     }
-
-//   }
-//   //ERROR RESPONSE: BOOKING CONFLICT - SPOT IS ALREADY BOOK FOR THE SPECIFIED DATES
-//   if(booked){
-//     res.status(403)
-//     res.json({
-//       message: "Sorry, this spot is already booked for the specified dates",
-//       statusCode: 403,
-//       errors: {
-//         startDate: "Start date conflicts with an existing booking",
-//         endDate: "End date conflicts with an existing booking"
-//       }
-//     })
-//   }
-//   //ERROR RESPONSE: BODY VALIDATION ERRORS - COMPLETE
-//   else if (endDate < startDate) {
-//     res.status(400)
-//     res.json({
-//       message: "Validation error",
-//       statusCode: 400,
-//       errors: {
-//         "endDate": "endDate cannot be on or before startDate"
-//       }
-//     })
-//   }
-//   //CREATE REVIEW -
-//   else {
-//     const bookingSpot = await Booking.create({
-//       spotId, userId, startDate, endDate
-//   })
-//   res.json(bookingSpot)
-//   }
-// }
-//   //ERROR RESPONSE: COULDN'T FIND SPOT BASED ON SPECIFIED ID - COMPLETE
-//   else {
-//     res.status(404)
-//     res.json({
-//         message: "Spot couldn't be found",
-//         statusCode: 404
-//     })
-//   }
-
-
-// })
-
-
-// Create a Booking from a Spot based on the Spot's id
+// Create a Booking from a Spot based on the Spot's id - COMPLETE
 router.post('/:spotId/bookings', async (req, res) => {
   const { startDate, endDate } = req.body
 
@@ -412,52 +342,52 @@ router.post('/:spotId/bookings', async (req, res) => {
 
 
   const allBoookings = await Booking.findAll({
-      include: [
-          { model: Spot, where: { id: spotId } }
-      ]
+    include: [
+      { model: Spot, where: { id: spotId } }
+    ]
   })
 
   if (findSpot) {
-      //* Error response: Review from the current user already exists for the Spot
-      let booked;
-      for (let booking of allBoookings) {
-          if (booking.userId === userId) {
-              booked = true
-          }
+    //* Error response: Review from the current user already exists for the Spot
+    let booked;
+    for (let booking of allBoookings) {
+      if (booking.userId === userId) {
+        booked = true
       }
-      if (booked) {
-          res.status(403)
-          res.json({
-              message: "Sorry, this spot is already booked for the specified dates",
-              statusCode: 403,
-              errors: {
-                startDate: "Start date conflicts with an existing booking",
-                endDate: "End date conflicts with an existing booking"
-              }
-            })
-      } else if (endDate < startDate) {  //* Error Response: Body validation errors
-          res.status(400)
-          res.json({
-              message: "Validation error",
-              statusCode: 400,
-              errors: {
-                "endDate": "endDate cannot be on or before startDate"
-              }
-            })
-      } else {
-          // Create Review
-          const spotBooking = await Booking.create({
-              spotId, userId, startDate, endDate
-          })
-          res.json(spotBooking)
-      }
-  } else {
-      //* Error response: Couldn't find a Spot with the specified id
-      res.status(404)
+    }
+    if (booked) {
+      res.status(403)
       res.json({
-          message: "Spot couldn't be found",
-          statusCode: 404
+        message: "Sorry, this spot is already booked for the specified dates",
+        statusCode: 403,
+        errors: {
+          startDate: "Start date conflicts with an existing booking",
+          endDate: "End date conflicts with an existing booking"
+        }
       })
+    } else if (endDate < startDate) {  //* Error Response: Body validation errors
+      res.status(400)
+      res.json({
+        message: "Validation error",
+        statusCode: 400,
+        errors: {
+          "endDate": "endDate cannot be on or before startDate"
+        }
+      })
+    } else {
+      // Create Review
+      const spotBooking = await Booking.create({
+        spotId, userId, startDate, endDate
+      })
+      res.json(spotBooking)
+    }
+  } else {
+    //* Error response: Couldn't find a Spot with the specified id
+    res.status(404)
+    res.json({
+      message: "Spot couldn't be found",
+      statusCode: 404
+    })
   }
 })
 
@@ -558,38 +488,81 @@ router.post('/:spotId/reviews', async (req, res) => {
 
 
 //### Get all Reviews by a Spot's Id - COMPLETE
-router.get('/:spotId/reviews', async (req,res) => {
-  const {spotId} = req.params  //id = 4
+router.get('/:spotId/reviews', async (req, res) => {
+  const { spotId } = req.params  //id = 4
   // console.log(spotId)
-  const {Image} = req.body
+  const { Image } = req.body
   console.log()
   const spotCurrent = await Spot.findByPk(spotId);
-    const reviewSpot = await Review.findAll({
-      where: {
-        spotId
-      },
-      include: [
-      {model: User, attributes:['id', 'firstName', 'lastName']},
+  const reviewSpot = await Review.findAll({
+    where: {
+      spotId
+    },
+    include: [
+      { model: User, attributes: ['id', 'firstName', 'lastName'] },
       // {model: Image, attributes: ['id', 'imageableId', 'url']}
 
     ],
 
+  })
+  //If review spots exists, display all reviews by Spot's ID
+  if (spotCurrent) {   //IF CURRENT SPOT EXISTS
+    res.status(200)
+    res.json(reviewSpot)
+  }
+  //If review spots doesn't exist, throw an error
+  else {  //IF CURRENT SPOT DOESN'T EXIST
+    res.status(404)
+    res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
     })
-    //If review spots exists, display all reviews by Spot's ID
-    if(spotCurrent){   //IF CURRENT SPOT EXISTS
-      res.status(200)
-      res.json(reviewSpot)
-    }
-    //If review spots doesn't exist, throw an error
-    else {  //IF CURRENT SPOT DOESN'T EXIST
-      res.status(404)
-      res.json({
-        "message": "Spot couldn't be found",
-        "statusCode": 404
-      })
-    }
+  }
 })
 
 
+
+// ****************************** Image *************************************************
+
+//### Add an Image to a Spot based on the Spot's id - COMPLETE
+router.post('/:spotId/images', restoreUser, async (req, res, next) => {
+
+  // DECONSTRUCT SPOT ID
+  const spotId = req.params = req.params.spotId;
+
+  //DECONSTRUCT USER, URL & PREVIEW IMAGE
+  const { user } = req
+  const { url, previewImage } = req.body
+
+
+  //IF USER DOESN'T EXIST - THROW ERROR
+  if (!user) return res.status(401).json({ "message": "You need to be logged in to make any changes", "statusCode": 401 })
+
+
+  //CONFIRM IF SPOT ID EXISTS
+  const spot = await Spot.findByPk(spotId)
+
+
+  //THROW ERROR IF SPOT COULD NOT BE FOUND
+  if (!spot) {
+    res.status(404)
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+
+  // CREATE AN IMAGE
+  const image = await Image.create({ url, previewImage, spotId, userId: user.id})
+
+  //DEFINE AN OBJECT IN ORDER TO MAKE THE ASSOCIATION
+  const object = {}
+  object.id = image.id
+  object.imageableId = parseInt(spotId)
+  object.url = image.url
+
+  res.status(200).json(object)
+
+})
 
 module.exports = router

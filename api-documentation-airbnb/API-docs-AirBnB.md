@@ -675,7 +675,7 @@ Returns all the reviews written by the current user.
     }
     ```
 
-### Get all Reviews by a Spot's id
+### Get all Reviews by a Spot's id - COMPLETE
 
 Returns all the reviews that belong to a spot specified by id.
 
@@ -1092,7 +1092,7 @@ Return all the bookings for a spot specified by id.
     }
     ```
 
-### Create a Booking from a Spot based on the Spot's id
+### Create a Booking from a Spot based on the Spot's id - complete
 
 Create and return a new booking from a spot specified by id.
 
@@ -1271,7 +1271,7 @@ Update and return an existing booking.
     }
     ```
 
-### Delete a Booking
+### Delete a Booking - COMPLETE
 
 Delete an existing booking.
 
