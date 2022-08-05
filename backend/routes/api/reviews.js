@@ -10,37 +10,46 @@ const router = express.Router();
 
 
 //### Get all Reviews of the Current User - complete
-router.get('/current', async (req,res) => {
+router.get('/current', requireAuth, async (req, res) => {
   // console.log(req.user)
   const currentUserId = req.user.dataValues.id // access current User id
   const getReviews = await Review.findAll({
 
-        include: [
-          { model: User, where: {id: currentUserId}},
-          { model: Spot},
-          { model: Image}
+    include: [
+      { model: User, where: { id: currentUserId } },
+      {
+        model: Spot,
+        attributes: [
+          "id", "ownerId", "address", "city", "state",
+          "country", "lat", "lng", "name", "price"
         ]
+      },
+      { model: Image, attributes: ['id', ['spotId', 'imageableId'], 'url'] }
+
+    ]
 
   })
-  if(getReviews)
-  res.status(200)
-  return res.json({getReviews})
+
+  if (getReviews) {
+    res.status(200)
+    return res.json({ getReviews })
+  }
 })
 
 
 
 //### Edit a Review  - COMPLETE
-router.put('/:reviewId', async (req,res) => {
+router.put('/:reviewId', async (req, res) => {
   // console.log(req.params)
-  const {reviewId} = req.params
+  const { reviewId } = req.params
   // console.log('reviewId', reviewId)
 
-  const {userId, spotId, review, stars}= req.body
+  const { userId, spotId, review, stars } = req.body
 
   const edit = await Review.findByPk(reviewId);
 
   //SUCCESSFULLY POST A REVEIW
-  if(edit){
+  if (edit) {
     edit.set({
       review,
       stars
@@ -82,7 +91,7 @@ router.put('/:reviewId', async (req,res) => {
 
 
 //### Delete a Review - COMPLETE
-router.delete("/:reviewId",  async (req, res) => {
+router.delete("/:reviewId", async (req, res) => {
 
 
   const { reviewId } = req.params;

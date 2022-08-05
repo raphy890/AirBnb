@@ -151,7 +151,7 @@ router.get('/:spotId', async (req, res, next) => {
 
   spotDetails.Owner = owner
 
-  console.log('getSpots', getSpots)
+  // console.log('getSpots', getSpots)
 
   //ERROR HANDLER IF SPOT COULD NOT BE FOUND WITH THE SPECIFICED ID
   if (!getSpots) {
