@@ -8,7 +8,7 @@
 
 ## USER AUTHENTICATION/AUTHORIZATION
 
-### All endpoints that require authentication
+### All endpoints that require authentication - COMPLETE
 
 All endpoints that require a current user to be logged in.
 
@@ -26,7 +26,7 @@ All endpoints that require a current user to be logged in.
     }
     ```
 
-### All endpoints that require proper authorization
+### All endpoints that require proper authorization - COMPLETE
 
 All endpoints that require authentication and the current user does not have the
 correct role(s) or permission(s).
@@ -45,7 +45,7 @@ correct role(s) or permission(s).
     }
     ```
 
-### Get the Current User
+### Get the Current User - COMPLETE
 
 Returns the information about the current user that is logged in.
 
@@ -71,7 +71,7 @@ Returns the information about the current user that is logged in.
     }
     ```
 
-### Log In a User
+### Log In a User - COMPLETE
 
 Logs in a current user with valid credentials and returns the current user's
 information.
@@ -231,7 +231,7 @@ user's information.
 
 ## SPOTS
 
-### Get all Spots
+### Get all Spots - complete
 
 Returns all the spots.
 
@@ -271,7 +271,7 @@ Returns all the spots.
     }
     ```
 
-### Get all Spots owned by the Current User
+### Get all Spots owned by the Current User - COMPLETE
 
 Returns all the spots owned (created) by the current user.
 
@@ -311,7 +311,7 @@ Returns all the spots owned (created) by the current user.
     }
     ```
 
-### Get details of a Spot from an id
+### Get details of a Spot from an id - DONE
 
 Returns the details of a spot specified by its id.
 
@@ -372,7 +372,7 @@ Returns the details of a spot specified by its id.
     }
     ```
 
-### Create a Spot
+### Create a Spot - Complete
 
 Creates and returns a new spot.
 
@@ -492,7 +492,7 @@ Create and return a new image for a spot specified by id.
     }
     ```
 
-### Edit a Spot
+### Edit a Spot - COMPLETE
 
 Updates and returns an existing spot.
 
@@ -519,7 +519,7 @@ Updates and returns an existing spot.
     }
     ```
 
-* Successful Response
+* Successful Response - DONE
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -543,7 +543,7 @@ Updates and returns an existing spot.
     }
     ```
 
-* Error Response: Body validation error
+* Error Response: Body validation error - DONE
   * Status Code: 400
   * Headers:
     * Content-Type: application/json
@@ -580,7 +580,7 @@ Updates and returns an existing spot.
     }
     ```
 
-### Delete a Spot
+### Delete a Spot - COMPLETE
 
 Deletes an existing spot.
 
@@ -732,7 +732,7 @@ Returns all the reviews that belong to a spot specified by id.
     }
     ```
 
-### Create a Review for a Spot based on the Spot's id
+### Create a Review for a Spot based on the Spot's id - COMPLETE
 
 Create and return a new review for a spot specified by id.
 
@@ -872,7 +872,7 @@ Create and return a new image for a review specified by id.
     }
     ```
 
-### Edit a Review
+### Edit a Review - COMPLETE
 
 Update and return an existing review.
 
@@ -940,7 +940,7 @@ Update and return an existing review.
     }
     ```
 
-### Delete a Review
+### Delete a Review - COMPLETE
 
 Delete an existing review.
 
@@ -1024,7 +1024,7 @@ Return all the bookings that the current user has made.
     }
     ```
 
-### Get all Bookings for a Spot based on the Spot's id
+### Get all Bookings for a Spot based on the Spot's id - COMPLETE
 
 Return all the bookings for a spot specified by id.
 

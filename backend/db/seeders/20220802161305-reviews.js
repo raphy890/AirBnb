@@ -35,7 +35,8 @@ module.exports = {
           "spotId": 3,
           "review": "A really nice spot!",
           "stars": 3,
-          }
+          },
+
 
        ], {});
   },

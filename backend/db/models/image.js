@@ -13,47 +13,47 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Image.belongsTo(
         models.User,
-        {foreignKey: 'userId', onDelete: "CASCADE", hooks:true}
+        {foreignKey: 'userId'}
       ),
       Image.belongsTo(
         models.Spot,
-        {foreignKey: 'spotId', onDelete: "CASCADE", hooks:true}
+        {foreignKey: 'spotId'}
       ),
       Image.belongsTo(
         models.Review,
-        {foreignKey: 'reviewId', onDelete: "CASCADE", hooks:true}
+        {foreignKey: 'reviewId'}
       )
     }
   }
   Image.init({
     url: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
 
     previewImage: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.BOOLEAN,
+      // allowNull: false
     },
 
     spotId: {
       type: DataTypes.INTEGER,
       // allowNull: false,
       // unique: true,
-      references: {model: 'Spots'}
+      // references: {model: 'Spots'}
     },
 
     reviewId: {
       type: DataTypes.INTEGER,
       // allowNull: false,
       // unique: true,
-      references: {model: 'Reviews'}
+      // references: {model: 'Reviews'}
     },
 
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      // allowNull: false
       // unique: true
     },
 

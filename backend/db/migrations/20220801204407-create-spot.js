@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
-        references: {model: "Users"}
+        references: {model: "Users", onDelete: "CASCADE", }
       },
       address: {
         type: Sequelize.STRING,

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Spot.belongsTo(models.User, {foreignKey: 'ownerId',onDelete: "CASCADE", hooks:true})
+      Spot.belongsTo(models.User, {foreignKey: 'ownerId', as:'Owner'}) //aliasing Owner to support the Delete Spot Route
       Spot.hasMany(models.Booking, {foreignKey: 'spotId', onDelete: "CASCADE", hooks:true})
       Spot.hasMany(models.Review, {foreignKey: 'spotId', onDelete: "CASCADE", hooks:true})
       Spot.hasMany(models.Image, {foreignKey: 'spotId', onDelete: "CASCADE", hooks:true})
@@ -50,16 +50,33 @@ module.exports = (sequelize, DataTypes) => {
     lat:{
       type: DataTypes.DECIMAL,
       allowNull: false,
+      validate: {
+        check(value){
+          if (value > 90 || value < -90){
+            throw new Error ("Latitude is not valid")
+          }
+        }
+      }
     },
 
     lng:{
       type: DataTypes.DECIMAL,
       allowNull: false,
+      validate: {
+        check(value){
+          if (value > 180 || value < -180){
+            throw new Error ("Longitude is not valid")
+          }
+        }
+      }
     },
 
     name:{
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [1,49]
+      }
     },
 
     description:{

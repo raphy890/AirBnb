@@ -10,35 +10,35 @@ module.exports = {
       },
 
       url: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
 
       previewImage: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.BOOLEAN,
+        // allowNull: false
       },
 
       spotId: {
         type: Sequelize.INTEGER,
         // allowNull: false,
         // unique: true,
-        references: {model: 'Spots'}
+        references: {model: 'Spots', onDelete: "CASCADE"}
 
       },
       reviewId: {
         type: Sequelize.INTEGER,
         // allowNull: false,
         // unique: true,
-        references: {model: 'Reviews'}
+        references: {model: 'Reviews', onDelete: "CASCADE"}
 
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        // allowNull: false,
         // unique: true,
-        references: {model: 'Users'}
+        references: {model: 'Users', onDelete: "CASCADE"}
 
       },
       createdAt: {
