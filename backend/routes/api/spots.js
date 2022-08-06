@@ -52,21 +52,43 @@ router.get('/', async (req, res, next) => {
 
 
 // Get all Spots owned by the Current User - COMPLETE
-router.get("/current", async (req, res) => {
-  let userId = req.user.dataValues.id;
+router.get('/current', requireAuth,restoreUser, async (req, res) => {
+  let userId = req.user.dataValues.id
 
-  const allReviews = await Review.findAll({
-    include: [
-      { model: User, where: { id: userId } },
-      { model: Spot },
-      { model: Image },
-    ],
-  });
-  if (allReviews) {
-    res.status(200);
-    res.json({ allReviews });
+  const allSpots = await Spot.findAll({
+      attributes: {
+          include: [
+              [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
+
+          ]
+      },
+      include: [
+          { model: User, where: { id: userId }, as: 'Owner', attributes: []},
+          { model: Review, attributes: []}
+      ],
+      group: ['Spot.id'],
+      raw: true
+  })
+  for (let spot of allSpots) {
+      const image = await Image.findOne({
+          attributes: ['url'],
+          where: {
+              previewImage: true,
+              spotId: spot.id
+          },
+          raw: true
+      })
+
+      //Determine if image contains a url link
+      if (image) { // if image exists, set the url of the image equal to the value of previewImage
+          spot.previewImage = image.url
+      } else {
+          spot.previewImage = null
+      }
   }
-});
+  res.status(200)
+  res.json({ allSpots })
+}) 
 
 
 
