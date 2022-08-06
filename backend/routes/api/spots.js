@@ -6,45 +6,45 @@ const router = express.Router();
 
 
 
-// //GET ALL SPOTS - COMPLETE
-//Part 1
-router.get('/', async (req, res, next) => {
-  const allSpots = await Spot.findAll({
-    attributes: {
-      include: [
-        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]  //AvgRating Column Added using sequelize functions in the stars column
-      ]
-    },
-    include: [     //Provide access to Review model from associations
-      { model: Review, attributes: [] }
-    ],
-    group: ['Spot.id'], //
-    raw: true //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
-  })
+// // //GET ALL SPOTS - COMPLETE
+// //Part 1
+// router.get('/', async (req, res, next) => {
+//   const allSpots = await Spot.findAll({
+//     attributes: {
+//       include: [
+//         [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]  //AvgRating Column Added using sequelize functions in the stars column
+//       ]
+//     },
+//     include: [     //Provide access to Review model from associations
+//       { model: Review, attributes: [] }
+//     ],
+//     group: ['Spot.id'], //
+//     raw: true //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
+//   })
 
-  //Part 2 - Associate previewImage with Spots
-  //Iterate through each spot in allSpots variable
-  for (let spot of allSpots) {
-    const image = await Image.findOne({
-      attributes: ['url'],
-      where: {
-        previewImage: true,
-        spotId: spot.id
-      },
-      raw: true
-    })
+//   //Part 2 - Associate previewImage with Spots
+//   //Iterate through each spot in allSpots variable
+//   for (let spot of allSpots) {
+//     const image = await Image.findOne({
+//       attributes: ['url'],
+//       where: {
+//         previewImage: true,
+//         spotId: spot.id
+//       },
+//       raw: true
+//     })
 
-    //Determine if image contains a url link
-    if (image) { //if image exists, set the url of the image equal to the value of previewImage
-      spot.previewImage = image.url  //www.allstar1.com'
-    } else {
-      spot.previewImage = null
-    }
-  }
+//     //Determine if image contains a url link
+//     if (image) { //if image exists, set the url of the image equal to the value of previewImage
+//       spot.previewImage = image.url  //www.allstar1.com'
+//     } else {
+//       spot.previewImage = null
+//     }
+//   }
 
-  res.status(200)
-  res.json({ allSpots })
-})
+//   res.status(200)
+//   res.json({ allSpots })
+// })
 
 
 
@@ -272,6 +272,141 @@ router.delete("/:spotId", async (req, res) => {
 
 
 
+
+
+//## Add Query Filters to Get All Spots
+// Return spots filtered by query parameters.
+router.get('/', async (req, res) => {
+  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query
+
+  let where = {};
+
+  if (minLat) {
+      where.minLat = minLat
+  }
+  if (maxLat) {
+      where.maxLat = maxLat
+  }
+  if (minLng) {
+      where.minLng = minLng
+  }
+  if (maxLng) {
+      where.maxLng = maxLng
+  }
+  if (minPrice) {
+      where.minPrice = minPrice
+  }
+  if (maxPrice) {
+      where.maxPrice = maxPrice
+  }
+
+  page = parseInt(page);
+  size = parseInt(size);
+
+  if (Number.isNaN(page) || !page) page = 1;
+  if (Number.isNaN(size) || !size) size = 20;
+
+  if ((page < 1 || page > 10) || (size < 1 || size > 20)) {
+      res.status(400)
+      res.json({
+          message: "Validation Error",
+          statusCode: 400,
+          errors: {
+              page: "Page must be greater than or equal to 1",
+              size: "Size must be greater than or equal to 1"
+          }
+      })
+  }
+
+  if (req.query.page && req.query.size) {
+
+      const allSpots = await Spot.findAll({
+          where: { ...where },
+          group: ['Spot.id'],
+          raw: true, //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
+          limit: size,
+          offset: size * (page - 1),
+      })
+
+      //Part 2 - Associate previewImage with Spots
+      //Iterate through each spot in allSpots variable
+      for (let spot of allSpots) {
+          const image = await Image.findOne({
+              attributes: ['url'],
+              where: {
+                  previewImage: true,
+                  spotId: spot.id
+              },
+              raw: true
+          })
+
+          //Determine if image contains a url link
+          if (image) { // if image exists, set the url of the image equal to the value of previewImage
+              spot.previewImage = image.url
+          } else {
+              spot.previewImage = null
+          }
+      }
+
+      res.json({
+          allSpots,
+          page,
+          size
+      });
+
+  } else {
+
+      // Get spot all
+      const allSpots = await Spot.findAll({
+          attributes: {
+              include: [
+                  [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]  //AvgRating Column Added using sequelize functions in the stars column
+              ]
+          },
+          include: [     //Provide access to Review model from associations
+              { model: Review, attributes: [] }
+          ],
+          group: ['Spot.id'],
+          raw: true //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
+      })
+
+      //Part 2 - Associate previewImage with Spots
+      //Iterate through each spot in allSpots variable
+      for (let spot of allSpots) {
+          const image = await Image.findOne({
+              attributes: ['url'],
+              where: {
+                  previewImage: true,
+                  spotId: spot.id
+              },
+              raw: true
+          })
+
+          //Determine if image contains a url link
+          if (image) { // if image exists, set the url of the image equal to the value of previewImage
+              spot.previewImage = image.url
+          } else {
+              spot.previewImage = null
+          }
+      }
+
+      res.status(200)
+      res.json({ allSpots })
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ****************************** Bookings *************************************************
 
 // GET ALL BOOKINGS FOR A SPOT BASED ON SPOT'S ID - COMPLETE
@@ -281,6 +416,7 @@ router.get('/:spotId/bookings', async (req, res) => {
   let { spotId } = req.params // DECONSTRUCT SPOTID FROM PARAMS/URL
   const searchSpot = await Spot.findByPk(spotId)
   const { userId } = req.user.dataValues.id
+
 
   const getBookings = await Booking.findAll({ //SET GETSPOT TO VARIABLE BASED ON SPOTID WITHIN PARAMS
     where: {spotId},
@@ -293,8 +429,12 @@ router.get('/:spotId/bookings', async (req, res) => {
 
   //IF THE SPOTID EXISTS, GET ALL BOOKINGS BASED ON SPOT ID
   if (searchSpot) {
-    res.status(200)
-    res.json({ getBookings })
+    if( owner.id === userId){
+      res.status(200)
+      res.json({ getBookings })
+    } else {
+
+    }
   }
 
   //THROW ERROR IF SPOT CANNOT BE FOUND
