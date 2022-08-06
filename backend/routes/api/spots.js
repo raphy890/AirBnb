@@ -172,8 +172,10 @@ router.post('/', async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body //deconstruct attributes from the body
   // console.log(req.body);
 
+
   const user = req.user.dataValues.id //get owner id from req object
   console.log('user:', user)
+
 
   //Create new spot with id from 'user' and the following attributes below
   const spotNew = await Spot.create({ ownerId: user, address, city, state, country, lat, lng, name, description, price });
@@ -183,6 +185,7 @@ router.post('/', async (req, res) => {
   if (spotNew) {
     res.json(spotNew)
   }
+
 
   //Error Handler
   else {
