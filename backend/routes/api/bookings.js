@@ -111,7 +111,6 @@ router.delete("/:bookingId", async (req, res) => {
 
 
 
-
   //THROW ERROR IF BOOKING DOESN'T EXIST
   if (!currentBooking) {
     res.status(404);
@@ -122,8 +121,8 @@ router.delete("/:bookingId", async (req, res) => {
   }
 
   //Error response: Bookings that have been started can't be deleted
-  let current = new Date.now()
-  let bookedDate = new Date(booking.startDate)
+  let current = Date.now()
+  let bookedDate = new Date(bookingId.startDate)
 
   if (current > bookedDate) {
     res.json({
@@ -132,15 +131,12 @@ router.delete("/:bookingId", async (req, res) => {
     })
   }
 
-
   //
   await currentBooking.destroy();
   res.json({
     message: "Successfully deleted",
     statusCode: 200,
   });
-
-
 
 
 });
