@@ -9,28 +9,26 @@ const router = express.Router();
 
 
 //### Delete an Image
-router.delete('/:imageId', requireAuth, async (req,res,next) =>{
+router.delete("/:imageId", requireAuth, restoreUser, async (req, res) => {
+  const { imageId } = req.params;
+  const currentImage = await Image.findByPk(imageId);
 
-  const {id} = req.params.imageId
-  const image = await Image.findByPk(id)
 
-  if (!image) {
-    res.json({
-      message: "Image could not be found",
-      statusCode: 404
-    })
+  if (!currentImage) {
+    res.status(404);
+    return res.json({
+      message: "Review couldn't be found",
+      statusCode: 404,
+    });
   }
 
-  //Successfully delete Image
-  if(image.userId === req.user.id){
-    await image.destroy()
-    res.json({
-      message: "Successfully deleted!!!!!!!",
-      statusCode: 200
-    })
-  }
+  await currentImage.destroy();
+  res.json({
+    message: "Successfully deleted",
+    statusCode: 200,
+  });
 
-})
+});
 
 
 
