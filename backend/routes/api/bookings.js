@@ -122,7 +122,7 @@ router.delete("/:bookingId", async (req, res) => {
   }
 
   //Error response: Bookings that have been started can't be deleted
-  let current = new Date.now
+  let current = new Date.now()
   let bookedDate = new Date(booking.startDate)
 
   if (current > bookedDate) {
