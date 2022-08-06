@@ -52,43 +52,21 @@ router.get('/', async (req, res, next) => {
 
 
 // Get all Spots owned by the Current User - COMPLETE
-router.get('/current', requireAuth, async (req, res, next) => {
-  //Step 1: Idenitfy the current userId  from the request
-  const id = req.user.dataValues.id //4
-  // console.log('req.user', req.user.dataValues.id) //4
+router.get("/current", async (req, res) => {
+  let userId = req.user.dataValues.id;
 
-  //Step 2: Find current user
-  const currUser = await Spot.findAll({
-    attributes: { include: [[sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]] },
-    include: [{ model: Review, attributes: [] }],
-    where: { id },
-    raw: true
-  })
-
-  //Step 3: ITERATE THROUGH EACH SPOT
-  for (let spot of currUser) {
-    console.log('spot', spot)
-    const image = await Image.findOne({
-      attributes: ['url'],
-      where: {
-        previewImage: true,
-        spotId: spot.id
-      },
-      raw: true
-    })
-
-
-    //Step 4: IF IMAGE EXISTS, SET PREVIEW IMAGE EQUAL TO THE VALUE OF THE KEY OF URL
-    if (image) {
-      spot.previewImage = image.url
-    } else {
-      spot.previewImage = null
-    }
-
+  const allReviews = await Review.findAll({
+    include: [
+      { model: User, where: { id: userId } },
+      { model: Spot },
+      { model: Image },
+    ],
+  });
+  if (allReviews) {
+    res.status(200);
+    res.json({ allReviews });
   }
-  res.status(200)
-  res.json({ currUser })
-})
+});
 
 
 
