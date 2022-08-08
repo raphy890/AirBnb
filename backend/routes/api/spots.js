@@ -99,6 +99,7 @@ router.get('/:spotId', async (req, res) => {
   const spotId = req.params.spotId
   const spot = await Spot.findByPk(spotId)
 
+  //Error handler if Spot does not exists
   if (!spot) {
     res.json({
       "message": "Spot couldn't be found",
@@ -276,36 +277,31 @@ router.delete("/:spotId", async (req, res) => {
 
 //## Add Query Filters to Get All Spots
 // Return spots filtered by query parameters.
+// Combined Add Query with 'GET ALL SPOT'
 router.get('/', async (req, res) => {
+  //Deconstruct the Query
   let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query
 
-  let where = {};
+  let where = {};  //define a where object for association
 
-  if (minLat) {
-      where.minLat = minLat
-  }
-  if (maxLat) {
-      where.maxLat = maxLat
-  }
-  if (minLng) {
-      where.minLng = minLng
-  }
-  if (maxLng) {
-      where.maxLng = maxLng
-  }
-  if (minPrice) {
-      where.minPrice = minPrice
-  }
-  if (maxPrice) {
-      where.maxPrice = maxPrice
-  }
+  //If features exist, set equal to key value of where object
+  if (minLat) { where.minLat = minLat }
+  if (maxLat) { where.maxLat = maxLat }
+  if (minLng) { where.minLng = minLng }
+  if (maxLng) { where.maxLng = maxLng }
+  if (minPrice) { where.minPrice = minPrice }
+  if (maxPrice) { where.maxPrice = maxPrice }
 
+  //Coverting both page & size from string to numbers
   page = parseInt(page);
   size = parseInt(size);
 
+  //If Page & Size don't exist or NAN then set Default
   if (Number.isNaN(page) || !page) page = 1;
   if (Number.isNaN(size) || !size) size = 20;
 
+
+  //Validation error if page and size are not within scope
   if ((page < 1 || page > 10) || (size < 1 || size > 20)) {
       res.status(400)
       res.json({
@@ -318,7 +314,9 @@ router.get('/', async (req, res) => {
       })
   }
 
+  //Key into request to access Page & Size
   if (req.query.page && req.query.size) {
+
 
       const allSpots = await Spot.findAll({
           where: { ...where },
@@ -330,6 +328,7 @@ router.get('/', async (req, res) => {
 
       //Part 2 - Associate previewImage with Spots
       //Iterate through each spot in allSpots variable
+      //find the image & url for each spot
       for (let spot of allSpots) {
           const image = await Image.findOne({
               attributes: ['url'],
@@ -348,30 +347,35 @@ router.get('/', async (req, res) => {
           }
       }
 
+      //Successful Response
+      res.status(200)
       res.json({
           allSpots,
           page,
           size
       });
 
-  } else {
 
-      // Get spot all
+  } else { //Return data to return all spots if no pagination
+
+      // IF THERE'S NO PAGINATION, Get spot all
       const allSpots = await Spot.findAll({
           attributes: {
               include: [
-                  [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]  //AvgRating Column Added using sequelize functions in the stars column
+                //AvgRating Column Added using sequelize functions in the stars column
+                  [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"]
               ]
           },
-          include: [     //Provide access to Review model from associations
-              { model: Review, attributes: [] }
+          //Provide access to Review model from associations
+          include: [
+              { model: Review, attributes: [] } //remove attributes
           ],
-          group: ['Spot.id'],
-          raw: true //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
+          group: ['Spot.id'], //group all of the spots together
+          raw: true //convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
       })
 
-      //Part 2 - Associate previewImage with Spots
-      //Iterate through each spot in allSpots variable
+
+      //Part 2 - Associate previewImage with Spots: Iterate through each spot in allSpots variable
       for (let spot of allSpots) {
           const image = await Image.findOne({
               attributes: ['url'],
@@ -382,8 +386,8 @@ router.get('/', async (req, res) => {
               raw: true
           })
 
-          //Determine if image contains a url link
-          if (image) { // if image exists, set the url of the image equal to the value of previewImage
+          //Determine if image contains a url link: if image exists, set the url of the image equal to the value of previewImage
+          if (image) {
               spot.previewImage = image.url
           } else {
               spot.previewImage = null
@@ -399,54 +403,53 @@ router.get('/', async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
 // ****************************** Bookings *************************************************
 
-// GET ALL BOOKINGS FOR A SPOT BASED ON SPOT'S ID - COMPLETE
-router.get('/:spotId/bookings', async (req, res) => {
-  // const { startDate, endDate } = req.params
-
-  let { spotId } = req.params // DECONSTRUCT SPOTID FROM PARAMS/URL
+// GET ALL BOOKINGS FOR A SPOT BASED ON SPOT ID
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+  let { spotId } = req.params
+  const currentUserId = req.user.id
   const searchSpot = await Spot.findByPk(spotId)
-  const { userId } = req.user.dataValues.id
 
 
-  const getBookings = await Booking.findAll({ //SET GETSPOT TO VARIABLE BASED ON SPOTID WITHIN PARAMS
-    where: {spotId},
-    include: [
-      { model: User, attributes: ['id', 'firstName', 'lastName'] },
-    ]
+  const owner = await Spot.findOne({
+      where: { id: spotId }
   })
 
+  const bookings = await Booking.findAll({
+      where: { spotId },
+      include: [
+          { model: User, attributes: ['id', 'firstName', 'lastName'] },
+      ]
+  })
 
-
-  //IF THE SPOTID EXISTS, GET ALL BOOKINGS BASED ON SPOT ID
-  if (searchSpot) {
-    if( owner.id === userId){
-      res.status(200)
-      res.json({ getBookings })
-    } else {
-
-    }
+  // THROW ERROR IF SPOT
+  if (!searchSpot) {
+      res.status(404)
+      res.json({
+          message: "Spot cannot't be found",
+          statusCode: 404,
+      })
   }
 
-  //THROW ERROR IF SPOT CANNOT BE FOUND
-  else {
-    res.status(404)
-    res.json({
-      message: "Spot couldn't be found",
-      statusCode: 404,
-    })
+
+  if (searchSpot) {
+      // Successful Response: If you ARE NOT the owner of the spot.
+      if (owner.id === currentUserId) {
+          res.status(200)
+          res.json({ bookings })
+      } else {
+          // Successful Response: If you ARE the owner of the spot.
+          const bookings = await Booking.findAll({
+              where: { spotId },
+              attributes: ['spotId', 'startDate', 'endDate']
+          })
+          // Successful Response
+          res.status(200)
+          res.json({ bookings })
+      }
   }
 })
-
 
 
 
@@ -524,6 +527,7 @@ router.post('/:spotId/bookings', async (req, res) => {
 // ****************************** Reviews *************************************************
 
 //Create a Review for a Spot based on the Spot's id - COMPLETE
+//Challenge: Implementing the error handlers in the correct order
 router.post('/:spotId/reviews', async (req, res) => {
   const { review, stars } = req.body; // { review: 'This was an awesome spot!', star: undefined }
   const { user } = req   //
@@ -539,8 +543,8 @@ router.post('/:spotId/reviews', async (req, res) => {
   const userId = user.dataValues.id //Id of current logged in user
 
   const spotId = req.params.spotId //spotId: '4'
+  // console.log(spotId)
   const spot = await Spot.findByPk(spotId)
-
 
 
 
@@ -554,6 +558,7 @@ router.post('/:spotId/reviews', async (req, res) => {
     }
     ]
   })
+
 
   if (spot) {
     let reviewed;

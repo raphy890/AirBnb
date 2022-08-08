@@ -119,19 +119,24 @@ router.delete("/:reviewId", async (req, res) => {
 });
 
 
-//Create an Image for a REeviw
+//Create an Image for a Reviw
 // Add an Image to a Review based on the Review's id
 router.post('/:reviewId/images', requireAuth, restoreUser, async (req, res) => {
+
   // DECONSTRUCT SPOT ID
   const reviewId = req.params = req.params.reviewId;
 
-
+ 
   const { user } = req       //DECONSTRUCT USER, URL & PREVIEW IMAGE
   const { url, previewImage } = req.body
 
 
   //IF USER DOESN'T EXIST - THROW ERROR
-  if (!user) return res.status(401).json({ "message": "You need to be logged in to make any changes", "statusCode": 401 })
+  if (!user)
+  return
+  res.status(401).json(
+    { "message": "You need to be logged in to make any changes", "statusCode": 401 }
+    )
 
 
   const review = await Spot.findByPk(reviewId)   //CONFIRM IF SPOT ID EXISTS
@@ -156,7 +161,7 @@ router.post('/:reviewId/images', requireAuth, restoreUser, async (req, res) => {
   object.url = image.url
 
   res.status(200).json(object)
-}) 
+})
 
 
 

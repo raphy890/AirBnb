@@ -14,7 +14,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
   //Deconstruct user id from the request
   let userId = req.user.dataValues.id
 
-
   const bookings = await Booking.findAll({
       where: { userId },
       include: [{model: Spot}]
@@ -30,7 +29,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
 //EDIT BOOKING - COMPLETE
 router.put('/:bookingId', requireAuth, restoreUser, async (req, res, next) => {
 
-  //
   const bookingId = req.params.bookingId
   const { startDate, endDate } = req.body
   const newBooking = await Booking.findByPk(bookingId)
