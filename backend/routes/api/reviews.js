@@ -140,7 +140,7 @@ router.post('/:reviewId/images', requireAuth, restoreUser, async (req, res) => {
   }
 
 
-  
+
   // CREATE AN IMAGE IF SPOT CAN BE FOUND
   const image = await Image.create({ url, previewImage, reviewId, userId: user.id })
 

@@ -101,6 +101,7 @@ router.get('/:spotId', async (req, res) => {
 
   //Error handler if Spot does not exists
   if (!spot) {
+    res.status(404)
     res.json({
       "message": "Spot couldn't be found",
       "statusCode": 404

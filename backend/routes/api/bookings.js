@@ -44,6 +44,7 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res, next) => {
   }
 
   if (!newBooking) {
+    res.status(404)
     res.json({
       message: "Booking couldn't be found",
       statusCode: 404
