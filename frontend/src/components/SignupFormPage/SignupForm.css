@@ -1,0 +1,10 @@
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 32em;
+  min-height: 32em;
+}
+
+
+
