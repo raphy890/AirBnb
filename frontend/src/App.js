@@ -7,7 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import GetSpots from "./components/Spots_Card";
 import GetOneSpot from "./components/GetOneSpot"
-
+import CreateSpotForm from "./components/CreateSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,14 +26,17 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/">
-            <GetSpots/>
+          <Route exact path="/spots/create">
+            <CreateSpotForm />
           </Route>
           <Route exact path="/spots/:spotId">
             <GetOneSpot/>
           </Route>
           <Route exact path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path="/">
+            <GetSpots/>
           </Route>
         </Switch>
       )}

@@ -91,38 +91,41 @@ export const thunkGetOneSpot = (id) => async (dispatch) => {
 
 
 // *************** Update - complete
-// export const thunkUpdateSpot = (spot) => async (dispatch) => {
-//   const response = await csrfFetch(`/api/spots/${spot.id}`, {
-//       method: "PUT",
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(spot)
-//   })
-//   if(response.ok) {
-//     const data = await response.json();
-//     dispatch(actionUpdateSpot(data));
-//     return data
-//   }
-//   return await response.json();
-// }
+export const thunkUpdateSpot = (spot) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spot.id}`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(spot)
+  })
+  if(response.ok) {
+    const data = await response.json();
+    dispatch(actionUpdateSpot(data));
+    return data
+  }
+  const errors = await response.json()
+  return errors
+}
 
 
 
 
 // *************** CREATE/POST - complete
-// export const thunkCreateSpot = (spot) => async (dispatch) => {
-//   const response = await csrfFetch('/api/spots', {
-//     method: 'POST',
-//     headers: {
-//         "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify(spot)
-// })
-// if(response.ok){
-//   const newSpot = await response.json()
-//   dispatch(actionCreateSpot(newSpot))
-//   return newSpot
-//   }
-// };
+export const thunkCreateSpot = (spot) => async (dispatch) => {
+  const response = await csrfFetch('/api/spots', {
+    method: 'POST',
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(spot)
+})
+if(response.ok){
+  const newSpot = await response.json()
+  dispatch(actionCreateSpot(newSpot))
+  return newSpot
+  }
+  const err = await response.json()
+  return err
+};
 
 
 
@@ -167,11 +170,15 @@ const spotsReducer = (state = {}, action) => {
 
     case GET_SPOT_INFO: {
       let newState = {...state}
-      newState.spotDetails = {}
-      newState.spotDetails[action.spot.id] = action.spot
+      newState[action.spot.id] = action.spot
       return newState
     }
 
+      case EDIT_SPOT:{ //complete
+      newState = { ...state };
+      newState[action.spot.id] = action.spot
+      return newState;
+    }
 
     default:
       return state;
@@ -184,11 +191,6 @@ export default spotsReducer
 
 
 
-    // case EDIT_SPOT:{ //complete
-    //   newState = { ...state };
-    //   newState[action.spot.id] = action.spot
-    //   return newState;
-    // }
 
     // case CREATE_SPOT: { //complete
     //   newState = { ...state };
