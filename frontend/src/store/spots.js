@@ -60,7 +60,7 @@ export const thunkGetSpot = () => async (dispatch) => {
 
   if (response.ok) {
     const spots = await response.json();
-    console.log('THIS IS THE LIST DATA AFTER RES.JSON-ING THE RESPONSE', spots);
+    // console.log('THIS IS THE LIST DATA AFTER RES.JSON-ING THE RESPONSE', spots);
 
     //console.log('BEFORE THE THUNK DISPATCHES THE ACTION')
     dispatch(actionGetAllSpots(spots.allSpots));
@@ -102,8 +102,8 @@ export const thunkUpdateSpot = (spot) => async (dispatch) => {
     dispatch(actionUpdateSpot(data));
     return data
   }
-  const errors = await response.json()
-  return errors
+
+  return await response.json();
 }
 
 
@@ -167,11 +167,16 @@ const spotsReducer = (state = {}, action) => {
       return newState
 
 
-
     case GET_SPOT_INFO: {
       let newState = {...state}
       newState[action.spot.id] = action.spot
       return newState
+    }
+    
+    case CREATE_SPOT: { //complete
+      newState = { ...state };
+      newState[action.spot.id] = action.spot
+      return newState;
     }
 
       case EDIT_SPOT:{ //complete
@@ -192,11 +197,7 @@ export default spotsReducer
 
 
 
-    // case CREATE_SPOT: { //complete
-    //   newState = { ...state };
-    //   newState[action.spot.id] = action.spot
-    //   return newState;
-    // }
+
 
     // case DELETE_SPOT: {  //complete
     //   newState = { ...state }

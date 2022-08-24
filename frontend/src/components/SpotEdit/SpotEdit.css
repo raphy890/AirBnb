@@ -1,0 +1,81 @@
+/* #container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1220px;
+  height: 700px;
+}
+
+#form-header {
+  border-bottom: 1px solid grey;
+  text-align: center;
+  font-size: 16px;
+}
+
+#form-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  padding: 32px;
+  margin: 0 auto;
+}
+
+#form-title {
+  font-size: 22px;
+  margin: 0 0 8px;
+  padding: 0;
+}
+
+#input-container {
+  border-radius: 8px;
+  border: 1px solid grey;
+  width: 502px;
+  background-color: white;
+  margin-bottom: 32px;
+}
+
+.form-input {
+  box-sizing: border-box;
+  padding: 26px 36px 10px 12px;
+  background-color: white;
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-radius: 8px;
+}
+
+.form-input:first-child {
+  margin-bottom: 2px;
+}
+
+.form-input:focus {
+  outline: 2px solid black;
+}
+
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+#form-container>button {
+  width: 502px;
+  height: 48px;
+  background: #e41c64;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  color: white;
+}
+
+
+.booking-container {
+  width: 330px;
+  height: 330px;
+}
+
+.details {
+  flex-shrink: 1;
+} */

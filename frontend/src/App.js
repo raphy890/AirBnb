@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import GetSpots from "./components/Spots_Card";
 import GetOneSpot from "./components/GetOneSpot"
 import CreateSpotForm from "./components/CreateSpot";
+import EditSpotComponent from "./components/SpotEdit";
 
 function App() {
   const dispatch = useDispatch();

@@ -49,7 +49,7 @@ export default function CreateSpotForm() {
     e.preventDefault();
 
     setHasSubmitted(true);
-    if(errors.length) return alert('cannot submit')
+    if(errors.length) return alert('can not submit')
 
 
     const details = { name, price, address, city, state, country, lng, lat, description}
