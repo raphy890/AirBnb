@@ -1,5 +1,5 @@
-import {useHistory} from 'react-router-dom';
-import {useState, useEffect, Redirect} from 'react';
+import {useHistory, Redirect} from 'react-router-dom';
+import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {thunkCreateSpot} from '../../store/spots';
 
