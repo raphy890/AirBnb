@@ -24,6 +24,10 @@ export default function GetSpots () {
     return null
   }
 
+  
+
+
+
 
   return(
     isLoaded && (

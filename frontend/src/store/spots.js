@@ -133,18 +133,18 @@ if(response.ok){
 
 
 // *************** Delete - completed
-// export const thunkDeleteSpot = (spotId) => async dispatch => {
-//   const response = await csrfFetch(`/api/spots/${spotId}`, {
-//     method: 'DELETE',
-//     body: JSON.stringify(spotId)
-//   })
-//   if (response.ok) {
-//     const deleteSpot = await response.json()
-//     dispatch(actionDeleteSpot(deleteSpot))
-//     return 'deleted'
-//   }
-//   return response
-// }
+export const thunkDeleteSpot = (spotId) => async dispatch => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'DELETE',
+    body: JSON.stringify(spotId)
+  })
+  if (response.ok) {
+    const deleteSpot = await response.json()
+    dispatch(actionDeleteSpot(deleteSpot))
+    return 'deleted'
+  }
+  return response
+}
 
 
 
@@ -172,7 +172,7 @@ const spotsReducer = (state = {}, action) => {
       newState[action.spot.id] = action.spot
       return newState
     }
-    
+
     case CREATE_SPOT: { //complete
       newState = { ...state };
       newState[action.spot.id] = action.spot
@@ -185,22 +185,15 @@ const spotsReducer = (state = {}, action) => {
       return newState;
     }
 
+      case DELETE_SPOT: {  //complete
+      newState = { ...state }
+      delete newState[action.id]
+      return newState
+    }
+
     default:
       return state;
   }
 }
 
 export default spotsReducer
-
-
-
-
-
-
-
-
-    // case DELETE_SPOT: {  //complete
-    //   newState = { ...state }
-    //   delete newState[action.id]
-    //   return newState
-    // }
