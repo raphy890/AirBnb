@@ -1,26 +1,31 @@
-// //src/components/DeleteSpots/DeleteSpots.js
-// import './Delete.css'
-// import { useDispatch } from "react-redux";
-// import { useHistory } from "react-router-dom";
-// import { thunkDeleteSpot } from "../../store/spots"; //import thunk
+//src/components/DeleteSpots/DeleteSpots.js
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory, Redirect, useParams } from "react-router-dom";
+import { thunkDeleteSpot } from "../../store/spots";
+import './Delete.css'
 
 
-// export default function SpotDelete({spotId, setShowDelete}){
-//   const dispatch = useDispatch()
-//   const history = useHistory()
-//   const handleDelete = async (e) => {
-//     await dispatch(thunkDeleteSpot(spotId))  //thunk to be located heree
+const SpotDelete = ({spotId, setShowDelete}) => {
 
-//     setShowDelete(false)
-//     history.push("/")
-//   }
-//   return (
-//     <>
-//       <div className="delete-container">
-//       <button className="delete-button" onClick={() => handleDelete()}>YES</button>
-//       <button className="delete-button" onClick={() => setShowDelete(false)}>NO</button>
-//       </div>
-//     </>
-//   )
-// }
+  const dispatch = useDispatch()
+  const history = useHistory()
 
+  const handleDelete = async (e) => {
+    history.push("/")
+    await dispatch(thunkDeleteSpot(spotId))
+    setShowDelete(false)
+  }
+
+  return (
+    <>
+      <div className='delete-container'>
+      <p>This spot will be deleted. Are you sure you want to proceed? </p>
+      <button className="delete-button" onClick={() => handleDelete()}>YES</button>
+      <button className="delete-button" onClick={() => setShowDelete(false)}>NO</button>
+      </div>
+    </>
+  )
+}
+
+export default SpotDelete
