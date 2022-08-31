@@ -7,8 +7,9 @@ import SpotDelete from '../DeleteSpot/DeleteSpot'
 import ReviewGetComponent from "../ReviewGet"
 import { Modal } from '../../context/Modal'
 import './getOneSpot.css'
+import {thunkGetCurrentReviews} from "../../store/reviews"
 // import SpotDelete from "../DeleteSpot/DelteSpot.js"
-import { GetSpotReviews } from '../ReviewGet/index'
+// import { GetSpotReviews } from '../ReviewGet/index'
 
 
 //Get One Spot
@@ -19,14 +20,32 @@ export default function GetOneSpot() {
   // const [hasUdpated, setHasUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [hasReviews, setReviews] = useState(false)
-
+  const history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false)
   const oneSpot = useSelector(state => state.spots[spotId])
   const sessionUser = useSelector(state => state.session.user)
 
 
+  const allReviews = useSelector(state => state.reviews)
+
+  const getAllReviewArr = Object.values(allReviews)
+  const [userIds, setUserIds] = useState([])
+
+
+
+
+  const addReview = (e, spotId) => {
+    e.preventDefault();
+    history.push(`/spots/${spotId}/create`)
+  }
+
+  useEffect(() => {
+    setUserIds(getAllReviewArr.map(rv=>rv.userId))
+  }, [allReviews])
+
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(thunkGetCurrentReviews(spotId))
     dispatch(thunkGetOneSpot(spotId)).then(() => setIsLoaded(true))
   }, [dispatch])
 
@@ -44,10 +63,14 @@ export default function GetOneSpot() {
           <ul className='current-spot-location'>{oneSpot.address}</ul>
         </div>
         <div>
+
+         {oneSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) && <button onClick={(e) => addReview(e, oneSpot.id)}>Review Spot</button>}
+
           {oneSpot.ownerId === sessionUser?.id && (
             <div>
               <button onClick={() => setShowUpdate(true)}>Edit Spot</button>
               <button onClick={() => setShowDelete(true)}>Delete Spot</button>
+
               {showUpdate && (
                 <Modal onClose={() => setShowUpdate(false)}>
                   <EditSpotComponent spotId={spotId} setShowUpdate={setShowUpdate} />
@@ -58,9 +81,9 @@ export default function GetOneSpot() {
                   <SpotDelete spotId={spotId} setShowDelete={setShowDelete} />
                 </Modal>
               )}
-              <ReviewGetComponent spotId={spotId} setReviews={setReviews} />
             </div>
           )}
+          <ReviewGetComponent spotId={spotId} setReviews={setReviews} sessionUser={sessionUser}/>
         </div>
         <div>
           {oneSpot && (

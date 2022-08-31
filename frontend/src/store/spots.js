@@ -136,12 +136,12 @@ if(response.ok){
 export const thunkDeleteSpot = (spotId) => async dispatch => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'DELETE',
-    body: JSON.stringify(spotId)
+    // body: spotId
   })
   if (response.ok) {
     const deleteSpot = await response.json()
-    dispatch(actionDeleteSpot(deleteSpot))
-    return 'deleted'
+    dispatch(actionDeleteSpot(spotId))
+    return deleteSpot
   }
   return response
 }

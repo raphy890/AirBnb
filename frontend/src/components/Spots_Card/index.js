@@ -24,7 +24,7 @@ export default function GetSpots () {
     return null
   }
 
-  
+
 
 
 
@@ -32,13 +32,29 @@ export default function GetSpots () {
   return(
     isLoaded && (
       <>
-      <div>All Spots</div>
+      <div>ALL SPOTS</div>
       <div>
-        <ul>
+        <div>
           {getAllSpotsArr.map((spot) => (
-            <li key={spot.id}>{spot.name}</li>
+            <div key={spot.id}>
+              <div>
+                {spot.name}
+              </div>
+              <div>
+                <img src={spot.previewImage}></img>
+              </div>
+              <div>
+                {spot.city}, {spot.state}
+              </div>
+              <div>
+                {Number(spot.avgRating).toFixed(2)}
+              </div>
+              <div>
+                {`$${spot.price} night`}
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
       </>
     )

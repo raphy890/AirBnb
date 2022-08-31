@@ -23,7 +23,7 @@ module.exports = {
       country: "United States of America",
       lat: 37.7645358,
       lng: -122.4730327,
-      name: "App Academy",
+      name: "Glorious Homes",
       description: "Place where web developers are created",
       price: 123
         },
@@ -36,7 +36,7 @@ module.exports = {
         country: "United States of America",
         lat: 37.7645351,
         lng: -122.4730321,
-        name: "Ap Academy",
+        name: "Land of Times",
         description: "Place where web developers are created",
         price: 123
         },
@@ -50,7 +50,7 @@ module.exports = {
         country: "United States of America",
         lat: 37.7645352,
         lng: -122.4730322,
-        name: "A Academy",
+        name: "Endless Green",
         description: "Place where web developers are created",
         price: 123,
 

@@ -7,6 +7,7 @@ import {thunkCreateSpot} from '../../store/spots';
 
 
 export default function CreateSpotForm() {
+  const history = useHistory();
   const user = useSelector(state => state.session.user);
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
@@ -55,6 +56,7 @@ export default function CreateSpotForm() {
     const details = { name, price, address, city, state, country, lng, lat, description}
 
     await dispatch(thunkCreateSpot(details))
+    history.push('/')
 }
 
 

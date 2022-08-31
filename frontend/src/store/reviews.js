@@ -3,7 +3,6 @@ import { csrfFetch } from "./csrf";
 
 
 //Types
-
 const GET_CURRENT_REVIEWS = '/reviews/reviewInfo'
 const CREATE_REVIEW = '/reviews/addReview'
 const DELETE_REVIEW = '/reviews/deleteReview'
@@ -42,12 +41,12 @@ export const thunkGetCurrentReviews = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const reviews = await response.json();
-    console.log('THIS IS THE LIST DATA AFTER RES.JSON-ING THE RESPONSE', reviews);
-
-    console.log('BEFORE THE THUNK DISPATCHES THE ACTION')
+    // console.log('THIS IS THE LIST DATA AFTER RES.JSON-ING THE RESPONSE', reviews);
+   console.log("revires", reviews);
+    // console.log('BEFORE THE THUNK DISPATCHES THE ACTION')
     dispatch(actionGetCurrentReviews(reviews));
-    console.log('AFTER THE THUNK DISPATCHES THE ACTION')
-    return response
+    // console.log('AFTER THE THUNK DISPATCHES THE ACTION')
+    // ret
   }
   return response
   // await response.json();
@@ -57,7 +56,7 @@ export const thunkGetCurrentReviews = (spotId) => async (dispatch) => {
 
 // *************** CREATE/POST
 export const thunkCreateReview = (review) => async (dispatch) => {
-  const response = await csrfFetch('/api/reviews', {
+  const response = await csrfFetch(`/api/spots/${review.spotId}/reviews`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -66,11 +65,8 @@ export const thunkCreateReview = (review) => async (dispatch) => {
   })
   if (response.ok) {
     const newReview = await response.json()
-    dispatch(actionCreateReview(newReview))
-    return newReview
-  }
-  const err = await response.json()
-  return err
+    return dispatch(actionCreateReview(newReview))
+  } else throw response
 };
 
 
@@ -80,14 +76,13 @@ export const thunkCreateReview = (review) => async (dispatch) => {
 export const thunkDeleteReview = (reviewId) => async dispatch => {
   const response = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: 'DELETE',
-    body: JSON.stringify(reviewId)
   })
   if (response.ok) {
     const deleteReview = await response.json()
-    dispatch(actionDeleteReview(deleteReview))
-    return 'deleted'
+    dispatch(actionDeleteReview(reviewId))
+    // return 'deleted'
+    return deleteReview
   }
-  return response
 }
 
 
@@ -103,12 +98,13 @@ const reviewReducer = (state = {}, action) => {
 
     case GET_CURRENT_REVIEWS:
       newState = { ...state }
-      console.log('action-------',action)
-      console.log('action.reviews--------',action.reviews)
       action.reviews.forEach(review => {
         newState[review.id] = review
       })
       return newState
+      // console.log('action-------',action)
+      // console.log('action.reviews--------',action.reviews)
+      // console.log(state)
 
 
     case CREATE_REVIEW: { //complete

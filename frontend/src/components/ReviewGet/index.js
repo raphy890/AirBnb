@@ -1,25 +1,31 @@
 import { useParams, useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import {useEffect, useState} from 'react'
-import {thunkGetCurrentReviews} from '../../store/reviews'
+import {thunkGetCurrentReviews,thunkDeleteReview} from '../../store/reviews'
 
 
-export default function GetSpotReviews(){
+
+export default function GetSpotReviews({sessionUser}){
   const {spotId} = useParams();
   const spotIdParsed = parseInt(spotId)
   const spot = useSelector(state => (state.spots[spotIdParsed]))
-
   const allReviews = useSelector(state => state.reviews)
-  console.log('allReviews-----', allReviews)//objec empty
   const getAllReviewArr = Object.values(allReviews)
 
 
+  // console.log(spotId)
+  // console.log(spotIdParsed)
+  // console.log('spot',spot)
+  // console.log('allReviews-----', allReviews)//objec empty
   // const [showUpdate, setShowUpdate] = useState(false);
   // const [hasUdpated, setHasUpdate] = useState(false);
 
   const [isLoaded, setIsLoaded] = useState(false)
 
-  const sessionUser = useSelector(state => state.session.user)
+const deletereview = (e, id) => {
+  e.preventDefault()
+  dispatch(thunkDeleteReview(id))
+}
 
 
   const dispatch = useDispatch();
@@ -39,8 +45,11 @@ export default function GetSpotReviews(){
     <ul>
       {getAllReviewArr.map(review => {
         return (
-          <div>
+          <div key={review.id}>
+            <span>
             {review.review}
+           { sessionUser.id === review.userId && <button onClick={(e)=>deletereview(e, review.id)}>Delete Review</button>}
+            </span>
           </div>
         )
       })}

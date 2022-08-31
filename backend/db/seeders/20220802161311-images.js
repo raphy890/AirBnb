@@ -6,7 +6,7 @@ module.exports = {
     await queryInterface.bulkInsert('Images', [
 
       {
-        url: 'www.allstar1.com',
+        url: 'https://cdn.pixabay.com/photo/2016/08/11/23/48/mountains-1587287_640.jpg',
         previewImage: true,
         spotId: 1,
         reviewId: null,
@@ -14,15 +14,15 @@ module.exports = {
        },
 
        {
-        url: 'www.allstar2.com',
+        url: 'https://cdn.pixabay.com/photo/2016/09/19/22/46/lake-1681485_640.jpg',
         previewImage: true,
-        spotId: null,
+        spotId: 2,
         reviewId: 2,
         userId: 2
        },
 
        {
-        url: 'www.allstar3.com',
+        url: 'https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_640.jpg',
         previewImage: true,
         spotId: 3,
         reviewId: null,

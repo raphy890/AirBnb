@@ -47,6 +47,11 @@ function SignupFormPage() {
 
   return (
     <form className= "signup-form" onSubmit={handleSubmit}>
+      <div className="signup-form-wrapper">
+        <div className="signup-title">
+          <h4 className="signup-h3">Sign up</h4>
+        </div>
+      </div>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>

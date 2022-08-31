@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import GetSpots from "./components/Spots_Card";
 import GetOneSpot from "./components/GetOneSpot"
 import CreateSpotForm from "./components/CreateSpot";
+import CreateReviewForm from "./components/ReviewCreate"
 import EditSpotComponent from "./components/SpotEdit";
 
 function App() {
@@ -23,10 +24,20 @@ function App() {
 
 
   return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
+    // <>
+    //   <Navigation isLoaded={isLoaded} />
+
+    // </>
+    <div class="grid">
+    <header>
+         <Navigation isLoaded={isLoaded} />
+    </header>
+    <main>
+    {isLoaded && (
         <Switch>
+           <Route exact path="/spots/:spotId/create">
+            <CreateReviewForm />
+          </Route>
           <Route exact path="/spots/create">
             <CreateSpotForm />
           </Route>
@@ -41,7 +52,8 @@ function App() {
           </Route>
         </Switch>
       )}
-    </>
+    </main>
+</div>
   );
 }
 
