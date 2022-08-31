@@ -50,6 +50,8 @@ export default function GetOneSpot() {
   }, [dispatch])
 
   const rating = oneSpot?.avgStarRating == 0 ? "New" : oneSpot?.avgStarRating
+  // const pic = oneSpot.Images[0].url // why is Images reading undefined??
+
 
   return (
     isLoaded && (
@@ -58,8 +60,9 @@ export default function GetOneSpot() {
           <h2>{oneSpot.name}</h2>
         </div>
         <div>
+          <img src={oneSpot.Images[0].url}/>
           <p>Rating: {rating}</p>
-          <p>{oneSpot.city}, {oneSpot.state} {oneSpot.country}</p>
+          <p>{oneSpot.city}, {oneSpot.state}</p>
           <ul className='current-spot-location'>{oneSpot.address}</ul>
         </div>
         <div>

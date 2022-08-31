@@ -42,12 +42,14 @@ function ProfileButton({ user, isLoaded }) {
     };
 
 
-
     document.addEventListener('click', closeMenu);
+
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+
+  
   const sessionUser = useSelector(state => state.session.user);
 
 
@@ -74,7 +76,7 @@ function ProfileButton({ user, isLoaded }) {
             {isLoaded && sessionUser && (
             <ul className="profile-list">
               <li className="profile-list-item user-name-li">{user.username}</li>
-              <li className="hover-link"><NavLink className="menu-my-bookings" activeClassName="active" to="/bookings">My Bookings</NavLink></li>
+              <li className="hover-link"><NavLink className="menu-my-bookings" activeClassName="active" to="/listings">My Listings</NavLink></li>
               <li className="hover-link" onClick={logout}>Log Out</li>
             </ul>
           )}
@@ -89,11 +91,6 @@ function ProfileButton({ user, isLoaded }) {
               <li className="hover-link"><NavLink onClick={() => setShowSignUpModal(true)} className='profile-list-item' to="">Sign Up</NavLink></li>
             </ul>
           )}
-          {/* <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li> */}
         </div>
       )}
     </>

@@ -40,9 +40,11 @@ export default function GetSpots () {
               <div>
                 {spot.name}
               </div>
-              <div>
-                <img src={spot.previewImage}></img>
-              </div>
+              <p>
+                <a href={`/spots/${spot.id}`}>
+                  <img src={spot.previewImage}></img>
+                </a>
+              </p>
               <div>
                 {spot.city}, {spot.state}
               </div>
