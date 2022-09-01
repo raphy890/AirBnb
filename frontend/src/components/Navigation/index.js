@@ -11,30 +11,18 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const history = useHistory()
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <div className='right-profile-container'>
-        <ProfileButton user={sessionUser} isLoaded={isLoaded} />
-      </div>
-    );
-  } else {
-    sessionLinks = (
-      <>
-        <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
+    return (
+      <nav className='main-navbar'>
+        <div className='svg-container' onClick={() => history.push('/')}>
+          <img className='favicon' src={favicon} />
+        </div>
+        {isLoaded && (
+          <div className='right-profile-container'>
+            <ProfileButton user={sessionUser} isLoaded={isLoaded} />
+          </div>
+        )}
+      </nav>
     );
   }
 
-  return (
-    <nav className='main-navbar'>
-      <div className='svg-container' onClick={() => history.push('/')}>
-        <img className='favicon' src={favicon}/>
-      </div>
-      {isLoaded && sessionLinks}
-    </nav>
-  );
-}
-
-export default Navigation;
+export default Navigation

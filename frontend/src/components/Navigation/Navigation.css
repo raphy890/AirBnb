@@ -11,9 +11,10 @@ div.svg-container{
 
 .favicon {
   display: flex;
-  max-height: 120px;
-  max-width: 120px;
-  margin: left
+  max-height: 150px;
+  max-width: 150px;
+  margin-top:15px;
+  margin-right: 25px;
 }
 
 img.svg-logo-name {

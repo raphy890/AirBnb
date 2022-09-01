@@ -49,23 +49,24 @@ function ProfileButton({ user, isLoaded }) {
   }, [showMenu]);
 
 
-  
+
   const sessionUser = useSelector(state => state.session.user);
 
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push("/");
   };
 
   return (
     <>
       {showLoginModal && (<LoginFormModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} />)}
-      {showSignUpModal && (<SignUpFormPage showSignUpModal={showSignUpModal} setShowSignUpModal={setShowSignUpModal} />)}
+      {/* {showSignUpModal && (<SignUpFormPage showSignUpModal={showSignUpModal} setShowSignUpModal={setShowSignUpModal} />)} */}
       <div className='right-profile-container'>
-        <div className='host-hover-border'>
+        <span className='host-hover-border'>
           <NavLink className='become-host-link' to="/spots/create">Become a Host</NavLink>
-        </div>
+        </span>
       </div>
       <div className="profile-button-border" onClick={openMenu}>
         <img className="hamburger-icon" src={hamburger} />
@@ -88,7 +89,7 @@ function ProfileButton({ user, isLoaded }) {
               <li className="hover-link">
                 <NavLink className='profile-list-item' onClick={() => handleDemo()} to=''>Demo Login</NavLink>
               </li>
-              <li className="hover-link"><NavLink onClick={() => setShowSignUpModal(true)} className='profile-list-item' to="">Sign Up</NavLink></li>
+              <li className="hover-link"><NavLink onClick={() => setShowSignUpModal(true)} className='profile-list-item' to="/signup">Sign Up</NavLink></li>
             </ul>
           )}
         </div>

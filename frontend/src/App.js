@@ -28,7 +28,7 @@ function App() {
     //   <Navigation isLoaded={isLoaded} />
 
     // </>
-    <div class="grid">
+    <div className="grid">
     <header>
          <Navigation isLoaded={isLoaded} />
     </header>
