@@ -1,5 +1,6 @@
 //imports
 import { csrfFetch } from "./csrf";
+import {thunkCreateImage} from "./images"
 
 
 //Types
@@ -120,6 +121,9 @@ export const thunkCreateSpot = (spot) => async (dispatch) => {
 })
 if(response.ok){
   const newSpot = await response.json()
+  // console.log(newSpot)//returns new spot information
+  // console.log(spot)// returns input of spot
+  dispatch(thunkCreateImage(newSpot.id,spot.url))  //grab the id of the new spot along with the added url
   dispatch(actionCreateSpot(newSpot))
   return newSpot
   }

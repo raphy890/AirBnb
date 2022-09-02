@@ -2,13 +2,15 @@ import {useHistory, Redirect} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {thunkCreateSpot} from '../../store/spots';
-
+import {thunkCreateImage} from '../../store/images';
+// const LAT = 39.76;
+// const LNG = -100.99;
 
 
 
 export default function CreateSpotForm() {
-  const history = useHistory
   const user = useSelector(state => state.session.user);
+  const history = useHistory()
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [address, setAddress] = useState('');
@@ -19,7 +21,12 @@ export default function CreateSpotForm() {
   const [lng, setLng] = useState('')
   const [description, setDescription] = useState('')
   const [errors, setErrors] = useState([])
+  const [url, setUrl] = useState('')
 
+
+  function confirmImage(url){
+    return /\.(jpg|png|jpeg|svg|gif)$/.test(url);
+  }
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const dispatch = useDispatch();
@@ -35,11 +42,12 @@ export default function CreateSpotForm() {
       if (!lat) errors.push("Please provide a lat")
       if (!lng) errors.push("Please provide a lng")
       if (!description) errors.push("Please provide a description")
+      if (!url) errors.push("Please provide a url")
 
 
       return setErrors(errors);
 
-  }, [name,price,address,city,state,country,lat,lng,description])
+  }, [name,price,address,city,state,country,lat,lng,description,url])
 
   if (user === null) {
       alert("You must be logged in to make a spot")
@@ -53,9 +61,12 @@ export default function CreateSpotForm() {
     if(errors.length) return alert('can not submit')
 
 
-    const details = { name, price, address, city, state, country, lng, lat, description}
+    const details = { name, price, address, city, state, country, lng, lat, description,url}
+    const spot = await thunkCreateSpot(details)
+    // console.log({spot})
+    await dispatch(spot)
+  
 
-    await dispatch(thunkCreateSpot(details))
     history.push('/')
 }
 
@@ -87,7 +98,7 @@ return(
       <label htmlFor="price">Price:</label>
       <input
           id="price"
-          type="text"
+          type="number"
           onChange={(e) => setPrice(e.target.value)}
           value={price}
           />
@@ -144,6 +155,15 @@ return(
           type="text"
           onChange={(e) => setLng(e.target.value)}
           value={lng}
+        />
+      </div>
+      <div>
+         <label htmlFor="url">url:</label>
+        <input
+          id="url"
+          type="string"
+          onChange={(e) => setUrl(e.target.value)}
+          value={url}
         />
       </div>
       <div>

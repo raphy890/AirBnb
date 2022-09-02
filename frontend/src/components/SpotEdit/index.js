@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import {useEffect, useState} from 'react'
 import { thunkUpdateSpot,thunkGetOneSpot } from "../../store/spots"
 import './SpotEdit.css'
+const LAT = 39.76;
+const LNG = -100.99;
 
 export default function EditSpotComponent(setShowUpdate) {
-
   const user = useSelector(state => state.session.user);
+  const history = useHistory()
   const {spotId} = useParams();
-
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [address, setAddress] = useState('');
@@ -18,11 +19,12 @@ export default function EditSpotComponent(setShowUpdate) {
   const [lat , setLat] = useState('')
   const [lng, setLng] = useState('')
   const [description, setDescription] = useState('')
-   // const [previewImage, setPreviewImage] = useState('')
+  const [url, setUrl] = useState('')
+
+
 
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const history = useHistory()
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -37,9 +39,11 @@ export default function EditSpotComponent(setShowUpdate) {
     if (!lat) errors.push("Please provide a lat")
     if (!lng) errors.push("Please provide a lng")
     if (!description) errors.push("Please provide a description")
+    if (!url) errors.push("Please provide a url")
+
 
     return setErrors(errors);
-  }, [name,address,city,state,country,price,lat,lng,description] )
+  }, [name,address,city,state,country,price,lat,lng,description,url] )
 
   if(user === null){
     alert("Must be logged in to perform that action")
@@ -52,7 +56,7 @@ export default function EditSpotComponent(setShowUpdate) {
     setHasSubmitted(true);
     if(errors.length) return alert('can not submit')
 
-    const details = { id:spotId,name,address,city,state,country,price,lat,lng,description}
+    const details = { id:spotId,name,address,city,state,country,price,lat,lng,description,url}
 
     const response = await dispatch(thunkUpdateSpot(details))
     await dispatch(thunkGetOneSpot(spotId))
@@ -82,6 +86,14 @@ export default function EditSpotComponent(setShowUpdate) {
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+        />
+         <label htmlFor="name">Price:</label>
+        <input
+          id='price'
+          type="number"
+          placeholder="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
         />
         <label htmlFor="address">Adress:</label>
         <input
@@ -134,15 +146,10 @@ export default function EditSpotComponent(setShowUpdate) {
           required
         />
         <input
-          type="number"
-          className="form-input none update"
-          value={price}
-          pattern="^\d+(?:\.\d{1,2})?$"
-          min="0.00"
-          step="0.01"
-          placeholder="Price"
-          onChange={(e) => setPrice(e.target.value)}
-          required
+          type="string"
+          placeholder="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
         />
         <textarea
           type="text"
@@ -159,4 +166,3 @@ export default function EditSpotComponent(setShowUpdate) {
     </form>
   )
 }
-

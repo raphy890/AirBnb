@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {useEffect, useState} from 'react'
 import { thunkGetSpot } from "../../store/spots"
 import Spots_Card from "../Spots_Card"
+// import Favicon from "../Navigation/images/Favicon"
 import './spotcards.css'
 // add get details of sppt
 
@@ -32,7 +33,9 @@ export default function GetSpots () {
   return(
     isLoaded && (
       <>
-      <div>ALL SPOTS</div>
+      {/* <head> */}
+        <title>ALL SPOTS</title>
+      {/* </head> */}
       <div>
         <div>
           {getAllSpotsArr.map((spot) => (
