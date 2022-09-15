@@ -34,7 +34,7 @@ function CreateReviewForm() {
   }, [review, stars]);
 
   if (spot?.Owners?.id === currentUser.id) {
-    <Redirect to={`/spots/${spot.id}`} />; //throw
+    <Redirect to={`/spots/${spot.id}`} />; 
   }
 
   const handleSubmit = async (e) => {

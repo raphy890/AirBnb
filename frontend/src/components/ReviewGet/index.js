@@ -11,7 +11,7 @@ export default function GetSpotReviews({sessionUser}){
   const spot = useSelector(state => (state.spots[spotIdParsed]))
   const allReviews = useSelector(state => state.reviews)
   const getAllReviewArr = Object.values(allReviews)
-
+  // console.log(sessionUser) // email, id, username
 
   // console.log(spotId)
   // console.log(spotIdParsed)
@@ -47,8 +47,8 @@ const deletereview = (e, id) => {
         return (
           <div key={review.id}>
             <span>
-            {review.review}
-           { sessionUser.id === review.userId && <button onClick={(e)=>deletereview(e, review.id)}>Delete Review</button>}
+            {review.review }
+            {!sessionUser ? null : sessionUser.id === review.userId  && <button onClick={(e)=>deletereview(e, review.id)}>Delete Review</button>}
             </span>
           </div>
         )

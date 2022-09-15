@@ -2,59 +2,76 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import "./LoginForm.css";
+import {useHistory} from "react-router-dom"
 
 function LoginForm() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const history = useHistory()
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential, password })).catch(
+
+    dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
-  };
+        if (data && data.errors)
+        setErrors(data.errors);
+      },
+      // history.push('/')
+      );
+      reset()
+      return false
+    };
+
+    const reset = () => {
+      setCredential('');
+      setPassword('')
+    }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className= 'login-title-container'>
+    <form className="login-form" onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
+          <li className= 'errors-list' key={idx}>{error}</li>
         ))}
       </ul>
-      <label>
-        Username or Email
         <input
           type="text"
+          className="login-input"
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
+          placeholder={'Username or Email'}
           required
         />
-      </label>
-      <label>
-        Password
         <input
           type="password"
+          className="login-input"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder={'password'}
           required
         />
-      </label>
-      <button type="submit">Log In</button>
       <button
-      className='demo-bttn'
+        className="login-button "
+        type="submit"
+        >Log In
+        </button>
+      {/* <button
+      className='login-button '
       type='submit'
       onClick={(e) => {
         setCredential('Demo-lition')
         setPassword('password')
       }}
-      >Demo User</button>
+      >Demo User</button> */}
     </form>
+    </div>
   );
 }
 

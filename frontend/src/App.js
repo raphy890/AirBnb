@@ -9,15 +9,18 @@ import GetSpots from "./components/Spots_Card";
 import GetOneSpot from "./components/GetOneSpot"
 import CreateSpotForm from "./components/CreateSpot";
 import CreateReviewForm from "./components/ReviewCreate"
-import EditSpotComponent from "./components/SpotEdit";
+import GetUserSpots from "./components/GetUserSpots";
+import { thunkGetSpot } from "./store/spots";
+// import EditSpotComponent from "./components/SpotEdit";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(thunkGetSpot()).then(()=>dispatch(sessionActions.restoreUser())).then(() => setIsLoaded(true));
   }, [dispatch]);
+
 
 
 
@@ -35,20 +38,23 @@ function App() {
     <main>
     {isLoaded && (
         <Switch>
+          <Route exact path="/signup">
+            <SignupFormPage />
+          </Route>
+          <Route exact path="/mySpots">
+            <GetUserSpots/>
+          </Route>
            <Route exact path="/spots/:spotId/create">
             <CreateReviewForm />
+          </Route>
+          <Route exact path="/">
+            <GetSpots/>
           </Route>
           <Route exact path="/spots/create">
             <CreateSpotForm />
           </Route>
           <Route exact path="/spots/:spotId">
             <GetOneSpot/>
-          </Route>
-          <Route exact path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route exact path="/">
-            <GetSpots/>
           </Route>
         </Switch>
       )}

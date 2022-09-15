@@ -2,26 +2,27 @@ import { useParams, useHistory, Redirect } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import {useEffect, useState} from 'react'
 import { thunkUpdateSpot,thunkGetOneSpot } from "../../store/spots"
+import {thunkCreateImage, thunkUpdateImage} from "../../store/images"
 import './SpotEdit.css'
-const LAT = 39.76;
-const LNG = -100.99;
+// const lat = 39.76;
+// const lng = -100.99;
 
-export default function EditSpotComponent(setShowUpdate) {
+export default function EditSpotComponent({image,setShowUpdate,}){
   const user = useSelector(state => state.session.user);
   const history = useHistory()
   const {spotId} = useParams();
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
+  const formInformation = useSelector(state => state.spots[spotId])
+  // console.log('formInformation---', formInformation)
+  const [name, setName] = useState(formInformation.name);
+  const [price, setPrice] = useState(formInformation.price);
+  const [address, setAddress] = useState(formInformation.address);
+  const [city, setCity] = useState(formInformation.city);
+  const [state, setState] = useState(formInformation.state);
+  const [country, setCountry] = useState(formInformation.country);
   const [lat , setLat] = useState('')
   const [lng, setLng] = useState('')
-  const [description, setDescription] = useState('')
+  const [description, setDescription] = useState(formInformation.description)
   const [url, setUrl] = useState('')
-
-
 
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -43,7 +44,7 @@ export default function EditSpotComponent(setShowUpdate) {
 
 
     return setErrors(errors);
-  }, [name,address,city,state,country,price,lat,lng,description,url] )
+  }, [name,address,city,state,country,price,description,lat,lng,url] )
 
   if(user === null){
     alert("Must be logged in to perform that action")
@@ -56,12 +57,14 @@ export default function EditSpotComponent(setShowUpdate) {
     setHasSubmitted(true);
     if(errors.length) return alert('can not submit')
 
-    const details = { id:spotId,name,address,city,state,country,price,lat,lng,description,url}
+    const details = { id:spotId,name,address,city,state,country,price,lat,lng,description}
 
-    const response = await dispatch(thunkUpdateSpot(details))
-    await dispatch(thunkGetOneSpot(spotId))
-    setShowUpdate(false)
-    history.push(`/spots/${spotId}`)
+    dispatch(thunkGetOneSpot(spotId))
+    dispatch(thunkUpdateSpot(details))
+    // dispatch(thunkCreateImage(spotId,url))
+    dispatch(thunkUpdateImage(spotId,image.id,url))
+    .then(() => setShowUpdate(false))
+    // .then(() => history.push(`/spots/${spotId}`))
   }
 
   return (

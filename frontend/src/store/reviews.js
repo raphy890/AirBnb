@@ -42,7 +42,7 @@ export const thunkGetCurrentReviews = (spotId) => async (dispatch) => {
   if (response.ok) {
     const reviews = await response.json();
     // console.log('THIS IS THE LIST DATA AFTER RES.JSON-ING THE RESPONSE', reviews);
-   console.log("revires", reviews);
+   console.log("reviews", reviews);
     // console.log('BEFORE THE THUNK DISPATCHES THE ACTION')
     dispatch(actionGetCurrentReviews(reviews));
     // console.log('AFTER THE THUNK DISPATCHES THE ACTION')
@@ -97,8 +97,9 @@ const reviewReducer = (state = {}, action) => {
   switch (action.type) {
 
     case GET_CURRENT_REVIEWS:
-      newState = { ...state }
+      newState = {}
       action.reviews.forEach(review => {
+        console.log('reducer----',review)
         newState[review.id] = review
       })
       return newState

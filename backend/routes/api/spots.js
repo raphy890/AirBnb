@@ -245,7 +245,7 @@ router.put("/:spotId", async (req, res) => {
 
 //Delete a Spot - COMPLETE
 router.delete("/:spotId", async (req, res) => {
-  
+
   const { spotId } = req.params;
 
   const currentSpot = await Spot.findByPk(spotId);

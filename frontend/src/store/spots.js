@@ -7,10 +7,11 @@ import {thunkCreateImage} from "./images"
 
 const GET_ALL_SPOTS = '/spots/getAllSpots'   // GET all spots
 const GET_SPOT_INFO = '/spots/spotInfo'
+const GET_SPOTS_USER = '/spots/getUserSpots'
 const EDIT_SPOT = '/spots/editSpot'          // UPDATE one spot
 const CREATE_SPOT = '/spots/addSpot'         // CREATE one spot
 const DELETE_SPOT = '/spots/deleteSpot'      // DELETE   one spots
-
+const UPDATE_IMAGE = '/image/updateImage'         // CREATE one spot
 
 
 //Actions
@@ -28,10 +29,25 @@ const actionGetOneSpot = (spot) => {  //Get one spot
   }
 }
 
+const actionGetUserSpots = (spots) => {
+  return {
+    type: GET_SPOTS_USER,
+    spots
+  }
+}
+
 const actionUpdateSpot = (spot) => { //UPDATE one spot
   return {
     type: EDIT_SPOT,
     spot
+  }
+};
+
+export const actionUpdateImage = (image,spotId) => { // Update
+  return {
+    type: UPDATE_IMAGE,
+    image,
+    spotId
   }
 };
 
@@ -81,13 +97,44 @@ export const thunkGetOneSpot = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${id}`);
   if (response.ok) {
     const spot = await response.json();
-    // console.log('after spot---:',spot)
+    console.log('after spot---:',spot)
     dispatch(actionGetOneSpot(spot))
-    // console.log('after dispatch spot---:',spot)
+    console.log('after dispatch spot---:',spot)
     return spot
   }
   return response
+    // await response.json();
 };
+
+
+
+
+
+
+// *************** GET USER SPOTS/READ -
+export const thunkGetUserSpots = () => async (dispatch) => {
+    console.log('THUNK CODE STARTS RUNNING, RIGHT BEFORE FETCH')
+  const response = await csrfFetch(`/api/spots/current`)
+    console.log('THIS IS THE RESPONSE RETURNED FROM FETCH;', response)
+
+
+  if(response.ok){
+    const spots = await response.json()
+    console.log('THIS IS THE LIST DATA AFTER RES.JSON-ING THE RESPONSE', spots);
+
+    console.log('BEFORE THE THUNK DISPATCHES THE ACTION')
+    dispatch(actionGetUserSpots(spots))
+    console.log('AFTER THE THUNK DISPATCHES THE ACTION')
+
+    return spots
+  }
+  return response
+}
+
+
+
+
+
 
 
 
@@ -100,7 +147,9 @@ export const thunkUpdateSpot = (spot) => async (dispatch) => {
   })
   if(response.ok) {
     const data = await response.json();
+    console.log('data----',data)
     dispatch(actionUpdateSpot(data));
+
     return data
   }
 
@@ -174,8 +223,18 @@ const spotsReducer = (state = {}, action) => {
     case GET_SPOT_INFO: {
       let newState = {...state}
       newState[action.spot.id] = action.spot
+      console.log('action.spot-----',action.spot)
       return newState
     }
+
+    case GET_SPOTS_USER: {
+      let userSpot = {}
+      action.spots.Spots.forEach(spot => {
+        userSpot[spot.id] = spot
+      })
+      return userSpot
+    }
+
 
     case CREATE_SPOT: { //complete
       newState = { ...state };
@@ -188,6 +247,13 @@ const spotsReducer = (state = {}, action) => {
       newState[action.spot.id] = action.spot
       return newState;
     }
+
+      case UPDATE_IMAGE:{
+      newState = {...state};
+      // const Images = [action.image]
+      newState[action.spotId].Images = [action.image]
+      return newState
+      }
 
       case DELETE_SPOT: {  //complete
       newState = { ...state }

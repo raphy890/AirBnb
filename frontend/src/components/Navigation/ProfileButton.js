@@ -77,7 +77,7 @@ function ProfileButton({ user, isLoaded }) {
             {isLoaded && sessionUser && (
             <ul className="profile-list">
               <li className="profile-list-item user-name-li">{user.username}</li>
-              <li className="hover-link"><NavLink className="menu-my-bookings" activeClassName="active" to="/listings">My Listings</NavLink></li>
+              <li className="hover-link"><NavLink className="menu-my-bookings" activeClassName="active" to="/mySpots">My Spots</NavLink></li>
               <li className="hover-link" onClick={logout}>Log Out</li>
             </ul>
           )}

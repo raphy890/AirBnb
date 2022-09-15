@@ -23,16 +23,34 @@ export default function GetOneSpot() {
   const history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false)
   const oneSpot = useSelector(state => state.spots[spotId])
+  // console.log(oneSpot)
   const sessionUser = useSelector(state => state.session.user)
+  const [disableReview, setDisableReview] = useState(true); //create state to disable or enable a review
+  const [,setRender] = useState(false)
 
+  // console.log('sessionUser----', sessionUser)  //{email: , id: , username: }
+  console.log('spotId here------',spotId)
 
   const allReviews = useSelector(state => state.reviews)
+  // console.log('allReviews-----', allReviews)
+  /*
+  if allReviews.spotId = oneSpot.id &&
+  */
 
   const getAllReviewArr = Object.values(allReviews)
+  // console.log("getAllReviewArr----", getAllReviewArr)
   const [userIds, setUserIds] = useState([])
+  // console.log('userIds----', userIds) // returns all of the reviews and the associated userId BUT NOT THE SPOTID
+
+  const sessionUserReview = !sessionUser ? null : getAllReviewArr.find((review) =>   //if user does not exist, return null else if a review contains a userId equal to sessionUserId then set value equal to sessionUserReview
+    (review.userId === sessionUser.id)
+  )
 
 
 
+  useEffect(() =>{
+    setDisableReview(!!sessionUserReview)
+  })
 
   const addReview = (e, spotId) => {
     e.preventDefault();
@@ -46,12 +64,27 @@ export default function GetOneSpot() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(thunkGetCurrentReviews(spotId))
-    dispatch(thunkGetOneSpot(spotId)).then(() => setIsLoaded(true))
+    dispatch(thunkGetOneSpot(spotId))
+    .then((res) => console.log('res---------',res))
+    .then(() => setIsLoaded(true))
   }, [dispatch])
 
-  const rating = oneSpot?.avgStarRating == 0 ? "New" : oneSpot?.avgStarRating
-  // const pic = oneSpot.Images[0].url // why is Images reading undefined??
 
+  const rating = oneSpot?.avgStarRating == 0 ? "New" : oneSpot?.avgStarRating
+  // const pic = Object.values(oneSpot) //.Images[0].url // why is Images reading undefined??
+  // console.log('pic----',pic[15][0].url) // {{[Images] }}
+  // const img = oneSpot
+  // console.log('img----',img)
+
+  console.log('oneSpot------',oneSpot)
+  console.log('isloaded----', isLoaded)
+
+  //FORCE A RERENDER
+  if (oneSpot.Images === undefined) {
+    dispatch(thunkGetOneSpot(spotId)).then(()=> setRender((prev) => !prev))
+    console.log('why??')
+    return (<div>...Loading</div>)
+  }
 
   return (
     isLoaded && (
@@ -60,14 +93,19 @@ export default function GetOneSpot() {
           <h2>{oneSpot.name}</h2>
         </div>
         <div>
-          <img src={oneSpot.Images[0].url}/>
+           <img src={oneSpot?.Images[0].url}/>
+           {/* {console.log(oneSpot.Images[0])} */}
+           {/* {!oneSpot.Images[0].url ? null :} */}
           <p>Rating: {rating}</p>
           <p>{oneSpot.city}, {oneSpot.state}</p>
           <ul className='current-spot-location'>{oneSpot.address}</ul>
         </div>
         <div>
 
-         {oneSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) && <button onClick={(e) => addReview(e, oneSpot.id)}>Review Spot</button>}
+         {!sessionUser ? null :oneSpot.ownerId !== sessionUser?.id && <button disabled={disableReview}  onClick={(e) => addReview(e, oneSpot.id)}>Review Spot</button>}
+
+         {/* !userIds.includes(sessionUser?.id) && */}
+
 
           {oneSpot.ownerId === sessionUser?.id && (
             <div>
@@ -76,7 +114,7 @@ export default function GetOneSpot() {
 
               {showUpdate && (
                 <Modal onClose={() => setShowUpdate(false)}>
-                  <EditSpotComponent spotId={spotId} setShowUpdate={setShowUpdate} />
+                  <EditSpotComponent image={oneSpot.Images[0]} spotId={spotId} setShowUpdate={setShowUpdate} />
                 </Modal>
               )}
               {showDelete && (

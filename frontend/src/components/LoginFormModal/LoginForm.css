@@ -41,7 +41,7 @@ input.login-input:placeholder-shown {
 
 input:focus {
   outline: none !important;
-  border: 10px solid black;
+  border: 10px;
   box-shadow: 0 0 5px #719ECE;
 }
 
@@ -95,4 +95,3 @@ input:focus {
   margin: 0;
   color: rgb(212, 24, 24)
 }
-
