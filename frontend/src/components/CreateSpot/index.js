@@ -40,8 +40,8 @@ export default function CreateSpotForm() {
     if (!city.length) errors.push("Please provide a city");
     if (!state.length) errors.push("Please provide a state")
     if (!country.length) errors.push("Please provide a country")
-    // if (!lat) errors.push("Please provide a lat")
-    // if (!lng) errors.push("Please provide a lng")
+    if (!lat) errors.push("Please provide a lat")
+    if (!lng) errors.push("Please provide a lng")
     if (!description) errors.push("Please provide a description")
     if (!url) errors.push("Please provide a url")
 
@@ -66,7 +66,7 @@ export default function CreateSpotForm() {
     // console.log({spot})
     await dispatch(spot)
 
-    
+
     history.push('/')
   }
 

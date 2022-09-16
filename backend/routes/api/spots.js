@@ -141,10 +141,13 @@ router.get('/:spotId', async (req, res) => {
 
 //POST/CREATE a New Spot - COMPLETE
 router.post('/', async (req, res) => {
-  const { address, city, state, country, lat, lng, name, description, price } = req.body //deconstruct attributes from the body
+  // const { address, city, state, country, lat, lng, name, description, price } = req.body //deconstruct attributes from the body
+  const { address, city, state, country, name, description, price } = req.body //deconstruct attributes from the body
+
   // console.log(req.body);
 
-
+  const lat = 99;
+  const lng = 89;
   const user = req.user.dataValues.id //get owner id from req object
   console.log('user:', user)
 
