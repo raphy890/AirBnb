@@ -66,7 +66,7 @@ export default function CreateSpotForm() {
     // console.log({spot})
     await dispatch(spot)
 
-
+    
     history.push('/')
   }
 

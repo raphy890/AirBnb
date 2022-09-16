@@ -164,19 +164,24 @@ export const thunkUpdateSpot = (spot) => async (dispatch) => {
 
 // *************** CREATE/POST - complete
 export const thunkCreateSpot = (spot) => async (dispatch) => {
+
   const response = await csrfFetch('/api/spots', {
     method: 'POST',
     headers: {
         "Content-Type": "application/json"
     },
     body: JSON.stringify(spot)
+}).catch(async (e) => {
+  const errorMessage = await e.json()
+  console.log('error message---- spot store', errorMessage)
+  throw errorMessage
 })
 if(response.ok){
   const newSpot = await response.json()
   // console.log(newSpot)//returns new spot information
   // console.log(spot)// returns input of spot
-  dispatch(thunkCreateImage(newSpot.id,spot.url))  //grab the id of the new spot along with the added url
   dispatch(actionCreateSpot(newSpot))
+  dispatch(thunkCreateImage(newSpot.id,spot.url))  //grab the id of the new spot along with the added url
   return newSpot
   }
   const err = await response.json()
