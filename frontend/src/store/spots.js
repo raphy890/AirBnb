@@ -7,7 +7,9 @@ import {thunkCreateImage} from "./images"
 
 const GET_ALL_SPOTS = '/spots/getAllSpots'   // GET all spots
 const GET_SPOT_INFO = '/spots/spotInfo'
+
 const GET_SPOTS_USER = '/spots/getUserSpots'
+
 const EDIT_SPOT = '/spots/editSpot'          // UPDATE one spot
 const CREATE_SPOT = '/spots/addSpot'         // CREATE one spot
 const DELETE_SPOT = '/spots/deleteSpot'      // DELETE   one spots
@@ -113,14 +115,15 @@ export const thunkGetOneSpot = (id) => async (dispatch) => {
 
 // *************** GET USER SPOTS/READ -
 export const thunkGetUserSpots = () => async (dispatch) => {
-    console.log('THUNK CODE STARTS RUNNING, RIGHT BEFORE FETCH')
+    // console.log('THUNK CODE STARTS RUNNING, RIGHT BEFORE FETCH')
   const response = await csrfFetch(`/api/spots/current`)
-    console.log('THIS IS THE RESPONSE RETURNED FROM FETCH;', response)
+
+    // console.log('THIS IS THE RESPONSE RETURNED FROM FETCH;', response)
 
 
   if(response.ok){
     const spots = await response.json()
-    console.log('THIS IS THE LIST DATA AFTER RES.JSON-ING THE RESPONSE', spots);
+    console.log('THIS IS THE LIST DATA AFTER RES.JSON-ING THE RESPONSE LOCATED IN THUNKGETUSERSPOTS', spots);
 
     console.log('BEFORE THE THUNK DISPATCHES THE ACTION')
     dispatch(actionGetUserSpots(spots))
@@ -223,16 +226,20 @@ const spotsReducer = (state = {}, action) => {
     case GET_SPOT_INFO: {
       let newState = {...state}
       newState[action.spot.id] = action.spot
-      console.log('action.spot-----',action.spot)
+      // console.log('action.spot-----',action.spot)
       return newState
     }
 
-    case GET_SPOTS_USER: {
-      let userSpot = {}
-      action.spots.Spots.forEach(spot => {
-        userSpot[spot.id] = spot
+    case GET_SPOTS_USER:{
+      let newState = {}
+      const newSpots = action.spots.allSpots //[{},{}]
+      console.log('newSpots in this biiii----' ,action.spots.allSpots) //returns all spots owned by user
+
+      newSpots.forEach(spot => {
+        newState[spot.id] = spot
+        console.log('newState----', newState)
       })
-      return userSpot
+      return newState
     }
 
 

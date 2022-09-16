@@ -14,6 +14,7 @@ import {thunkGetCurrentReviews} from "../../store/reviews"
 
 //Get One Spot
 export default function GetOneSpot() {
+  console.log('GETONESPOT COMPONENT CODE RUNNING')
   const { spotId } = useParams();
   //console.log('spotId:', spotId);
   const [showUpdate, setShowUpdate] = useState(false);
@@ -29,7 +30,7 @@ export default function GetOneSpot() {
   const [,setRender] = useState(false)
 
   // console.log('sessionUser----', sessionUser)  //{email: , id: , username: }
-  console.log('spotId here------',spotId)
+  // console.log('spotId here------',spotId)
 
   const allReviews = useSelector(state => state.reviews)
   // console.log('allReviews-----', allReviews)
@@ -49,6 +50,7 @@ export default function GetOneSpot() {
 
 
   useEffect(() =>{
+    console.log('USE EFFCT RAN IN GETONESPOT TO DISABLE/ENABLE REVIEW')
     setDisableReview(!!sessionUserReview)
   })
 
@@ -58,12 +60,14 @@ export default function GetOneSpot() {
   }
 
   useEffect(() => {
+    console.log('USE EFFECT RAN TO GET ALL REVIEWS AND SET THEM TO A USERID')
     setUserIds(getAllReviewArr.map(rv=>rv.userId))
   }, [allReviews])
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(thunkGetCurrentReviews(spotId))
+    console.log('USE EFFECT RAN TO GET CURRENT USER')
     dispatch(thunkGetOneSpot(spotId))
     .then((res) => console.log('res---------',res))
     .then(() => setIsLoaded(true))
