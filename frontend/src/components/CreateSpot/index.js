@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkCreateSpot } from '../../store/spots';
 import { thunkCreateImage } from '../../store/images';
-import './createSpot.css'
+import './CreateSpot.css'
 const lat = 39.76;
 const lng = -100.99;
 
