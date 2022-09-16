@@ -146,8 +146,8 @@ router.post('/', async (req, res) => {
 
   // console.log(req.body);
 
-  const lat = 99;
-  const lng = 89;
+  // const lat = 99;
+  // const lng = 89;
   const user = req.user.dataValues.id //get owner id from req object
   console.log('user:', user)
 

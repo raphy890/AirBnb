@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunkCreateSpot } from '../../store/spots';
 import { thunkCreateImage } from '../../store/images';
 import './CreateSpot.css'
-const lat = 39.76;
-const lng = -100.99;
+
 
 
 
 export default function CreateSpotForm() {
+  const lat = 39.76;
+  const lng = -100.99;
   const user = useSelector(state => state.session.user);
   const history = useHistory()
   const [name, setName] = useState('');
@@ -18,8 +19,8 @@ export default function CreateSpotForm() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  const [lat, setLat] = useState('')
-  const [lng, setLng] = useState('')
+  // const [lat, setLat] = useState('')
+  // const [lng, setLng] = useState('')
   const [description, setDescription] = useState('')
   const [errors, setErrors] = useState([])
   const [url, setUrl] = useState('')
