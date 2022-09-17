@@ -172,7 +172,7 @@ export const thunkCreateSpot = (spot) => async (dispatch) => {
     },
     body: JSON.stringify(spot)
 }).catch(async (e) => {
-  const errorMessage = await e.json()
+  const errorMessage = await e.json() //catch error if 500 is thrown  ==> use in the future => .catch(async (e) => {const errorMessage = await e.json() console.log('error message---- spot store', errorMessage)
   console.log('error message---- spot store', errorMessage)
   throw errorMessage
 })
