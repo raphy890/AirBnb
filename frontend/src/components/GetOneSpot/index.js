@@ -100,7 +100,7 @@ export default function GetOneSpot() {
            <img src={oneSpot?.Images[0].url}/>
            {/* {console.log(oneSpot.Images[0])} */}
            {/* {!oneSpot.Images[0].url ? null :} */}
-          <p>Rating: {rating.toFixed(2)}</p>
+          <p>Rating: {Number(rating).toFixed(2)}</p>
           <p>{oneSpot.city}, {oneSpot.state}</p>
           <ul className='current-spot-location'>{oneSpot.address}</ul>
         </div>
