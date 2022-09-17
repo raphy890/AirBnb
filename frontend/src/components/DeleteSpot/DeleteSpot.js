@@ -1,7 +1,6 @@
 //src/components/DeleteSpots/DeleteSpots.js
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useHistory, Redirect, useParams } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { useHistory } from "react-router-dom";
 import { thunkDeleteSpot } from "../../store/spots";
 import './Delete.css'
 

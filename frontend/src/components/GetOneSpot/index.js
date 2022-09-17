@@ -74,7 +74,7 @@ export default function GetOneSpot() {
   }, [dispatch])
 
 
-  const rating = oneSpot?.avgStarRating == 0 ? "New" : oneSpot?.avgStarRating
+  const rating = oneSpot?.avgStarRating === 0 ? "New" : oneSpot?.avgStarRating
   // const pic = Object.values(oneSpot) //.Images[0].url // why is Images reading undefined??
   // console.log('pic----',pic[15][0].url) // {{[Images] }}
   // const img = oneSpot
