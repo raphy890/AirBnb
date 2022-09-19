@@ -25,7 +25,7 @@ Click here to access the app: [https://airbnb-raphael-yohannes.herokuapp.com].
 ### HomePage
 <img width="739" alt="Home Page" src="https://user-images.githubusercontent.com/64937695/191111212-d6d95bdc-5760-4942-aee8-bb8f79a38fb7.png">
 
-##Details Page
+### Details Page
 ![Screen Shot 2022-09-19 at 6 35 49 PM](https://user-images.githubusercontent.com/64937695/191137283-91cc5a72-49b3-4723-9a87-a7ee83d0ed14.png)
 
 
