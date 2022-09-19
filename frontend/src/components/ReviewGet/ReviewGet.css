@@ -1,0 +1,35 @@
+div.review-container {
+  margin-bottom: 3em;
+  margin-top: 3em;
+}
+
+div.user-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column
+}
+
+
+div.box-container{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+div.review-holder{
+  margin-left: 25px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.review-icon {
+  margin-right: 15px;
+  width: 45px;
+  height: 45px;
+}
+
+.review-name {
+  margin-right: 10px;
+  font-size: 23px;
+  font-weight: bold;
+}

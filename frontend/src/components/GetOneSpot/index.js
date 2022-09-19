@@ -95,62 +95,60 @@ export default function GetOneSpot() {
     isLoaded && (
       <>
         <div className='main'>
-          <div className='spot-name'>
-            <h2>{oneSpot.name}</h2>
-            <h3 className='review Size'> Rating:{Number(rating).toFixed(2)}</h3>
-          </div>
-          <br />
-          <img className="class-Img" src={oneSpot?.Images[0].url} />
-          <div className="container-for-middle-part">
-            {/* {console.log(oneSpot.Images[0])} */}
-            {/* {!oneSpot.Images[0].url ? null :} */}
-            <div className='info-right'>
-              <div style={{ fontSize: '20px' }}>
+          <div className='main-wrapper'>
+            <div className='spot-name'>
+              <h2>{oneSpot.name}</h2>
+            </div>
+            <div className="spot-details">
+              <div className='review Size'>
                 <img className='star-icon' src={starIcon} alt='true' />
                 {Number(rating).toFixed(2)}
               </div>
+              <div className="spot-location"> {oneSpot.city}, {oneSpot.state}, {oneSpot.country}</div>
             </div>
-
-            <div className="info-left">
-              <div style={{ fontSize: '20px' }}>${oneSpot.price}</div>
-              <div> {oneSpot.city}, {oneSpot.state}</div>
-              <ul className='current-spot-location'>{oneSpot.address}</ul>
-
-
-
-              {!sessionUser ? null : oneSpot.ownerId !== sessionUser?.id && <button className="review-button-logo" disabled={disableReview} onClick={(e) => addReview(e, oneSpot.id)}>Review Spot</button>}
-
-              {/* !userIds.includes(sessionUser?.id) && */}
-
-
-              {oneSpot.ownerId === sessionUser?.id && (
-                <div>
-                  <button className="button-logo" onClick={() => setShowUpdate(true)}>Edit Spot</button>
-                  <button className="button-logo" onClick={() => setShowDelete(true)}>Delete Spot</button>
-
-                  {showUpdate && (
-                    <Modal onClose={() => setShowUpdate(false)}>
-                      <EditSpotComponent image={oneSpot.Images[0]} spotId={spotId} setShowUpdate={setShowUpdate} />
-                    </Modal>
-                  )}
-                  {showDelete && (
-                    <Modal onClose={() => setShowDelete(false)} >
-                      <SpotDelete spotId={spotId} setShowDelete={setShowDelete} />
-                    </Modal>
-                  )}
+            <br />
+            <div>
+              <img className="class-Img" src={oneSpot?.Images[0].url} />
+            </div>
+            <div className="container-price-rating">
+              <div style={{ fontSize: '20px' }}>
+                  <img className='star-icon' src={starIcon} alt='true' />
+                  {Number(rating).toFixed(2)}
                 </div>
-              )}
-              <ReviewGetComponent className="button-logo" spotId={spotId} setReviews={setReviews} sessionUser={sessionUser} />
+                <div className='spot-price' style={{ fontSize: '20px' }}>${oneSpot.price}</div>
+            </div>
+            <div className="container-for-middle-part">
 
-              <div>
-                {oneSpot && (
-                  <div>
-                    {/* <img src={`${oneSpot.previewImage}`} /> */}
+              <div className='info-left'>
+                <div style= {{fontSize: '20px', fontWeight:"bold" }}>This spot is hosted by {oneSpot.Owner.firstName}</div>
+                {oneSpot.ownerId === sessionUser?.id && (
+                  <div className='host-buttons'>
+                    <button className="button-logo-edit" onClick={() => setShowUpdate(true)}>Edit Spot</button>
+                    <button className="button-logo" onClick={() => setShowDelete(true)}>Delete Spot</button>
+
+                    {showUpdate && (
+                      <Modal onClose={() => setShowUpdate(false)}>
+                        <EditSpotComponent image={oneSpot.Images[0]} spotId={spotId} setShowUpdate={setShowUpdate} />
+                      </Modal>
+                    )}
+                    {showDelete && (
+                      <Modal onClose={() => setShowDelete(false)} >
+                        <SpotDelete spotId={spotId} setShowDelete={setShowDelete} />
+                      </Modal>
+                    )}
                   </div>
                 )}
-              </div >
-            </div>
-          </div >
+              </div>
+
+              <div className="info-right">
+
+              </div>
+            </div >
+
+                <h1 className='title-review'>Reviews for {oneSpot.name}</h1>
+                {!sessionUser ? null : oneSpot.ownerId !== sessionUser?.id && <button className="review-button-logo" disabled={disableReview} onClick={(e) => addReview(e, oneSpot.id)}>Review Spot</button>}
+                <ReviewGetComponent className="button-logo" spotId={spotId} setReviews={setReviews} sessionUser={sessionUser} />
+          </div>
         </div>
       </>
     )
