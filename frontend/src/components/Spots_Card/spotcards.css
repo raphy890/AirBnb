@@ -30,15 +30,15 @@ img.spot-img {
   height: 250px;
   border-radius: .7em;
   margin-right: 2em;
-
 }
+
 
 div.spot-card-container {
   margin: .6em;
   width: 300px;
   min-height: 388px;
-
 }
+
 
 div.spot-info-container {
   margin-top: .5em;
@@ -55,6 +55,8 @@ div.spot-info-left {
   flex-direction: column;
   justify-content: space-between;
 }
+
+
 
 div.spot-info-right {
   display: flex;

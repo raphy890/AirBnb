@@ -1,3 +1,98 @@
 .current-spot-location {
   text-decoration: underline;
 }
+
+
+div.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 130px;
+  margin-right: 120px;
+}
+
+
+div.spot-card-container {
+  margin: .6em;
+  width: 300px;
+  min-height: 388px;
+}
+
+
+.spot-name {
+  display:block;
+  margin-right: 490px;
+}
+
+
+img.class-Img {
+  margin-top: 30px;
+  object-fit: cover;
+  width: 800px;
+  height: 400px;
+  border-radius: .7em;
+  margin-right: 2em;
+  justify-content: center;
+  margin-left: 70px;
+}
+
+
+.button-logo {
+  background: linear-gradient(0.25turn, #E61E4D, #D70666);
+  color: white;
+  border: none;
+  height: 2.6em;
+  border-radius: .6em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: .3em;
+}
+
+.review-button-logo {
+  background: linear-gradient(0.25turn, #E61E4D, #D70666);
+  color: white;
+  border: none;
+  width: 7em;
+  height: 2.6em;
+  border-radius: .6em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: .3em;
+}
+
+.delete-button-logo {
+  background: linear-gradient(0.25turn, #E61E4D, #D70666);
+  color: white;
+  border: none;
+  width: 8em;
+  height: 2em;
+  border-radius: .6em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: .3em;
+}
+
+div.container-for-middle-part{
+  margin-top: .5em;
+  min-height: 90px;
+  /* display: flex; */
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
+div.info-right {
+  display: flex;
+  flex-wrap: nowrap;
+  /* width: 180%; */
+  font-size: small;
+  /* justify-content: space-around; */
+  margin-right: 1em;
+}
+
+div.info-left {
+  display: flex;
+  /* max-width: 75%; */
+  min-height: inherit;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}

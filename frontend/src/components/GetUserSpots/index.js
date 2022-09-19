@@ -8,13 +8,13 @@ import {NavLink} from 'react-router-dom'
 
 
 export default function GetUserSpots () {
-  console.log('get user spots rendering')
+  // console.log('get user spots rendering')
   const history = useHistory();
-  const [isLoaded, setIsLoaded] = useState(false)
-  const allSpots = useSelector(state => state.spots)
-  console.log('allSpots in GetUSerSpots-----', allSpots)
-  const getAllSpotsArr = Object.values(allSpots)
-  console.log('getAllSpotsArr located in GetUserSpots ===>', getAllSpotsArr)
+  const [isLoaded, setIsLoaded] = useState(false);
+  const allSpots = useSelector(state => state.spots);
+  // console.log('allSpots in GetUSerSpots-----', allSpots);
+  const getAllSpotsArr = Object.values(allSpots);
+  // console.log('getAllSpotsArr located in GetUserSpots ===>', getAllSpotsArr);
 
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)

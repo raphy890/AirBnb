@@ -48,7 +48,7 @@ const deletereview = (e, id) => {
           <div key={review.id}>
             <span>
             {review.review }
-            {!sessionUser ? null : sessionUser.id === review.userId  && <button onClick={(e)=>deletereview(e, review.id)}>Delete Review</button>}
+            {!sessionUser ? null : sessionUser.id === review.userId  && <button className= "delete-button-logo" onClick={(e)=>deletereview(e, review.id)}>Delete Review</button>}
             </span>
           </div>
         )

@@ -7,7 +7,8 @@ import SpotDelete from '../DeleteSpot/DeleteSpot'
 import ReviewGetComponent from "../ReviewGet"
 import { Modal } from '../../context/Modal'
 import './getOneSpot.css'
-import {thunkGetCurrentReviews} from "../../store/reviews"
+import { thunkGetCurrentReviews } from "../../store/reviews"
+import starIcon from '../Spots_Card/images/starIcon.png'
 // import SpotDelete from "../DeleteSpot/DelteSpot.js"
 // import { GetSpotReviews } from '../ReviewGet/index'
 
@@ -27,7 +28,7 @@ export default function GetOneSpot() {
   // console.log(oneSpot)
   const sessionUser = useSelector(state => state.session.user)
   const [disableReview, setDisableReview] = useState(true); //create state to disable or enable a review
-  const [,setRender] = useState(false)
+  const [, setRender] = useState(false)
 
   // console.log('sessionUser----', sessionUser)  //{email: , id: , username: }
   // console.log('spotId here------',spotId)
@@ -49,7 +50,7 @@ export default function GetOneSpot() {
 
 
 
-  useEffect(() =>{
+  useEffect(() => {
     console.log('USE EFFCT RAN IN GETONESPOT TO DISABLE/ENABLE REVIEW')
     setDisableReview(!!sessionUserReview)
   })
@@ -61,7 +62,7 @@ export default function GetOneSpot() {
 
   useEffect(() => {
     console.log('USE EFFECT RAN TO GET ALL REVIEWS AND SET THEM TO A USERID')
-    setUserIds(getAllReviewArr.map(rv=>rv.userId))
+    setUserIds(getAllReviewArr.map(rv => rv.userId))
   }, [allReviews])
 
   const dispatch = useDispatch();
@@ -69,8 +70,8 @@ export default function GetOneSpot() {
     dispatch(thunkGetCurrentReviews(spotId))
     console.log('USE EFFECT RAN TO GET CURRENT USER')
     dispatch(thunkGetOneSpot(spotId))
-    .then((res) => console.log('res---------',res))
-    .then(() => setIsLoaded(true))
+      .then((res) => console.log('res---------', res))
+      .then(() => setIsLoaded(true))
   }, [dispatch])
 
 
@@ -80,12 +81,12 @@ export default function GetOneSpot() {
   // const img = oneSpot
   // console.log('img----',img)
 
-  console.log('oneSpot------',oneSpot)
+  console.log('oneSpot------', oneSpot)
   console.log('isloaded----', isLoaded)
 
   //FORCE A RERENDER
   if (oneSpot.Images === undefined) {
-    dispatch(thunkGetOneSpot(spotId)).then(()=> setRender((prev) => !prev))
+    dispatch(thunkGetOneSpot(spotId)).then(() => setRender((prev) => !prev))
     console.log('why??')
     return (<div>...Loading</div>)
   }
@@ -93,50 +94,64 @@ export default function GetOneSpot() {
   return (
     isLoaded && (
       <>
-        <div>
-          <h2>{oneSpot.name}</h2>
-        </div>
-        <div>
-           <img src={oneSpot?.Images[0].url}/>
-           {/* {console.log(oneSpot.Images[0])} */}
-           {/* {!oneSpot.Images[0].url ? null :} */}
-          <p>Rating: {Number(rating).toFixed(2)}</p>
-          <p>{oneSpot.city}, {oneSpot.state}</p>
-          <ul className='current-spot-location'>{oneSpot.address}</ul>
-        </div>
-        <div>
-
-         {!sessionUser ? null :oneSpot.ownerId !== sessionUser?.id && <button disabled={disableReview}  onClick={(e) => addReview(e, oneSpot.id)}>Review Spot</button>}
-
-         {/* !userIds.includes(sessionUser?.id) && */}
-
-
-          {oneSpot.ownerId === sessionUser?.id && (
-            <div>
-              <button onClick={() => setShowUpdate(true)}>Edit Spot</button>
-              <button onClick={() => setShowDelete(true)}>Delete Spot</button>
-
-              {showUpdate && (
-                <Modal onClose={() => setShowUpdate(false)}>
-                  <EditSpotComponent image={oneSpot.Images[0]} spotId={spotId} setShowUpdate={setShowUpdate} />
-                </Modal>
-              )}
-              {showDelete && (
-                <Modal onClose={() => setShowDelete(false)} >
-                  <SpotDelete spotId={spotId} setShowDelete={setShowDelete} />
-                </Modal>
-              )}
+        <div className='main'>
+          <div className='spot-name'>
+            <h2>{oneSpot.name}</h2>
+            <h3 className='review Size'> Rating:{Number(rating).toFixed(2)}</h3>
+          </div>
+          <br />
+          <img className="class-Img" src={oneSpot?.Images[0].url} />
+          <div className="container-for-middle-part">
+            {/* {console.log(oneSpot.Images[0])} */}
+            {/* {!oneSpot.Images[0].url ? null :} */}
+            <div className='info-right'>
+              <div style={{ fontSize: '20px' }}>
+                <img className='star-icon' src={starIcon} alt='true' />
+                {Number(rating).toFixed(2)}
+              </div>
             </div>
-          )}
-          <ReviewGetComponent spotId={spotId} setReviews={setReviews} sessionUser={sessionUser}/>
-        </div>
-        <div>
-          {oneSpot && (
-            <div>
-              {/* <img src={`${oneSpot.previewImage}`} /> */}
+
+            <div className="info-left">
+              <div style={{ fontSize: '20px' }}>${oneSpot.price}</div>
+              <div> {oneSpot.city}, {oneSpot.state}</div>
+              <ul className='current-spot-location'>{oneSpot.address}</ul>
+
+
+
+              {!sessionUser ? null : oneSpot.ownerId !== sessionUser?.id && <button className="review-button-logo" disabled={disableReview} onClick={(e) => addReview(e, oneSpot.id)}>Review Spot</button>}
+
+              {/* !userIds.includes(sessionUser?.id) && */}
+
+
+              {oneSpot.ownerId === sessionUser?.id && (
+                <div>
+                  <button className="button-logo" onClick={() => setShowUpdate(true)}>Edit Spot</button>
+                  <button className="button-logo" onClick={() => setShowDelete(true)}>Delete Spot</button>
+
+                  {showUpdate && (
+                    <Modal onClose={() => setShowUpdate(false)}>
+                      <EditSpotComponent image={oneSpot.Images[0]} spotId={spotId} setShowUpdate={setShowUpdate} />
+                    </Modal>
+                  )}
+                  {showDelete && (
+                    <Modal onClose={() => setShowDelete(false)} >
+                      <SpotDelete spotId={spotId} setShowDelete={setShowDelete} />
+                    </Modal>
+                  )}
+                </div>
+              )}
+              <ReviewGetComponent className="button-logo" spotId={spotId} setReviews={setReviews} sessionUser={sessionUser} />
+
+              <div>
+                {oneSpot && (
+                  <div>
+                    {/* <img src={`${oneSpot.previewImage}`} /> */}
+                  </div>
+                )}
+              </div >
             </div>
-          )}
-        </div >
+          </div >
+        </div>
       </>
     )
   )
