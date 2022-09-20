@@ -94,11 +94,11 @@ export default function CreateSpotForm() {
         >
           {hasSubmitted && errors.length > 0 && (
             <div className="errors-list">
-              <ul>
+              <div style={{"margin-right": "120px"}}>
                 {errors.map((error) => (
                   <li key={error}>{error}</li>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
 

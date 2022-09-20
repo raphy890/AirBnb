@@ -11,10 +11,6 @@ function CreateReviewForm() {
   const spot = useSelector((state) => state.spots[spotId]);
   const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false)
-
-
-  // const [spotId] = useState(id);
-  // const [userId] = useState(currentUser.id);
   const [review, setReview] = useState("");
   const [stars, setStars] = useState("");
   const [errors, setErrors] = useState([]);
@@ -63,7 +59,7 @@ function CreateReviewForm() {
   };
 
   const errorList = (errors.map((error) => (
-    <li className="create-review-errors" key={error}>{error}</li>
+    <div className="create-review-errors" key={error}>{error}</div>
   )))
 
   return (
@@ -81,7 +77,6 @@ function CreateReviewForm() {
             Review
             <div className="create-review-input-container">
               <input
-                // required
                 className="login-input"
                 type="string"
                 placeholder="Write your review..."
@@ -94,7 +89,6 @@ function CreateReviewForm() {
             Star Rating
             <div>
               <input
-                // required
                 className="login-input"
                 type="integer"
                 placeholder="1 - 5"
