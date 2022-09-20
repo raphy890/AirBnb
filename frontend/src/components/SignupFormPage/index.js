@@ -5,11 +5,12 @@ import {Redirect} from "react-router-dom"
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
 
+
 //Render a form with controlled inputs for the new user's username, email, and
 //password, and confirm password fields.
 
 
-function SignupFormPage() {
+function SignupFormPage({setSignUpFormModal}) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [firstName, setFirstName] = useState("");
@@ -22,7 +23,7 @@ function SignupFormPage() {
 
 
 
-  if (sessionUser) return <Redirect to="/" />;
+  // if (sessionUser) return <Redirect to="/" />;
 
 
 //On submit of the form, validate that the confirm password is the same as the password fields,
@@ -35,6 +36,7 @@ function SignupFormPage() {
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(sessionActions.signup({ firstName, lastName, email, username, password }))
+        .then(() => setSignUpFormModal(false))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
@@ -46,22 +48,25 @@ function SignupFormPage() {
 
 
   return (
-    <form className= "signup-form" onSubmit={handleSubmit}>
+    <div className= 'login-title-container'>
+    <form className="login-form"  onSubmit={handleSubmit}>
       <div className="signup-form-wrapper">
         <div className="signup-title">
-          <h4 className="signup-h3">Sign up</h4>
+          <h1 className="signup-h3">Sign up</h1>
         </div>
       </div>
       <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        {errors.map((error, idx) => <li className= 'errors-list' key={idx}>{error}</li>)}
       </ul>
       <label>
         First Name
         <input
           type="text"
           value={firstName}
+          className="login-input"
           onChange={(e) => setFirstName(e.target.value)}
           required
+          placeholder={'first name'}
         />
       </label>
       <label>
@@ -69,8 +74,10 @@ function SignupFormPage() {
         <input
           type="text"
           value={lastName}
+          className="login-input"
           onChange={(e) => setLastName(e.target.value)}
           required
+          placeholder={'last name'}
         />
       </label>
       <label>
@@ -78,8 +85,10 @@ function SignupFormPage() {
         <input
           type="text"
           value={email}
+          className="login-input"
           onChange={(e) => setEmail(e.target.value)}
           required
+          placeholder={'email'}
         />
       </label>
       <label>
@@ -87,8 +96,10 @@ function SignupFormPage() {
         <input
           type="text"
           value={username}
+          className="login-input"
           onChange={(e) => setUsername(e.target.value)}
           required
+          placeholder={'username'}
         />
       </label>
       <label>
@@ -96,8 +107,10 @@ function SignupFormPage() {
         <input
           type="password"
           value={password}
+          className="login-input"
           onChange={(e) => setPassword(e.target.value)}
           required
+          placeholder={'password'}
         />
       </label>
       <label>
@@ -105,12 +118,17 @@ function SignupFormPage() {
         <input
           type="password"
           value={confirmPassword}
+          className="login-input"
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
+          placeholder={'password'}
         />
       </label>
-      <button type="submit">Sign Up</button>
+      <button
+        className="login-button "
+        type="submit">Sign Up</button>
     </form>
+    </div>
   );
 }
 

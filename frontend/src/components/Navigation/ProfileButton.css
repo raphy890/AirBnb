@@ -3,7 +3,9 @@ img.profile-icon{
   max-height: 1.8em;
   margin-top: 0;
   margin-bottom: 0;
+  cursor: pointer;
 }
+
 div.profile-button-border {
   display: flex;
   align-items: center;
@@ -21,13 +23,9 @@ div.profile-button-border {
 
 div.profile-button-border:hover{
   box-shadow: 1px 5px 5px rgb(195, 195, 195) !important;
+  cursor: pointer;
 }
 
-/* .become-host-link {
-  border: 1px solid red;
-  min-width: 8em;
-  min-height: 8em;
-} */
 
 .host-hover-border {
   display: flex;
@@ -36,26 +34,31 @@ div.profile-button-border:hover{
   min-width: 8em;
   min-height: 2em;
   border-radius: 2em;
+  cursor: pointer;
 }
 
 .host-hover-border:hover {
   background-color: rgb(247, 243, 243);
+  cursor: pointer;
 }
 
 img.hamburger-icon{
   max-width: .9em;
   margin-top: 0;
   margin-bottom: 0;
+  cursor: pointer;
 }
 
 
 ul.profile-list {
   list-style-type: none;
+  cursor: pointer;
 }
 
 .profile-list-item {
   color: black;
   text-decoration: none;
+  cursor: pointer;
 }
 
 div.right-profile-container {
@@ -65,6 +68,7 @@ div.right-profile-container {
   width: 30%;
   height: 100%;
   justify-content: space-around;
+  cursor: pointer;
 }
 
 
@@ -77,6 +81,7 @@ div.right-profile-container {
   color: black;
   text-decoration: none;
   font-size: .9rem;
+  cursor: pointer;
 }
 
 div.profile-dropdown {
@@ -90,14 +95,18 @@ div.profile-dropdown {
   top: 90%;
   right: 6%;
   z-index: 2;
+  cursor: pointer;
 }
 .hover-link {
   margin-left: -2em;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .hover-link:hover {
   margin-left: -2em;
   background-color: rgb(216, 207, 207);
+  cursor: pointer;
 }
 
 .user-name-li {

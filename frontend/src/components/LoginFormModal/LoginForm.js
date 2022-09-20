@@ -36,11 +36,18 @@ function LoginForm() {
   return (
     <div className= 'login-title-container'>
     <form className="login-form" onSubmit={handleSubmit}>
+        <div className="signup-form-wrapper">
+          <div className="signup-title">
+            <h1 className="signup-h3">Login up</h1>
+        </div>
+      </div>
       <ul>
         {errors.map((error, idx) => (
           <li className= 'errors-list' key={idx}>{error}</li>
         ))}
       </ul>
+      <div className="information">
+
         <input
           type="text"
           className="login-input"
@@ -48,7 +55,7 @@ function LoginForm() {
           onChange={(e) => setCredential(e.target.value)}
           placeholder={'Username or Email'}
           required
-        />
+          />
         <input
           type="password"
           className="login-input"
@@ -56,7 +63,8 @@ function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder={'password'}
           required
-        />
+          />
+        </div>
       <button
         className="login-button "
         type="submit"

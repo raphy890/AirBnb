@@ -1,38 +1,37 @@
 div.svg-container{
-  position:sticky;
+  position: sticky;
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
-  max-width: 118px;
-  max-height: 64px;
-  margin-left: 3em;
+  width: 500px;
+  height: 64px;
   cursor: pointer;
 }
 
 
 .favicon {
-  position:sticky;
-  display: flex;
   max-height: 150px;
-  max-width: 150px;
+  width: 150px;
   margin-top:15px;
-  margin-right: 25px;
+  cursor: pointer;
+  margin-left: 20px;
 }
 
 img.svg-logo-name {
-  position:sticky;
+  position: sticky;
   max-height: 5em;
   max-width: 3.8em;
 }
 
-nav.main-navbar {
+nav.main-navbar-nav {
   position: fixed;
   display:flex;
+  align-items: center;
   background-color: #ffffff;
   top: 0%;
-  width: 95%;
+  width: 100%;
+  justify-content: left;
   justify-content: space-between;
-  align-items: center;
   border-bottom: 1px solid rgb(234, 229, 229);
   margin-bottom: 2em;
   height: 4em;

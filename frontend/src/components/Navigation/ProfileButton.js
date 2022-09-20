@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import * as sessionActions from '../../store/session';
 import LoginFormModal from "../LoginFormModal";
 import SignUpFormPage from "../SignupFormPage";
+import SignUpFormModal from "../SignupFormPage/SignUpFormModal"
 import hamburger from '../Navigation/images/hamburgerIcon.svg'
 import icon from '../Navigation/images/icon.svg'
 import { useHistory } from "react-router-dom";
@@ -13,12 +14,14 @@ import {NavLink} from 'react-router-dom'
 import './ProfileButton.css'
 
 
-function ProfileButton({ user, isLoaded }) {
+
+function ProfileButton({ user, isLoaded, setShowSignUp }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory()
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
+
 
   const openMenu = () => {
     if (showMenu) return;
@@ -62,7 +65,7 @@ function ProfileButton({ user, isLoaded }) {
   return (
     <>
       {showLoginModal && (<LoginFormModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} />)}
-      {/* {showSignUpModal && (<SignUpFormPage showSignUpModal={showSignUpModal} setShowSignUpModal={setShowSignUpModal} />)} */}
+      {/* {showSignUpModal && (<SignUpFormPage showSignUp={showSignUpModal} setShowSignUp={setShowSignUp} />)} */}
       <div className='right-profile-container'>
         <span className='host-hover-border'>
           <NavLink className='become-host-link' to="/spots/create">Become a Host</NavLink>
@@ -89,7 +92,9 @@ function ProfileButton({ user, isLoaded }) {
               <li className="hover-link">
                 <NavLink className='profile-list-item' onClick={() => handleDemo()} to=''>Demo Login</NavLink>
               </li>
-              <li className="hover-link"><NavLink onClick={() => setShowSignUpModal(true)} className='profile-list-item' to="/signup">Sign Up</NavLink></li>
+              <li className="hover-link">
+                <NavLink className='profile-list-item' onClick={() => setShowSignUp(true)} to=''>Sign Up</NavLink>
+              </li>
             </ul>
           )}
         </div>

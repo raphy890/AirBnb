@@ -121,6 +121,7 @@ export default function GetOneSpot() {
 
               <div className='info-left'>
                 <div style= {{fontSize: '20px', fontWeight:"bold" }}>This spot is hosted by {oneSpot.Owner.firstName}</div>
+                <div> {oneSpot.description}</div>
                 {oneSpot.ownerId === sessionUser?.id && (
                   <div className='host-buttons'>
                     <button className="button-logo-edit" onClick={() => setShowUpdate(true)}>Edit Spot</button>

@@ -50,6 +50,7 @@ export const thunkUpdateImage = (spotId,imageId,url) => async (dispatch) => {
       "Content-Type": "application/json"
     }
   })
+
   let response;
   if (deleteRes.ok){
     response = await csrfFetch(`/api/spots/${spotId}/images`, {
@@ -59,6 +60,7 @@ export const thunkUpdateImage = (spotId,imageId,url) => async (dispatch) => {
       },
       body: JSON.stringify({url,previewImage:true})
   })
+  
   if (response.ok){
     const newImage = await response.json()
     console.log('newImage----', newImage)

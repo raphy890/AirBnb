@@ -69,10 +69,11 @@ export default function EditSpotComponent({image,setShowUpdate,}){
 
   return (
     <form
+      className="login-form-SignUp"
       onSubmit={onSubmit}
     >
       <div>
-        <h3>Update Spot Form</h3>
+        <h1 className="signup-h3">Update Spot Form</h1>
       </div>
       {hasSubmitted && errors.length > 0 && (
         <ul>
@@ -88,6 +89,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           type="text"
           placeholder="Name"
           value={name}
+          className="login-input"
           onChange={(e) => setName(e.target.value)}
         />
          <label htmlFor="name">Price:</label>
@@ -96,6 +98,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           type="number"
           placeholder="Price"
           value={price}
+          className="login-input"
           onChange={(e) => setPrice(e.target.value)}
         />
         <label htmlFor="address">Adress:</label>
@@ -104,6 +107,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           type="text"
           placeholder="Address"
           value={address}
+          className="login-input"
           onChange={(e) => setAddress(e.target.value)}
         />
         <label htmlFor="city">City:</label>
@@ -112,6 +116,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           type="text"
           placeholder="City"
           value={city}
+          className="login-input"
           onChange={(e) => setCity(e.target.value)}
         />
         <label htmlFor="state">State:</label>
@@ -119,27 +124,29 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           type="text"
           placeholder="State"
           value={state}
+          className="login-input"
           onChange={(e) => setState(e.target.value)}
         />
         <input
           type="text"
           placeholder="Country"
           value={country}
+          className="login-input"
           onChange={(e) => setCountry(e.target.value)}
         />
-        <input
+        {/* <input
           type="number"
-          className="form-input none update"
+          className="login-input"
           value={lat}
           min='-90'
           max='90'
           step="0.01"
           placeholder="Latitude"
           onChange={(e) => setLat(e.target.value)}
-        />
-        <input
+        /> */}
+        {/* <input
           type="number"
-          className="form-input none update"
+          className="login-input"
           value={lng}
           min='-180'
           max='180'
@@ -147,17 +154,18 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           placeholder="Longitude"
           onChange={(e) => setLng(e.target.value)}
           required
-        />
+        /> */}
         <input
           type="string"
           placeholder="url"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          className="login-input"
         />
         <textarea
           type="text"
           value={description}
-          className="form-input last desc update"
+          className="login-input"
           placeholder="Description"
           maxLength='50'
           minLength='5'
@@ -165,7 +173,9 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           required
         />
       </div>
-      <button type="submit">Update Spot</button>
+      <button
+        className="login-button "
+        type="submit">Update Spot</button>
     </form>
   )
 }

@@ -1,4 +1,4 @@
-/* TODO Add site wide styles */
+TODO Add site wide styles
 
 /* Give the document some structure. */
 body {
@@ -7,20 +7,13 @@ body {
 }
 
 /* Create a responsive, centered, three-column grid. */
-.card-container {
+/* .card-container {
 	align-items: start;
 	display: grid;
 	grid-gap: 16px;
 	grid-template-columns: repeat(auto-fit, 300px);
 	justify-content: center;
-}
-
-
-
-
-
-
-
+} */
 
 
 
@@ -32,7 +25,7 @@ header,
 footer {
 	text-align: center;
 }
-
+/*
 .card {
 	background-color: orangered;
 	border-radius: 5px;
@@ -108,7 +101,9 @@ footer {
     color: #117964;
 }
 
-@media (max-width: 768px){
+@media (max-width: 1000px)
+
+{
     .navbar{
         opacity: 0.95;
     }
@@ -218,8 +213,8 @@ footer {
 
 }
 
-@media (max-width: 500px){
+@media (max-width: 1000px){
     .navbar-container input[type="checkbox"]:checked ~ .logo{
         display: none;
     }
-}
+} */
