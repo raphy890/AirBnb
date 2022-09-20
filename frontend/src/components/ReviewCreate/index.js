@@ -10,6 +10,7 @@ function CreateReviewForm() {
   const currentUser = useSelector((state) => state.session.user);
   const spot = useSelector((state) => state.spots[spotId]);
   const dispatch = useDispatch();
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
 
   // const [spotId] = useState(id);
@@ -39,11 +40,17 @@ function CreateReviewForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setIsSubmitted(true)
+
+    if (errors.length > 0){
+      return;
+    }
+
     history.push(`/spots/${spotId}`);
 
     const payload = {
       spotId,
-      // userId,
       review,
       stars,
     };
@@ -55,6 +62,9 @@ function CreateReviewForm() {
     }
   };
 
+  const errorList = (errors.map((error) => (
+    <li className="create-review-errors" key={error}>{error}</li>
+  )))
 
   return (
     <section className='login-title-container-review'>
@@ -62,20 +72,19 @@ function CreateReviewForm() {
         <div className="create-review-header-container">
           <h1 className="create-review-header">How was your stay?</h1>
         </div>
-        <div className="create-review-errors">
-          {errors.map((error) => (
-            <p key={error}>{error}</p>
-          ))}
-        </div>
+
+        <ul className="create-review-errors">
+        {isSubmitted && errorList}
+        </ul>
         <div className="modal-body">
           <label className="create-review-label">
             Review
             <div className="create-review-input-container">
               <input
+                // required
                 className="login-input"
                 type="string"
                 placeholder="Write your review..."
-                required
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
               />
@@ -85,10 +94,10 @@ function CreateReviewForm() {
             Star Rating
             <div>
               <input
+                // required
                 className="login-input"
                 type="integer"
                 placeholder="1 - 5"
-                required
                 value={stars}
                 onChange={(e) => setStars(e.target.value)}
               />
@@ -98,7 +107,7 @@ function CreateReviewForm() {
           <button
             className="login-button-review "
             type="submit"
-            disabled={errors.length ? true : false}
+            disabled={isSubmitted && errors.length>0}
           >
             Submit Review
           </button>
