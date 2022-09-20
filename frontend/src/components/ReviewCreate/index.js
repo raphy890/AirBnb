@@ -57,14 +57,14 @@ function CreateReviewForm() {
 
 
   return (
-    <section className="create-review-form-container">
-      <form className="create-review-form" onSubmit={handleSubmit}>
+    <section className='login-title-container-review'>
+      <form className="login-form-review" onSubmit={handleSubmit}>
         <div className="create-review-header-container">
-          <h3 className="create-review-header">How was your stay?</h3>
+          <h1 className="create-review-header">How was your stay?</h1>
         </div>
         <div className="create-review-errors">
           {errors.map((error) => (
-            <p key={error}>Error: {error}</p>
+            <p key={error}>{error}</p>
           ))}
         </div>
         <div className="modal-body">
@@ -72,7 +72,7 @@ function CreateReviewForm() {
             Review
             <div className="create-review-input-container">
               <input
-                className="create-review-input"
+                className="login-input"
                 type="string"
                 placeholder="Write your review..."
                 required
@@ -85,7 +85,7 @@ function CreateReviewForm() {
             Star Rating
             <div>
               <input
-                className="create-review-input"
+                className="login-input"
                 type="integer"
                 placeholder="1 - 5"
                 required
@@ -95,15 +95,14 @@ function CreateReviewForm() {
             </div>
           </label>
         </div>
-        <div className="review-submit-container">
           <button
-            className="create-review-submit-button"
+            className="login-button-review "
             type="submit"
             disabled={errors.length ? true : false}
           >
             Submit Review
           </button>
-        </div>
+
       </form>
     </section>
   );
