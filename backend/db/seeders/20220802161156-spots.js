@@ -115,7 +115,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "The Glass House",
-        description: "Experience the outdoors like never before, cozied up in the comfiest queen-size bed under luxuriously soft bedding with nothing to do but stare at those star-filled Texas skies and each other. Sleep outside and wake to the sounds of nature or roll the bed into your tiny home getaway.",
+        description: "Experience the outdoors like never before, cozied up in the comfiest queen-size bed under luxuriously soft bedding with nothing to do but stare at those star-filled Texas skies and each other.",
         price: 108,
        },
 
@@ -128,7 +128,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Tiny home",
-        description: "Feel the mountain breeze in this air inspired rustic A-Frame. Atop the ridge, enjoy year-round views of the mountains from the back porch. Hike up Rhododendron Ridge Trail or cozy up by the wood stove with a book. Start a campfire or listen to the sounds of Bee Tree Creek in the hammock.",
+        description: "Feel the mountain breeze in this air inspired rustic A-Frame. Atop the ridge, enjoy year-round views of the mountains from the back porch.",
         price: 109,
        },
 
@@ -141,7 +141,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Cabin on Lake Nichols",
-        description: "njoy a comfortable retreat in a historic 1930s cabin overlooking a 350-acre private lake. This fully renovated farmhouse features its original beadboard. The historic touches, combined with all the modern amenities, make this the perfect destination for those seeking to enjoy a getaway into nature and fishing experience.",
+        description: "Enjoy a comfortable retreat in a historic 1930s cabin overlooking a 350-acre private lake. This fully renovated farmhouse features its original beadboard.",
         price: 110,
        }
 
