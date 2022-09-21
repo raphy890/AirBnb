@@ -33,6 +33,48 @@ module.exports = {
         userId: 3,
         startDate: new Date ("2022-03-01"),
         endDate: new Date ("2022-04-01")
+      },
+      {
+        spotId: 4,
+        userId: 4,
+        startDate: new Date ("2022-03-01"),
+        endDate: new Date ("2022-04-01")
+      },
+      {
+        spotId: 5,
+        userId: 5,
+        startDate: new Date ("2022-03-01"),
+        endDate: new Date ("2022-04-01")
+      },
+      {
+        spotId: 6,
+        userId: 6,
+        startDate: new Date ("2022-03-01"),
+        endDate: new Date ("2022-04-01")
+      },
+      {
+        spotId: 7,
+        userId: 7,
+        startDate: new Date ("2022-03-01"),
+        endDate: new Date ("2022-04-01")
+      },
+      {
+        spotId: 8,
+        userId: 8,
+        startDate: new Date ("2022-03-01"),
+        endDate: new Date ("2022-04-01")
+      },
+      {
+        spotId: 9,
+        userId: 9,
+        startDate: new Date ("2022-03-01"),
+        endDate: new Date ("2022-04-01")
+      },
+      {
+        spotId: 10,
+        userId: 10,
+        startDate: new Date ("2022-03-01"),
+        endDate: new Date ("2022-04-01")
       }
 
     ]);

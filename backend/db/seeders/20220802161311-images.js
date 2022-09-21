@@ -27,6 +27,62 @@ module.exports = {
         spotId: 3,
         reviewId: null,
         userId: 3
+       },
+
+       {
+        url: 'https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+        previewImage: true,
+        spotId: 4,
+        reviewId: null,
+        userId: 4
+       },
+
+       {
+        url: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+        previewImage: true,
+        spotId: 5,
+        reviewId: null,
+        userId: 5
+       },
+
+       {
+        url: 'https://images.unsplash.com/photo-1563720223809-b9a3d1694e2a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+        previewImage: true,
+        spotId: 6,
+        reviewId: null,
+        userId: 6
+       },
+
+       {
+        url: 'https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGNhYmluJTIwaG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+        previewImage: true,
+        spotId: 7,
+        reviewId: null,
+        userId: 7
+       },
+
+       {
+        url: 'https://images.unsplash.com/photo-1506974210756-8e1b8985d348?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fGNhYmluJTIwaG91c2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+        previewImage: true,
+        spotId: 8,
+        reviewId: null,
+        userId: 8
+       },
+
+       {
+        url: 'https://images.unsplash.com/photo-1554114777-4039b6664977?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGxha2UlMjBob3VzZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+        previewImage: true,
+        spotId: 9,
+        reviewId: null,
+        userId: 9
+       },
+
+       {
+        url: 'https://images.unsplash.com/photo-1506974210756-8e1b8985d348?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fGxha2UlMjBob3VzZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+        previewImage: true,
+        spotId: 10,
+        reviewId: null,
+        userId: 10
        }
 
     ], {});
