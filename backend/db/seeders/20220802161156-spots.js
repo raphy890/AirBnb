@@ -37,7 +37,7 @@ module.exports = {
         lat: 37.7645351,
         lng: -122.4730321,
         name: "Land of Times",
-        description: "Soak up the sun and unwind in the Zion A-Frame. The unique convertible door lets the indoor comforts of this cozy cabin blend seamlessly with the stunning nature of the South Zion Mountains. The A-Frame living space is expansive - an open air concept to reconnect human and nature, allowing you to enjoy the natural world around you.",
+        description: "Soak up the sun and unwind in the Zion A-Frame. The unique convertible door lets the indoor comforts of this cozy cabin blend seamlessly with the stunning nature of the South Zion Mountains.",
         price: 102
         },
 
@@ -50,7 +50,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Endless Green",
-        description: "Stay on the flank of Sleeping Ute Mountain in historic McElmo Canyon just 40 minutes from Mesa Verde and 20 minutes from the town of Cortez. The Cliff House is built right into the red rock cliff wall of a private red rock canyon alcove with comfortable amenities, internet, nearby petroglyphs and sweeping views down canyon. A perfect place to base yourself for your next creative endeavor or for exploring in the wilds of the four corners.",
+        description: "Stay on the flank of Sleeping Ute Mountain in historic McElmo Canyon just 40 minutes from Mesa Verde and 20 minutes from the town of Cortez.",
         price: 103,
        },
 
@@ -89,7 +89,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Tree House",
-        description: "The treehouse sits in a 400 yr old oak tree. 250 yr old beams support the structure floating 25ft in the air. Huge windows offering a view of the pond and gardens. The privacy fence allows total seclusion. A composting toilet and vintage sink inside the treehouse.",
+        description: "The treehouse sits in a 400 yr old oak tree. 250 yr old beams support the structure floating 25ft in the air. Huge windows offering a view of the pond and gardens. The privacy fence allows total seclusion.",
         price: 106,
        },
 
@@ -115,7 +115,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "The Glass House",
-        description: "Experience the outdoors like never before, cozied up in the comfiest queen-size bed under luxuriously soft bedding with nothing to do but stare at those star-filled Texas skies and each other. Sleep outside and wake to the sounds of nature or roll the bed into your tiny home getaway. Either way, you'll wake to the peace and quiet of our 72-acre ranch, relaxed and ready to experience the magic of Twisted Horns Ridge.",
+        description: "Experience the outdoors like never before, cozied up in the comfiest queen-size bed under luxuriously soft bedding with nothing to do but stare at those star-filled Texas skies and each other. Sleep outside and wake to the sounds of nature or roll the bed into your tiny home getaway.",
         price: 108,
        },
 
@@ -128,7 +128,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Tiny home",
-        description: "Feel the mountain breeze in this air inspired rustic A-Frame. Atop the ridge, enjoy year-round views of the mountains from the back porch. Hike up Rhododendron Ridge Trail or cozy up by the wood stove with a book. Start a campfire or listen to the sounds of Bee Tree Creek in the hammock. Nightlife, food, coffee and breweries in Asheville or Black Mountain are 15 minutes away. It's an hour to Great Smokey Mountains National Park!",
+        description: "Feel the mountain breeze in this air inspired rustic A-Frame. Atop the ridge, enjoy year-round views of the mountains from the back porch. Hike up Rhododendron Ridge Trail or cozy up by the wood stove with a book. Start a campfire or listen to the sounds of Bee Tree Creek in the hammock.",
         price: 109,
        },
 
