@@ -34,7 +34,7 @@ export default function GetSpots() {
         <div className="spots-container">
           <div className="spots-cards-container">
             {getAllSpotsArr.map((spot) => (
-              <div key={spot.id}>
+              <div className= 'spacing-container'key={spot.id}>
                 {/* <a href={`/spots/${spot.id}`}> */}
                 <NavLink to={`/spots/${spot.id}`}>
                   <img

@@ -8,6 +8,8 @@ import './SpotEdit.css'
 // const lng = -100.99;
 
 export default function EditSpotComponent({image,setShowUpdate,}){
+  const lat = 39.76;
+  const lng = -100.99;
   const user = useSelector(state => state.session.user);
   const history = useHistory()
   const {spotId} = useParams();
@@ -19,13 +21,14 @@ export default function EditSpotComponent({image,setShowUpdate,}){
   const [city, setCity] = useState(formInformation.city);
   const [state, setState] = useState(formInformation.state);
   const [country, setCountry] = useState(formInformation.country);
-  const [lat , setLat] = useState('')
-  const [lng, setLng] = useState('')
+  // const [lat , setLat] = useState('')
+  // const [lng, setLng] = useState('')
   const [description, setDescription] = useState(formInformation.description)
   const [url, setUrl] = useState('')
 
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [, setRender] = useState(false)
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -37,8 +40,8 @@ export default function EditSpotComponent({image,setShowUpdate,}){
     if (!state.length) errors.push("Please provide a state")
     if (!country.length) errors.push("Please provide a country")
     if (price <= 0) errors.push("Please set a higher price");
-    if (!lat) errors.push("Please provide a lat")
-    if (!lng) errors.push("Please provide a lng")
+    // if (!lat) errors.push("Please provide a lat")
+    // if (!lng) errors.push("Please provide a lng")
     if (!description) errors.push("Please provide a description")
     if (!url) errors.push("Please provide a url")
 
@@ -53,7 +56,6 @@ export default function EditSpotComponent({image,setShowUpdate,}){
 
   async function onSubmit(e){
     e.preventDefault();
-
     setHasSubmitted(true);
     if(errors.length) return alert('can not submit')
 
@@ -63,8 +65,8 @@ export default function EditSpotComponent({image,setShowUpdate,}){
     dispatch(thunkUpdateSpot(details))
     // dispatch(thunkCreateImage(spotId,url))
     dispatch(thunkUpdateImage(spotId,image.id,url))
+    // .then(() => setRender((prev) => !prev))
     .then(() => setShowUpdate(false))
-    // .then(() => history.push(`/spots/${spotId}`))
   }
 
   return (

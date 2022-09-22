@@ -1,13 +1,16 @@
 div.spots-cards-container {
+  margin-top: 5em;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
 }
 
 div.spots-container {
   display: flex;
   justify-content: center;
   max-width: 100%;
+  padding: 2em;
 }
 
 .star-icon {
@@ -21,6 +24,9 @@ div.spots-container {
   display: inline-flex;
 }
 
+.spacing-container{
+  margin-top: -5em;
+}
 
 
 img.spot-img {
@@ -33,11 +39,12 @@ img.spot-img {
 }
 
 
-div.spot-card-container {
+/* div.spot-card-container {
+  
   margin: .6em;
   width: 300px;
   min-height: 388px;
-}
+} */
 
 
 div.spot-info-container {

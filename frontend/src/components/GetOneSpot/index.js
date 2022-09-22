@@ -25,7 +25,7 @@ export default function GetOneSpot() {
   const history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false)
   const oneSpot = useSelector(state => state.spots[spotId])
-  // console.log(oneSpot)
+  console.log(oneSpot)
   const sessionUser = useSelector(state => state.session.user)
   const [disableReview, setDisableReview] = useState(true); //create state to disable or enable a review
   const [, setRender] = useState(false)
@@ -85,15 +85,17 @@ export default function GetOneSpot() {
   console.log('isloaded----', isLoaded)
 
   //FORCE A RERENDER
-  if (oneSpot.Images === undefined) {
-    dispatch(thunkGetOneSpot(spotId)).then(() => setRender((prev) => !prev))
+  if (oneSpot.Images === undefined || oneSpot.Owner === undefined) {
+    dispatch(thunkGetOneSpot(spotId))/*.then(() => setRender((prev) => !prev))*/
     console.log('why??')
     return (<div>...Loading</div>)
   }
 
-  if(oneSpot === undefined){
-    return history.push('/')
+  if(oneSpot.Images[0].url === undefined) {
+    return (<div>...Loading</div>)
   }
+
+  console.log('oneSpot.Owner------',oneSpot.Owner)
 
   return (
     isLoaded && (
