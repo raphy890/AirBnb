@@ -18,9 +18,11 @@ export default function GetSpots() {
   const dispatch = useDispatch();
   const allSpots = useSelector(state => state.spots)
   const getAllSpotsArr = Object.values(allSpots);
-
+  console.log('isLoaded--------', isLoaded)
   useEffect(() => {
-    dispatch(thunkGetSpot()).then(setIsLoaded(true));
+    if(!isLoaded){
+      dispatch(thunkGetSpot()).then(setIsLoaded(true));
+    }
   }, [dispatch])
 
   if (!getAllSpotsArr.length) {

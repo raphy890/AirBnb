@@ -61,7 +61,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
 
     const details = { id:spotId,name,address,city,state,country,price,lat,lng,description}
 
-    dispatch(thunkGetOneSpot(spotId))
+    // dispatch(thunkGetOneSpot(spotId))
     dispatch(thunkUpdateSpot(details))
     // dispatch(thunkCreateImage(spotId,url))
     dispatch(thunkUpdateImage(spotId,image.id,url))

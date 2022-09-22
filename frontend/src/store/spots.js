@@ -256,7 +256,10 @@ const spotsReducer = (state = {}, action) => {
 
       case EDIT_SPOT:{ //complete
       newState = { ...state };
-      newState[action.spot.id] = action.spot
+      newState[action.spot.id] = {...newState[action.spot.id],...action.spot}
+      console.log("newState------",newState)
+      // newState[action.spot.id].Owner = state[action.spot.id].Owner
+      // newState[action.spot.id].Images = state[action.spot.id].Images
       return newState;
     }
 

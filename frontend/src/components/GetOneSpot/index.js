@@ -69,6 +69,11 @@ export default function GetOneSpot() {
   useEffect(() => {
     dispatch(thunkGetCurrentReviews(spotId))
     console.log('USE EFFECT RAN TO GET CURRENT USER')
+    if(oneSpot.Owner){
+      console.log('useEffect if statement on Owner was hit')
+      setIsLoaded(true)
+      return
+    }
     dispatch(thunkGetOneSpot(spotId))
       .then((res) => console.log('res---------', res))
       .then(() => setIsLoaded(true))
@@ -85,15 +90,15 @@ export default function GetOneSpot() {
   console.log('isloaded----', isLoaded)
 
   //FORCE A RERENDER
-  if (oneSpot.Images === undefined || oneSpot.Owner === undefined) {
-    dispatch(thunkGetOneSpot(spotId))/*.then(() => setRender((prev) => !prev))*/
-    console.log('why??')
-    return (<div>...Loading</div>)
-  }
+  // if (oneSpot.Images === undefined || oneSpot.Owner === undefined) {
+  //   dispatch(thunkGetOneSpot(spotId))/*.then(() => setRender((prev) => !prev))*/
+  //   console.log('why??')
+  //   return (<div>...Loading</div>)
+  // }
 
-  if(oneSpot.Images[0].url === undefined) {
-    return (<div>...Loading</div>)
-  }
+  // if(oneSpot.Images[0].url === undefined) {
+  //   return (<div>...Loading</div>)
+  // }
 
   console.log('oneSpot.Owner------',oneSpot.Owner)
 
