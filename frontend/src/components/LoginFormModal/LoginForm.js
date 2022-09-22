@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 import "./LoginForm.css";
 import {useHistory} from "react-router-dom"
 
-function LoginForm() {
+
+function LoginForm({setShowLoginModal}) {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +17,7 @@ function LoginForm() {
     e.preventDefault();
     setErrors([]);
 
-    dispatch(sessionActions.login({ credential, password })).catch(
+    dispatch(sessionActions.login({ credential, password })).then(() => setShowLoginModal(false)).catch(
       async (res) => {
         const data = await res.json();
         if (data && data.errors)
@@ -68,16 +69,9 @@ function LoginForm() {
       <button
         className="login-button "
         type="submit"
+
         >Log In
         </button>
-      {/* <button
-      className='login-button '
-      type='submit'
-      onClick={(e) => {
-        setCredential('Demo-lition')
-        setPassword('password')
-      }}
-      >Demo User</button> */}
     </form>
     </div>
   );

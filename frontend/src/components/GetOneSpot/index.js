@@ -91,6 +91,10 @@ export default function GetOneSpot() {
     return (<div>...Loading</div>)
   }
 
+  if(oneSpot === undefined){
+    return history.push('/')
+  }
+
   return (
     isLoaded && (
       <>
