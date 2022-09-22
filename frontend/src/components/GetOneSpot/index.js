@@ -100,6 +100,10 @@ export default function GetOneSpot() {
   //   return (<div>...Loading</div>)
   // }
 
+  if (!oneSpot) {
+    return <Redirect to='/'/>
+  }
+
   console.log('oneSpot.Owner------',oneSpot.Owner)
 
   return (

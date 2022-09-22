@@ -1,8 +1,9 @@
 //src/components/DeleteSpots/DeleteSpots.js
 import { useDispatch } from 'react-redux'
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { thunkDeleteSpot } from "../../store/spots";
 import './Delete.css'
+
 
 
 const SpotDelete = ({spotId, setShowDelete}) => {
@@ -10,11 +11,12 @@ const SpotDelete = ({spotId, setShowDelete}) => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const handleDelete = async (e) => {
-    history.push("/")
+  const handleDelete =  async (e) => {
     e.preventDefault()
-    await dispatch(thunkDeleteSpot(spotId)).then(() => setShowDelete(false))
+    await dispatch(thunkDeleteSpot(spotId))
+    setShowDelete(false)
   }
+
 
   return (
     <>
