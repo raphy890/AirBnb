@@ -128,7 +128,8 @@ div.host-buttons {
   width: 7em;
   height: 2.6em;
   border-radius: .6em;
-  cursor: pointer;
+  /* cursor: pointer; */
+  pointer-events: none;
   transition: all 0.2s ease-in-out;
   padding: .3em;
   margin-top: 10px;

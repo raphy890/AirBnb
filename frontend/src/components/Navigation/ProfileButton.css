@@ -106,7 +106,7 @@ div.profile-dropdown {
 .hover-link:hover {
   margin-left: -2em;
   background-color: rgb(216, 207, 207);
-  cursor: pointer;
+  
 }
 
 .user-name-li {
