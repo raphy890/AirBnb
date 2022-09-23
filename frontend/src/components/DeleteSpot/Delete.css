@@ -22,6 +22,22 @@ strong {
   transition: all 0.2s ease-in-out;
   margin-right: 2em;
   margin-left: 2em;
+  padding: 1em;
+}
+
+.delete-button-No {
+  background: linear-gradient(0.25turn, #E61E4D, #D70666);
+  color: white;
+  border: none;
+  height: 2.6em;
+  border-radius: .5em;
+  min-width: 9em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-right: 2em;
+  margin-left: 2em;
+  padding: 1em;
+  margin-top: 1em;
 }
 
 .delete-button:active {

@@ -24,7 +24,7 @@ module.exports = {
       lat: 37.7645358,
       lng: -122.4730327,
       name: "Glorious Homes",
-      description: "Are you sleeping among the clouds? Almost! The main bed has a memory foam mattress and is encircled by what seems like endless windows. Rest easy among the surrounding trees. And, when you wake up, get ready for... AMAZING VIEWS",
+      description: "Rest easy among the surrounding trees. And, when you wake up, get ready for... AMAZING VIEWS",
       price: 101
       },
 
@@ -37,7 +37,7 @@ module.exports = {
         lat: 37.7645351,
         lng: -122.4730321,
         name: "Land of Times",
-        description: "Soak up the sun and unwind in the Zion A-Frame. The unique convertible door lets the indoor comforts of this cozy cabin blend seamlessly with the stunning nature of the South Zion Mountains.",
+        description: "Soak up the sun and unwind in the Zion A-Frame.",
         price: 102
         },
 
@@ -50,7 +50,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Endless Green",
-        description: "Stay on the flank of Sleeping Ute Mountain in historic McElmo Canyon just 40 minutes from Mesa Verde and 20 minutes from the town of Cortez.",
+        description: "Stay on the flank of Sleeping Ute Mountain in historic McElmo Canyon!",
         price: 103,
        },
 
@@ -63,7 +63,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Gulf Beach Home",
-        description: "Amazing views, blissful sunsets, ocean breezes, and the sound of waves lapping at the shoreline await you at this fabulous, recently-built, pet-friendly, beachfront home located directly on the Gulf of Mexico.",
+        description: "Amazing views, blissful sunsets, ocean breezes, and the sound of waves!",
         price: 104,
        },
 
@@ -76,7 +76,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Architectural Masterpiece",
-        description: "Prepare to be blown away by the exquisite architecture and views that just don't stop. WE GUARANTEE THIS WILL BE THE MOST AMAZING AIRBNB EVER! ",
+        description: "WE GUARANTEE THIS WILL BE THE MOST AMAZING AIRBNB EVER! ",
         price: 105,
        },
 
@@ -89,7 +89,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Tree House",
-        description: "The treehouse sits in a 400 yr old oak tree. 250 yr old beams support the structure floating 25ft in the air. Huge windows offering a view of the pond and gardens. The privacy fence allows total seclusion.",
+        description: "Huge windows offering a view of the pond and gardens. The privacy fence allows total seclusion.",
         price: 106,
        },
 
@@ -115,7 +115,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "The Glass House",
-        description: "Experience the outdoors like never before, cozied up in the comfiest queen-size bed under luxuriously soft bedding with nothing to do but stare at those star-filled Texas skies and each other.",
+        description: "Experience the outdoors like never before.",
         price: 108,
        },
 
@@ -128,7 +128,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Tiny home",
-        description: "Feel the mountain breeze in this air inspired rustic A-Frame. Atop the ridge, enjoy year-round views of the mountains from the back porch.",
+        description: "Feel the mountain breeze in this air inspired rustic A-Frame.",
         price: 109,
        },
 
@@ -141,7 +141,7 @@ module.exports = {
         lat: 37.7645352,
         lng: -122.4730322,
         name: "Cabin on Lake Nichols",
-        description: "Enjoy a comfortable retreat in a historic 1930s cabin overlooking a 350-acre private lake. This fully renovated farmhouse features its original beadboard.",
+        description: "This fully renovated farmhouse features its original beadboard.",
         price: 110,
        }
 
