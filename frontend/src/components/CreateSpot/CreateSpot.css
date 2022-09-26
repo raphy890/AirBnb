@@ -1,33 +1,23 @@
 .host-page-container{
   display: flex;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
   position: fixed;
-  left: 0;
-  /* top: 0; */
   min-width: 100vw;
   min-height: 100vh;
-  z-index: -1;
-  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
+  left: 0;
   font-size: 20px;
+  z-index: -1;
 }
 
-/* .host-page-container {
-  max-width: 100%;
-  min-height: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10em;
-} */
 
 
 .host-page-left-conatiner{
-  min-width: 50%;
   min-height: 100%;
-  background: linear-gradient(0.5turn, #CE277A, #451DA0);
+  min-width: 50%;
   display: flex;
-  align-items: center;
   margin-top: 3.2em;
+  background: linear-gradient(0.5turn, #CE277A, #451DA0);
+  align-items: center;
 }
 
 .host-page-right-container {
@@ -40,39 +30,13 @@
   margin-top: 3em;
 }
 
-form.new-spot-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 400px;
-  /* padding-top: 1em; */
-  position: relative;
-}
 
 .errors-list{
   margin-bottom: 1em;
   font-size: 12px;
 }
 
-.form-input-none-create{
-  min-height: 2em;
-  width: 450px;
-  /* min-width: 100%; */
-  box-sizing: border-box;
-  padding-left: 1rem;
-}
-
-.create-spot-title {
-    position: relative;
-    /* bottom: 7%; */
-    padding-left: 1.4em;
-    color: black;
-    font-size: 20px;
-}
-
-
-
-.welcome-message {
+.host-message {
   position: relative;
   bottom: 7%;
   padding-left: 1.4em;
@@ -80,21 +44,18 @@ form.new-spot-form {
   font-size: 3rem;
 }
 
-
-
-.create.submit-button {
-  background: linear-gradient(0.25turn, #E61E4D, #D70666);
-  color: white;
-  border: none;
-  height: 2.6em;
-  border-radius: .5em;
-  min-width: 100%;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  margin-top: 2em;
-  position: relative;
+.form-input-none-create{
+  min-height: 2em;
+  width: 450px;
+  box-sizing: border-box;
+  padding-left: 1rem;
 }
 
-.create.submit-button:active {
-  transform: scale(.97);
+
+form.new-spot-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  position: relative;
 }

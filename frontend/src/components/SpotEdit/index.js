@@ -71,7 +71,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
 
   return (
     <form
-      className="login-form-SignUp"
+      className="login-form-SignUp-spots"
       onSubmit={onSubmit}
     >
       <div>
@@ -80,7 +80,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
       {hasSubmitted && errors.length > 0 && (
         <ul>
           {errors.map(error => (
-            <li key={error}>{error}</li>
+            <p key={error}>{error}</p>
           ))}
         </ul>
       )}

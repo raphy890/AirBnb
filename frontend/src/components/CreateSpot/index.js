@@ -78,16 +78,9 @@ export default function CreateSpotForm() {
   return (
     <div className="host-page-container">
       <div className="host-page-left-conatiner">
-        <h1 className="welcome-message">Host Your Spot!</h1>
+        <h1 className="host-message">Host Your Spot!</h1>
       </div>
-      {/* <div className="create-errors-container">
-        {errors.map((error, i) => (<li key={i}>{error}</li>))}
-      </div> */}
-
       <div className="host-page-right-container">
-
-
-
         <form
           onSubmit={onSubmit}
           className="new-spot-form"

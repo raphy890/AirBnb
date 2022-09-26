@@ -1,7 +1,3 @@
-.current-spot-location {
-  text-decoration: underline;
-}
-
 
 div.main {
   display: flex;
@@ -11,13 +7,12 @@ div.main {
 }
 
 div.main-wrapper {
-  display: flex;
   flex-direction: column;
+  display: flex;
 }
 
 div.spot-details{
   display: flex;
-
 }
 
 div.spot-location{
@@ -49,10 +44,6 @@ div.spot-price {
   margin-left: 35em;
 }
 
-div.info-right {
-  display: flex;
-  font-size: small;
-}
 
 div.info-left {
   margin-top: 1em;
@@ -60,15 +51,10 @@ div.info-left {
   flex-direction: column;
 }
 
-
-
-
-div.spot-card-container {
-  margin: .6em;
-  width: 300px;
-  min-height: 388px;
+div.info-right {
+  display: flex;
+  font-size: small;
 }
-
 
 .spot-name {
   display: flex;
@@ -125,24 +111,23 @@ div.host-buttons {
   background: linear-gradient(0.25turn, grey,grey);
   color: black;
   border: none;
-  width: 7em;
   height: 2.6em;
-  border-radius: .6em;
-  /* cursor: pointer; */
-  pointer-events: none;
-  transition: all 0.2s ease-in-out;
+  width: 7em;
   padding: .3em;
+  border-radius: .6em;
   margin-top: 10px;
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
 }
 
 .delete-button-logo {
   background: linear-gradient(0.25turn, #E61E4D, #D70666);
   color: white;
   border: none;
-  width: 8em;
   height: 2em;
+  width: 8em;
+  padding: .3em;
   border-radius: .6em;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  padding: .3em;
 }

@@ -9,13 +9,12 @@ import { Modal } from '../../context/Modal'
 import './getOneSpot.css'
 import { thunkGetCurrentReviews } from "../../store/reviews"
 import starIcon from '../Spots_Card/images/starIcon.png'
-// import SpotDelete from "../DeleteSpot/DelteSpot.js"
-// import { GetSpotReviews } from '../ReviewGet/index'
+
 
 
 //Get One Spot
 export default function GetOneSpot() {
-  console.log('GETONESPOT COMPONENT CODE RUNNING')
+  // console.log('GETONESPOT COMPONENT CODE RUNNING')
   const { spotId } = useParams();
   //console.log('spotId:', spotId);
   const [showUpdate, setShowUpdate] = useState(false);
@@ -25,7 +24,7 @@ export default function GetOneSpot() {
   const history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false)
   const oneSpot = useSelector(state => state.spots[spotId])
-  console.log(oneSpot)
+  // console.log(oneSpot)
   const sessionUser = useSelector(state => state.session.user)
   const [disableReview, setDisableReview] = useState(true); //create state to disable or enable a review
   const [, setRender] = useState(false)
@@ -86,25 +85,14 @@ export default function GetOneSpot() {
   // const img = oneSpot
   // console.log('img----',img)
 
-  console.log('oneSpot------', oneSpot)
-  console.log('isloaded----', isLoaded)
-
-  //FORCE A RERENDER
-  // if (oneSpot.Images === undefined || oneSpot.Owner === undefined) {
-  //   dispatch(thunkGetOneSpot(spotId))/*.then(() => setRender((prev) => !prev))*/
-  //   console.log('why??')
-  //   return (<div>...Loading</div>)
-  // }
-
-  // if(oneSpot.Images[0].url === undefined) {
-  //   return (<div>...Loading</div>)
-  // }
+  // console.log('oneSpot------', oneSpot)
+  // console.log('isloaded----', isLoaded)
 
   if (!oneSpot) {
     return <Redirect to='/'/>
   }
 
-  console.log('oneSpot.Owner------',oneSpot.Owner)
+  // console.log('oneSpot.Owner------',oneSpot.Owner)
 
   return (
     isLoaded && (
@@ -133,7 +121,6 @@ export default function GetOneSpot() {
                 <div className='spot-price' style={{ fontSize: '20px' }}>${oneSpot.price}</div>
             </div>
             <div className="container-for-middle-part">
-
               <div className='info-left'>
                 <div style= {{fontSize: '20px', fontWeight:"bold" }}>This spot is hosted by {oneSpot.Owner.firstName}</div>
                 <div> {oneSpot.description}</div>

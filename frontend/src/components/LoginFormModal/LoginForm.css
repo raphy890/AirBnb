@@ -49,6 +49,16 @@
   border-radius: .5em;
 }
 
+.login-form-SignUp-spots {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 60em;
+  width: 40em;
+  padding: 24px;
+  border-radius: .5em;
+}
+
 .login-button {
   background: linear-gradient(0.25turn, #E61E4D, #D70666);
   color: white;
