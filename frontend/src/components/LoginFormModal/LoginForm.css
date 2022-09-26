@@ -128,9 +128,6 @@
   border-radius: 5px;
 }
 
-input.login-input:placeholder-shown {
-  padding-left: 1rem;
-}
 
 input:focus {
   outline: none !important;
@@ -138,50 +135,21 @@ input:focus {
   box-shadow: 0 0 5px #719ECE;
 }
 
-#login-email-input {
-  border-radius: .5em .5em 0px 0px;
-  border-left: 1px solid #d1cfcf;
-  border-right: 1px solid #d1cfcf;
-  border-top: 1px solid #d1cfcf;
-  border-bottom: none;
+
+
+
+input.login-input:placeholder-shown {
+  padding-left: 1rem;
 }
 
-#login-pw-input {
-  border-radius: 0px 0px .5em .5em ;
-  border-left: 1px solid #d1cfcf;
-  border-right: 1px solid #d1cfcf;
-  border-bottom: 1px solid #d1cfcf;
-  border-top: 1px solid #d1cfcf;
-  margin-bottom: 0;
-}
-
-.form-input-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
 .signup-form-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: 90%;
-  /* padding: 1.5em; */
-  /* margin-bottom: 2em; */
 }
 
-#login-title {
-  text-align: center;
-  position: relative;
-  top: -0.4em;
-  min-width: 115%;
-  text-align: center;
-  min-height: 1.7em;
-  border-bottom: 1px solid rgb(224, 219, 219);
-  margin-top: -1.8em;
-  font-weight: 500;
-  font-size: large;
-}
 
 .login-errors-container{
   padding: 0;

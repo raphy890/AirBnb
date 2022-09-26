@@ -59,28 +59,6 @@ input:focus {
   box-shadow: 0 0 5px #719ECE;
 }
 
-#login-email-input {
-  border-radius: .5em .5em 0px 0px;
-  border-left: 1px solid #d1cfcf;
-  border-right: 1px solid #d1cfcf;
-  border-top: 1px solid #d1cfcf;
-  border-bottom: none;
-}
-
-#login-pw-input {
-  border-radius: 0px 0px .5em .5em ;
-  border-left: 1px solid #d1cfcf;
-  border-right: 1px solid #d1cfcf;
-  border-bottom: 1px solid #d1cfcf;
-  border-top: 1px solid #d1cfcf;
-  margin-bottom: 0;
-}
-
-.form-input-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
 #login-title {
   text-align: center;
