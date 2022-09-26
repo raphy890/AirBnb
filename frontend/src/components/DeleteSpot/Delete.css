@@ -25,6 +25,11 @@
   cursor: pointer;
 }
 
+.create-review-header{
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
 
 .delete-button-No {
   background: linear-gradient(0.25turn, #E61E4D, #D70666);

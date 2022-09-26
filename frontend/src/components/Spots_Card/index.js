@@ -49,7 +49,7 @@ export default function GetSpots() {
                 <div className="spot-info-container">
                   <p className="spot-info-left">
                     <div style=
-                      {{ fontSize: '16px', fontWeight: 'bold' }}>
+                      {{ fontSize: '16px', paddingBottom:'2px', fontWeight: 'bold' }}>
                       {spot.name}
                     </div>
                     <div style=

@@ -122,7 +122,7 @@ export default function GetOneSpot() {
             </div>
             <div className="container-for-middle-part">
               <div className='info-left'>
-                <div style= {{fontSize: '20px', fontWeight:"bold" }}>This spot is hosted by {oneSpot.Owner.firstName}</div>
+                <div className='sucks' style= {{fontSize: '20px', fontWeight:"bold"}}>This spot is hosted by {oneSpot.Owner.firstName}</div>
                 <div> {oneSpot.description}</div>
                 {oneSpot.ownerId === sessionUser?.id && (
                   <div className='host-buttons'>

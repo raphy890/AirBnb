@@ -56,10 +56,9 @@ function SignupFormPage({setSignUpFormModal}) {
         </div>
       </div>
       <ul>
-        {errors.map((error, idx) => <li className= 'errors-list' key={idx}>{error}</li>)}
+        {errors.map((error, idx) => <li className= 'errors-list-sign' key={idx}>{error}</li>)}
       </ul>
       <label>
-        First Name
         <input
           type="text"
           value={firstName}
@@ -70,7 +69,6 @@ function SignupFormPage({setSignUpFormModal}) {
         />
       </label>
       <label>
-        Last Name
         <input
           type="text"
           value={lastName}
@@ -81,7 +79,7 @@ function SignupFormPage({setSignUpFormModal}) {
         />
       </label>
       <label>
-        Email
+
         <input
           type="text"
           value={email}
@@ -92,7 +90,7 @@ function SignupFormPage({setSignUpFormModal}) {
         />
       </label>
       <label>
-        Username
+
         <input
           type="text"
           value={username}
@@ -103,7 +101,7 @@ function SignupFormPage({setSignUpFormModal}) {
         />
       </label>
       <label>
-        Password
+
         <input
           type="password"
           value={password}
@@ -114,7 +112,6 @@ function SignupFormPage({setSignUpFormModal}) {
         />
       </label>
       <label>
-        Confirm Password
         <input
           type="password"
           value={confirmPassword}
@@ -125,7 +122,7 @@ function SignupFormPage({setSignUpFormModal}) {
         />
       </label>
       <button
-        className="login-button "
+        className="login-button-sign "
         type="submit">Sign Up</button>
     </form>
     </div>

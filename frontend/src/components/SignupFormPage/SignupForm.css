@@ -46,6 +46,7 @@
   min-width: 100%;
   box-sizing: border-box;
   padding-left: 1rem;
+  border-radius: 5px;
 }
 
 input.login-input:placeholder-shown {
@@ -142,6 +143,8 @@ input:focus {
 
 .signup-h3 {
   font-weight: 500;
+  display: flex;
+  justify-content: center;
 }
 h3.signup-welcome-h3 {
   text-align: start;

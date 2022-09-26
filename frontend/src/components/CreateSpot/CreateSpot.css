@@ -28,12 +28,28 @@
   flex-direction: column;
   align-items: center;
   margin-top: 3em;
+  padding-top: -3em;
 }
 
 
 .errors-list{
+  display: flex;
+  align-items: center;
   margin-bottom: 1em;
   font-size: 12px;
+  margin-right: 13px;
+  width: 37em;
+}
+
+.errors-list-sign{
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  font-size: 12px;
+  margin-right: 13px;
+  width: 25em;
+  color:red;
+  
 }
 
 .host-message {
@@ -49,6 +65,7 @@
   width: 450px;
   box-sizing: border-box;
   padding-left: 1rem;
+  border-radius: 5px;
 }
 
 
@@ -58,4 +75,20 @@ form.new-spot-form {
   align-items: center;
   width: 400px;
   position: relative;
+}
+
+
+.create-submit-button{
+  background: linear-gradient(0.25turn, #E61E4D, #D70666);
+  margin-top: 10px;
+  margin-right: 2em;
+  margin-left: 2em;
+  height: 2.6em;
+  border-radius: .5em;
+  width: 25em;
+  padding: 1em;
+  color: white;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }

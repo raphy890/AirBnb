@@ -59,7 +59,7 @@ function CreateReviewForm() {
   };
 
   const errorList = (errors.map((error) => (
-    <div className="create-review-errors" key={error}>{error}</div>
+    <div className= 'update-spot-errors' key={error}>{error}</div>
   )))
 
   return (

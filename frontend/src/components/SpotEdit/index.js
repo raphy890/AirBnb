@@ -85,7 +85,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
         </ul>
       )}
       <div>
-        <label htmlFor="name">Name:</label>
+        {/* <label htmlFor="name">Name:</label> */}
         <input
           id='name'
           type="text"
@@ -94,7 +94,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           className="login-input"
           onChange={(e) => setName(e.target.value)}
         />
-         <label htmlFor="name">Price:</label>
+         {/* <label htmlFor="name">Price:</label> */}
         <input
           id='price'
           type="number"
@@ -103,7 +103,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           className="login-input"
           onChange={(e) => setPrice(e.target.value)}
         />
-        <label htmlFor="address">Adress:</label>
+        {/* <label htmlFor="address">Adress:</label> */}
         <input
           id="address"
           type="text"
@@ -112,7 +112,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           className="login-input"
           onChange={(e) => setAddress(e.target.value)}
         />
-        <label htmlFor="city">City:</label>
+        {/* <label htmlFor="city">City:</label> */}
         <input
           id='city'
           type="text"
@@ -121,7 +121,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
           className="login-input"
           onChange={(e) => setCity(e.target.value)}
         />
-        <label htmlFor="state">State:</label>
+        {/* <label htmlFor="state">State:</label> */}
         <input
           type="text"
           placeholder="State"
@@ -176,7 +176,7 @@ export default function EditSpotComponent({image,setShowUpdate,}){
         />
       </div>
       <button
-        className="login-button "
+        className="login-button-update-spot"
         type="submit">Update Spot</button>
     </form>
   )

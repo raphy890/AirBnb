@@ -15,6 +15,10 @@ div.spot-details{
   display: flex;
 }
 
+div.sucks{
+  padding-bottom: 1em;
+}
+
 div.spot-location{
   margin-left: 20px;
 }

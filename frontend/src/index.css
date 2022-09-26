@@ -6,6 +6,10 @@ body {
 	max-width: 948px;
 }
 
+*{
+    font-family: sans-serif;
+}
+
 /* Create a responsive, centered, three-column grid. */
 /* .card-container {
 	align-items: start;

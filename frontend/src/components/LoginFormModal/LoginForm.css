@@ -26,8 +26,8 @@
 }
 
 .error-container-update {
-  margin-top: -4em;
-  margin-bottom: -3em;
+  margin-top: -6em;
+  margin-bottom: -4em;
 }
 
 
@@ -39,7 +39,8 @@
   min-width: 19em;
   padding: 24px;
   border-radius: .5em;
-  border: 2px solid black;
+  border: 1px solid white;
+  box-shadow: 0px 0px 15px rgb(211, 210, 210);
 }
 
 
@@ -47,14 +48,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 40em;
+  height: 25em;
   width: 40em;
-  padding: 24px;
+  padding-bottom: 24px;
   border-radius: .5em;
 }
 
 .update-spot-errors{
   color: red;
+  display: flex;
+  align-items: center;
+  padding-right: 1em;
+  padding: .5px 0;
 }
 
 .login-form-SignUp-spots {
@@ -76,6 +81,29 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
+.login-button-sign {
+  background: linear-gradient(0.25turn, #E61E4D, #D70666);
+  color: white;
+  border: none;
+  height: 2.6em;
+  border-radius: .5em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-top: 2em;
+}
+
+.login-button-update-spot {
+  background: linear-gradient(0.25turn, #E61E4D, #D70666);
+  color: white;
+  border: none;
+  height: 2.6em;
+  border-radius: .5em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-top: -10em;
+}
+
+
 
 .login-button-review {
   background: linear-gradient(0.25turn, #E61E4D, #D70666);
@@ -97,6 +125,7 @@
   box-sizing: border-box;
   padding-left: 1rem;
   margin-bottom: 5px;
+  border-radius: 5px;
 }
 
 input.login-input:placeholder-shown {

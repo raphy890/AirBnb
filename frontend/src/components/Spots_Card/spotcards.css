@@ -22,6 +22,7 @@ div.spots-container {
 
 .price-container {
   display: inline-flex;
+  margin-top: 7px;
 }
 
 .spacing-container{
@@ -53,6 +54,17 @@ div.spot-info-left {
   min-height: inherit;
   flex-direction: column;
   justify-content: space-between;
+
+}
+
+p.spot-info-left {
+  display: flex;
+  max-width: 75%;
+  /* min-height: inherit; */
+  flex-direction: column;
+  /* justify-content: space-between; */
+  margin: 0px;
+
 }
 
 
@@ -63,5 +75,5 @@ div.spot-info-right {
   width: 25%;
   font-size: small;
   justify-content: space-around;
-  margin-right: 1em;
+  margin-right: 2em;
 }

@@ -198,7 +198,7 @@ export default function CreateSpotForm() {
               className="form-input-none-create"
             />
           </div>
-          <button className="create submit-button" type="submit">Create Spot</button>
+          <button className="create-submit-button" type="submit">Create Spot</button>
         </form>
       </div>
     </div>
