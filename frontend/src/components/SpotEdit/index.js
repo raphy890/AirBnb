@@ -78,9 +78,9 @@ export default function EditSpotComponent({image,setShowUpdate,}){
         <h1 className="signup-h3">Update Spot Form</h1>
       </div>
       {hasSubmitted && errors.length > 0 && (
-        <ul>
+        <ul className="error-container-update">
           {errors.map(error => (
-            <p key={error}>{error}</p>
+            <p className= 'update-spot-errors' key={error}>{error}</p>
           ))}
         </ul>
       )}
