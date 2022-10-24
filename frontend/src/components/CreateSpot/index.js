@@ -24,7 +24,7 @@ export default function CreateSpotForm() {
   const [description, setDescription] = useState('')
   const [errors, setErrors] = useState([])
   const [url, setUrl] = useState('')
-
+  const validImages = ["png", "jpg", "jpeg", "svg", "heic", "gif"];
 
   function confirmImage(url) {
     return /\.(jpg|png|jpeg|svg|gif)$/.test(url);
@@ -32,8 +32,12 @@ export default function CreateSpotForm() {
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     const errors = [];
+    const newUrl = url.split("/");
+    const img = newUrl[newUrl.length - 1].split(".")[1];
 
     if (name.length < 1 || name.length > 49) errors.push("Name must be between 1 and 49 characters")
     if (price <= 0) errors.push("Please set a higher price");
@@ -45,7 +49,7 @@ export default function CreateSpotForm() {
     // if (!lng) errors.push("Please provide a lng")
     if (!description) errors.push("Please provide a description")
     if (!url) errors.push("Please provide a url")
-
+    if (!validImages.includes(img)) errors.push("Image must be valid")
 
     return setErrors(errors);
 
